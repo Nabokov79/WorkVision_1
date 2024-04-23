@@ -1,0 +1,38 @@
+package ru.nabokovsg.laboratoryNK.dto.tasksJournal;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDate;
+
+@Setter
+@Getter
+@AllArgsConstructor
+@Schema(description = "Данные выполняемой работе")
+public class ResponseTasksJournalDto {
+
+    @Schema(description = "Индентификатор")
+    private Long id;
+    @Schema(description = "Дата обследования")
+    private LocalDate date;
+    @Schema(description = "Полное наименование филиала организации")
+    private String branch;
+    @Schema(description = "Полное наименование района теплоснабжения")
+    private String heatSupplyArea;
+    @Schema(description = "Полное наименование эксплуатационного участка")
+    private String exploitationRegion;
+    @Schema(description = "Место проведения работ")
+    private String workPlace;
+    @Schema(description = "Оборудование подлежащее обследованию")
+    private String equipmentDiagnosed;
+    @Schema(description = "Тип выполняемой работы")
+    private String workType;
+    @Schema(description = "Основание проведения работы(адресная программа, заявка, распоряжение руководителя)")
+    private String taskSource;
+    @Schema(description = "Комментарий к задаче")
+    private String comment;
+    @Schema(description = "Сотрудник(и) лаборатории назначенные для выполнения задачи")
+    private Set<LaboratoryEmployee> laboratoryEmployees;
+}
