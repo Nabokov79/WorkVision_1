@@ -7,5 +7,5 @@ import java.time.LocalDate;
 
 public interface TasksJournalRepository extends JpaRepository<TasksJournal, Long> {
 
-    TasksJournal findByDateAndEquipmentId(LocalDate date, Long equipmentId);
+    boolean existsByDateAndEquipmentId(LocalDate date, Long equipmentId);
 }

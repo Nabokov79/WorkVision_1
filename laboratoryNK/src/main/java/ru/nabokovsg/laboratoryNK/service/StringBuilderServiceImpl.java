@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import ru.nabokovsg.laboratoryNK.dto.client.AddressDto;
 import ru.nabokovsg.laboratoryNK.dto.client.BuildingDto;
 import ru.nabokovsg.laboratoryNK.dto.client.EmployeeDto;
+import ru.nabokovsg.laboratoryNK.model.equipmentDiagnosed.EquipmentDiagnosed;
 
 @Component
 public class StringBuilderServiceImpl implements StringBuilderService {
@@ -22,6 +23,26 @@ public class StringBuilderServiceImpl implements StringBuilderService {
             workPlace = String.join(" ", workPlace, "«", building.getLogin(), "»");
         }
         return String.join(", ", workPlace, buildAddress(building.getAddress()));
+    }
+
+    @Override
+    public String buildEquipmentDiagnosed(EquipmentDiagnosed equipment) {
+        String equipmentDiagnosed = equipment.getEquipmentName();
+        if (equipment.getModel() != null) {
+            equipmentDiagnosed = String.join(" ", equipmentDiagnosed, equipment.getModel());
+        }
+        if (equipment.getStationaryNumber() != null) {
+            equipmentDiagnosed = String.join(" ", equipmentDiagnosed
+                                                        , "ст. №"
+                                                        , String.valueOf(equipment.getStationaryNumber()));
+        }
+        if (equipment.getVolume() != null) {
+            equipmentDiagnosed = String.join(" ", equipmentDiagnosed
+                                                        , "V = "
+                                                        , String.valueOf(equipment.getVolume())
+                                                        , "м3");
+        }
+        return equipmentDiagnosed;
     }
 
     private String buildAddress(AddressDto address) {

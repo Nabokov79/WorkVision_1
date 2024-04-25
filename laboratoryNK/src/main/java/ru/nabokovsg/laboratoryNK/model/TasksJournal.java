@@ -28,6 +28,8 @@ public class TasksJournal {
     private String exploitationRegion;
     @Column(name = "building")
     private String building;
+    @Column(name = "equipment_id")
+    private Long equipmentId;
     @Column(name = "equipment_diagnosed")
     private String equipmentDiagnosed;
     @Column(name = "work_type")

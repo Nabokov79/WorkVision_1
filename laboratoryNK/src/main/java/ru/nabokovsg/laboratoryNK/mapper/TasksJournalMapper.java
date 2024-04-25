@@ -9,21 +9,21 @@ import ru.nabokovsg.laboratoryNK.model.TasksJournal;
 @Mapper(componentModel = "spring")
 public interface TasksJournalMapper {
 
-    @Mapping(source = "date", target = "date")
+    @Mapping(source = "taskJournalDto.date", target = "date")
     @Mapping(source = "branch", target = "branch")
     @Mapping(source = "heatSupplyArea", target = "heatSupplyArea")
     @Mapping(source = "exploitationRegion", target = "exploitationRegion")
-    @Mapping(source = "workPlace", target = "workPlace")
+    @Mapping(source = "building", target = "building")
     @Mapping(source = "equipmentDiagnosed", target = "equipmentDiagnosed")
-    @Mapping(source = "workType", target = "workType")
-    @Mapping(source = "taskSource", target = "taskSource")
-    @Mapping(source = "comment", target = "comment")
+    @Mapping(source = "taskJournalDto.workType", target = "workType")
+    @Mapping(source = "taskJournalDto.taskSource", target = "taskSource")
+    @Mapping(source = "taskJournalDto.comment", target = "comment")
     @Mapping(source = "taskJournalDto.id", target = "id")
     TasksJournal mapToTaskJournal(TasksJournalDto taskJournalDto
                                 , String branch
                                 , String heatSupplyArea
                                 , String exploitationRegion
-                                , String workPlace
+                                , String building
                                 , String equipmentDiagnosed);
 
     ResponseTasksJournalDto mapToResponseTaskJournalDto(TasksJournal journal);
