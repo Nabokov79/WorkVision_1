@@ -4,8 +4,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import ru.nabokovsg.laboratoryNK.dto.laboratoryEmployee.employees.ShortResponseLaboratoryEmployeeDto;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -25,7 +27,7 @@ public class ResponseTasksJournalDto {
     private String exploitationRegion;
     @Schema(description = "Место проведения работ")
     private String workPlace;
-    @Schema(description = "Оборудование подлежащее обследованию")
+    @Schema(description = "Диагностируемое оборудование")
     private String equipmentDiagnosed;
     @Schema(description = "Тип выполняемой работы")
     private String workType;
@@ -34,5 +36,5 @@ public class ResponseTasksJournalDto {
     @Schema(description = "Комментарий к задаче")
     private String comment;
     @Schema(description = "Сотрудник(и) лаборатории назначенные для выполнения задачи")
-    private Set<LaboratoryEmployee> laboratoryEmployees;
+    private Set<ShortResponseLaboratoryEmployeeDto> employees;
 }

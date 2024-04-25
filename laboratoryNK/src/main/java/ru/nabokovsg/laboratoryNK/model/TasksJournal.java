@@ -26,7 +26,7 @@ public class TasksJournal {
     private String heatSupplyArea;
     @Column(name = "exploitation_region")
     private String exploitationRegion;
-    @Column(name = "work_place")
+    @Column(name = "building")
     private String building;
     @Column(name = "equipment_diagnosed")
     private String equipmentDiagnosed;
@@ -45,5 +45,5 @@ public class TasksJournal {
             joinColumns =  {@JoinColumn(name = "journal_id")},
             inverseJoinColumns = {@JoinColumn(name = "employee_id")})
     @ToString.Exclude
-    private Set<LaboratoryEmployee> laboratoryEmployees;
+    private Set<LaboratoryEmployee> employees;
 }

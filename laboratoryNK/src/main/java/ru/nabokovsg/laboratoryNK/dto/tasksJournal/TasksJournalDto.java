@@ -28,8 +28,8 @@ public class TasksJournalDto {
     private Long exploitationRegionId;
     @Schema(description = "Место проведения работ")
     private Long addressId;
-    @Schema(description = "Индентификатор оборудования")
-    private String equipmentId;
+    @Schema(description = "Индентификатор диагностируемого оборудования")
+    private Long equipmentId;
     @Schema(description = "Тип выполняемой работы")
     private String workType;
     @Schema(description = "Основание проведения работы(адресная программа, заявка, распоряжение руководителя)")

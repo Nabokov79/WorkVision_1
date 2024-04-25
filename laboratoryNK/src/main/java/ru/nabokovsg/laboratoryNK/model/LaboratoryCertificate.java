@@ -27,4 +27,6 @@ public class LaboratoryCertificate {
     private LocalDate startDate;
     @Column(name = "end_date")
     private LocalDate endDate;
+    @Column(name = "organization")
+    private String organization;
 }

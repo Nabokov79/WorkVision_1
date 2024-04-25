@@ -11,8 +11,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "document_types")
-public class DocumentType {
+@Table(name = "diagnostic_document_types")
+public class DiagnosticDocumentType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

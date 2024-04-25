@@ -1,20 +1,17 @@
-package ru.nabokovsg.company.dto.branch;
+package ru.nabokovsg.laboratoryNK.dto.client;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import ru.nabokovsg.company.dto.address.ResponseAddressDto;
-import ru.nabokovsg.company.dto.department.ShortResponseDepartmentDto;
-import ru.nabokovsg.company.dto.heatSupplyArea.ResponseHeatSupplyAreaDto;
 
 import java.util.List;
 
 @Setter
 @Getter
-@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "Данные филиала")
-public class ResponseBranchDto {
+public class BranchDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
@@ -23,9 +20,9 @@ public class ResponseBranchDto {
     @Schema(description = "Краткое название")
     private String shortName;
     @Schema(description = "Адрес")
-    private ResponseAddressDto address;
+    private AddressDto address;
     @Schema(description = "Подразделения")
-    private List<ShortResponseDepartmentDto> departments;
+    private List<ShortDepartmentDto> departments;
     @Schema(description = "Подразделения")
-    private List<ResponseHeatSupplyAreaDto> heatSupplyAreas;
+    private List<HeatSupplyAreaDto> heatSupplyAreas;
 }

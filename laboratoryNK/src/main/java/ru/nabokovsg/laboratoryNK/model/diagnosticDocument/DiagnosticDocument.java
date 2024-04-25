@@ -25,7 +25,7 @@ public class DiagnosticDocument {
     private String equipmentDiagnosedId;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "document_type_id",  nullable = false)
-    private DocumentType documentType;
+    private TypeDocument typeDocument;
     @Column(name = "date")
     private LocalDate date;
     @Column(name = "next_date")

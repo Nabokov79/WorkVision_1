@@ -13,7 +13,7 @@ import ru.nabokovsg.laboratoryNK.model.equipmentDiagnosed.StandardSize;
 public interface EquipmentElementMapper {
 
     @Mapping(source = "elementDto.elementName", target = "elementName")
-    @Mapping(source = "equipment", target = "equipment")
+    @Mapping(source = "equipment", target = "equipmentDiagnosed")
     @Mapping(source = "elementDto.id", target = "id")
     EquipmentElement mapToElement(ElementDto elementDto, EquipmentDiagnosed equipment);
 
