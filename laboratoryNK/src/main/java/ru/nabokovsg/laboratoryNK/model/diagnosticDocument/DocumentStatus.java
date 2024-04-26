@@ -10,6 +10,5 @@ public enum DocumentStatus {
     DRAWING_VERIFICATION,
     ACCEPTED,
     REMARK,
-    RECORD_DB,
-    RECORD_FILE
+    RECORD
 }

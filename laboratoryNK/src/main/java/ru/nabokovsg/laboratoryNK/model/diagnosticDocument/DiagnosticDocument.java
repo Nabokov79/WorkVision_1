@@ -41,6 +41,8 @@ public class DiagnosticDocument {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private DocumentStatus status;
+    @Column(name = "drawing")
+    private Boolean drawing;
     @Column(name = "document_path")
     private String documentPath;
     @Column(name = "drawing_path")

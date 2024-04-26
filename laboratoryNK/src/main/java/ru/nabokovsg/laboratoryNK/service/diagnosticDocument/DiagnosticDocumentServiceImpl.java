@@ -36,6 +36,12 @@ public class DiagnosticDocumentServiceImpl implements DiagnosticDocumentService 
     private final DiagnosticDocumentTypeService documentTypeService;
     private final StringBuilderService builderService;
 
+    private final static String ABSENT = "ожидаются результаты обследования";
+    private final static String VERIFICATION = "ожидается проверка документа";
+    private final static String ACCEPTED = "проверка выполнена, замечания отсутствуют";
+    private final static String REMARK = "есть замечания";
+    private final static String RECORD = "документ записан в файл";
+
     @Override
     public void save(SurveyJournalDto journalDto, ResponseSurveyJournalDto journal) {
         if (journal.getDate() != null) {
@@ -105,9 +111,10 @@ public class DiagnosticDocumentServiceImpl implements DiagnosticDocumentService 
     @Override
     public void validateByStatus(Long taskJournalId) {
         DiagnosticDocument document = repository.findByTaskJournalId(taskJournalId);
-        if (document.getStatus().equals(DocumentStatus.RECORD_DB)) {
+        if (document.getStatus().equals(DocumentStatus.RECORD)) {
             throw new BadRequestException(
-                    String.format("Document has been created for writing in the task log with number=%s", document.getDocumentNumber())
+                    String.format("Document has been created for writing in the task log with number=%s"
+                                                                                        , document.getDocumentNumber())
             );
         }
     }

@@ -76,6 +76,10 @@ public class RemarkServiceImpl implements RemarkService {
     }
 
    private void delete(Long id) {
-        repository.deleteById(id);
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return;
+        }
+        throw new NotFoundException(String.format("Remark with id=%s not found for delete", id));
     }
 }
