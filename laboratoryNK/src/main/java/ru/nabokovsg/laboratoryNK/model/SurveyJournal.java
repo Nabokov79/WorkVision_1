@@ -12,8 +12,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tasks_journals")
-public class TasksJournal {
+@Table(name = "survey_journals")
+public class SurveyJournal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

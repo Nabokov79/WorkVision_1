@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.nabokovsg.laboratoryNK.dto.diagnosticDocument.DiagnosticDocumentTypeDto;
 import ru.nabokovsg.laboratoryNK.exceptions.BadRequestException;
 import ru.nabokovsg.laboratoryNK.exceptions.NotFoundException;
-import ru.nabokovsg.laboratoryNK.mapper.diagnosticDocument.DiagnosticDocumentMapper;
+import ru.nabokovsg.laboratoryNK.mapper.diagnosticDocument.DiagnosticDocumentTypeMapper;
+import ru.nabokovsg.laboratoryNK.model.diagnosticDocument.DiagnosticDocumentType;
 import ru.nabokovsg.laboratoryNK.model.diagnosticDocument.TypeDocument;
 import ru.nabokovsg.laboratoryNK.repository.diagnosticDocument.DiagnosticDocumentTypeRepository;
 
@@ -14,10 +15,10 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class DocumentTypeServiceImpl implements DocumentTypeService {
+public class DiagnosticDocumentTypeServiceImpl implements DiagnosticDocumentTypeService {
 
     private final DiagnosticDocumentTypeRepository repository;
-    private final DiagnosticDocumentMapper mapper;
+    private final DiagnosticDocumentTypeMapper mapper;
 
     @Override
     public DiagnosticDocumentTypeDto save(DiagnosticDocumentTypeDto documentTypeDto) {
@@ -59,6 +60,14 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
             return;
         }
         throw new NotFoundException(String.format("Diagnostic document type with id = %s not found for delete", id));
+    }
+
+    @Override
+    public DiagnosticDocumentType getById(Long diagnosticDocumentTypeId) {
+        return repository.findById(diagnosticDocumentTypeId)
+                .orElseThrow(() -> new NotFoundException(
+                        String.format("Diagnostic document type with id=%s not found", diagnosticDocumentTypeId))
+                );
     }
 
     private TypeDocument convertToTypeDocument(String typeDocument) {

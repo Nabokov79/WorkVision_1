@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.laboratoryNK.dto.diagnosticDocument.DiagnosticDocumentTypeDto;
-import ru.nabokovsg.laboratoryNK.service.diagnosticDocument.DocumentTypeService;
+import ru.nabokovsg.laboratoryNK.service.diagnosticDocument.DiagnosticDocumentTypeService;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import java.util.List;
         description="API для работы с данными вида документа по результатам диагностики")
 public class DiagnosticDocumentTypeController {
 
-    private final DocumentTypeService service;
+    private final DiagnosticDocumentTypeService service;
 
     @Operation(summary = "Добавление нового вида документа")
     @PostMapping

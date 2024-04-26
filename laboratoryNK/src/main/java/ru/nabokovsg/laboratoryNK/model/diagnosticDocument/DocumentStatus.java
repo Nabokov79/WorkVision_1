@@ -9,5 +9,7 @@ public enum DocumentStatus {
     DOCUMENT_VERIFICATION,
     DRAWING_VERIFICATION,
     ACCEPTED,
-    REMARK
+    REMARK,
+    RECORD_DB,
+    RECORD_FILE
 }

@@ -21,13 +21,19 @@ public class DiagnosticDocument {
     private Long id;
     @Column(name = "task_journal_id")
     private Long taskJournalId;
+    @Column(name = "equipment_diagnosed")
+    private String equipmentDiagnosed;
     @Column(name = "equipment_diagnosed_id")
-    private String equipmentDiagnosedId;
+    private Long equipmentDiagnosedId;
+    @Column(name = "diagnostic_document_type")
+    private String documentType;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "diagnostic_document_type_id",  nullable = false)
     private DiagnosticDocumentType diagnosticDocumentType;
     @Column(name = "date")
     private LocalDate date;
+    @Column(name = "installation_location")
+    private LocalDate installationLocation;
     @Column(name = "next_date")
     private LocalDate nextDate;
     @Column(name = "document_number")

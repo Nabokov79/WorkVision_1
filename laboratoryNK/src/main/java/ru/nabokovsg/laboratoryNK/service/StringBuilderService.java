@@ -2,6 +2,7 @@ package ru.nabokovsg.laboratoryNK.service;
 
 import ru.nabokovsg.laboratoryNK.dto.client.BuildingDto;
 import ru.nabokovsg.laboratoryNK.dto.client.EmployeeDto;
+import ru.nabokovsg.laboratoryNK.model.diagnosticDocument.DiagnosticDocumentType;
 import ru.nabokovsg.laboratoryNK.model.equipmentDiagnosed.EquipmentDiagnosed;
 
 public interface StringBuilderService {
@@ -11,4 +12,6 @@ public interface StringBuilderService {
     String buildBuilding(BuildingDto building);
 
     String buildEquipmentDiagnosed(EquipmentDiagnosed equipment);
+
+    String buildDiagnosticDocumentType(DiagnosticDocumentType diagnosticDocumentType);
 }

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import ru.nabokovsg.laboratoryNK.dto.client.AddressDto;
 import ru.nabokovsg.laboratoryNK.dto.client.BuildingDto;
 import ru.nabokovsg.laboratoryNK.dto.client.EmployeeDto;
+import ru.nabokovsg.laboratoryNK.model.diagnosticDocument.DiagnosticDocumentType;
 import ru.nabokovsg.laboratoryNK.model.equipmentDiagnosed.EquipmentDiagnosed;
 
 @Component
@@ -43,6 +44,11 @@ public class StringBuilderServiceImpl implements StringBuilderService {
                                                         , "м3");
         }
         return equipmentDiagnosed;
+    }
+
+    @Override
+    public String buildDiagnosticDocumentType(DiagnosticDocumentType diagnosticDocumentType) {
+        return String.join(", ", diagnosticDocumentType.getTitle(), diagnosticDocumentType.getHeading());
     }
 
     private String buildAddress(AddressDto address) {

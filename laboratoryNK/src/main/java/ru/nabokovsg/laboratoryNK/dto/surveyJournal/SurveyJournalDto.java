@@ -1,4 +1,4 @@
-package ru.nabokovsg.laboratoryNK.dto.tasksJournal;
+package ru.nabokovsg.laboratoryNK.dto.surveyJournal;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "Данные для добавления/изменения информации об выполняемой работе")
-public class TasksJournalDto {
+public class SurveyJournalDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
@@ -36,8 +36,12 @@ public class TasksJournalDto {
     private String taskSource;
     @Schema(description = "Комментарий к задаче")
     private String comment;
-    @Schema(description = "Индентификаторы руководителя работ")
+    @Schema(description = "Индентификатор руководителя работ")
     private Long laboratoryEmployeeId;
     @Schema(description = "Индентификаторы сотрудников лаборатории назначенных для выполнения задачи")
     private List<Long> laboratoryEmployeesIds;
+    @Schema(description = "Индентификатор типа документа диагностики")
+    private Long diagnosticDocumentTypeId;
+    @Schema(description = "необходимо приложить чертеж")
+    private boolean drawing;
 }

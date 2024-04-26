@@ -2,12 +2,12 @@ package ru.nabokovsg.laboratoryNK.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.nabokovsg.laboratoryNK.dto.tasksJournal.ResponseTasksJournalDto;
-import ru.nabokovsg.laboratoryNK.dto.tasksJournal.TasksJournalDto;
-import ru.nabokovsg.laboratoryNK.model.TasksJournal;
+import ru.nabokovsg.laboratoryNK.dto.surveyJournal.ResponseSurveyJournalDto;
+import ru.nabokovsg.laboratoryNK.dto.surveyJournal.SurveyJournalDto;
+import ru.nabokovsg.laboratoryNK.model.SurveyJournal;
 
 @Mapper(componentModel = "spring")
-public interface TasksJournalMapper {
+public interface SurveyJournalMapper {
 
     @Mapping(source = "taskJournalDto.date", target = "date")
     @Mapping(source = "branch", target = "branch")
@@ -19,12 +19,12 @@ public interface TasksJournalMapper {
     @Mapping(source = "taskJournalDto.taskSource", target = "taskSource")
     @Mapping(source = "taskJournalDto.comment", target = "comment")
     @Mapping(source = "taskJournalDto.id", target = "id")
-    TasksJournal mapToTaskJournal(TasksJournalDto taskJournalDto
+    SurveyJournal mapToTaskJournal(SurveyJournalDto taskJournalDto
                                 , String branch
                                 , String heatSupplyArea
                                 , String exploitationRegion
                                 , String building
                                 , String equipmentDiagnosed);
 
-    ResponseTasksJournalDto mapToResponseTaskJournalDto(TasksJournal journal);
+    ResponseSurveyJournalDto mapToResponseTaskJournalDto(SurveyJournal journal);
 }

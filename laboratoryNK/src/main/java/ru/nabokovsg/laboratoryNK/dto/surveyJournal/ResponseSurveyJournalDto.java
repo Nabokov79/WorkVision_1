@@ -1,4 +1,4 @@
-package ru.nabokovsg.laboratoryNK.dto.tasksJournal;
+package ru.nabokovsg.laboratoryNK.dto.surveyJournal;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @Schema(description = "Данные выполняемой работе")
-public class ResponseTasksJournalDto {
+public class ResponseSurveyJournalDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
@@ -26,7 +26,7 @@ public class ResponseTasksJournalDto {
     @Schema(description = "Полное наименование эксплуатационного участка")
     private String exploitationRegion;
     @Schema(description = "Место проведения работ")
-    private String workPlace;
+    private String building;
     @Schema(description = "Диагностируемое оборудование")
     private String equipmentDiagnosed;
     @Schema(description = "Тип выполняемой работы")

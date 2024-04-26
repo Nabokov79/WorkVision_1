@@ -7,19 +7,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nabokovsg.laboratoryNK.client.LaboratoryClient;
 import ru.nabokovsg.laboratoryNK.dto.client.BranchDto;
-import ru.nabokovsg.laboratoryNK.dto.client.BuildingDto;
 import ru.nabokovsg.laboratoryNK.dto.client.ExploitationRegionDto;
 import ru.nabokovsg.laboratoryNK.dto.client.HeatSupplyAreaDto;
-import ru.nabokovsg.laboratoryNK.dto.tasksJournal.ResponseTasksJournalDto;
-import ru.nabokovsg.laboratoryNK.dto.tasksJournal.TasksJournalDto;
+import ru.nabokovsg.laboratoryNK.dto.surveyJournal.ResponseSurveyJournalDto;
+import ru.nabokovsg.laboratoryNK.dto.surveyJournal.SurveyJournalDto;
 import ru.nabokovsg.laboratoryNK.exceptions.BadRequestException;
 import ru.nabokovsg.laboratoryNK.exceptions.NotFoundException;
-import ru.nabokovsg.laboratoryNK.mapper.TasksJournalMapper;
-import ru.nabokovsg.laboratoryNK.model.QTasksJournal;
-import ru.nabokovsg.laboratoryNK.model.TasksJournal;
+import ru.nabokovsg.laboratoryNK.mapper.SurveyJournalMapper;
+import ru.nabokovsg.laboratoryNK.model.QSurveyJournal;
+import ru.nabokovsg.laboratoryNK.model.SurveyJournal;
 import ru.nabokovsg.laboratoryNK.model.equipmentDiagnosed.EquipmentDiagnosed;
 import ru.nabokovsg.laboratoryNK.model.laboratoryEmployee.LaboratoryEmployee;
-import ru.nabokovsg.laboratoryNK.repository.TasksJournalRepository;
+import ru.nabokovsg.laboratoryNK.repository.SurveyJournalRepository;
 import ru.nabokovsg.laboratoryNK.service.diagnosticDocument.DiagnosticDocumentService;
 import ru.nabokovsg.laboratoryNK.service.equipmentDiagnosed.EquipmentDiagnosedService;
 import ru.nabokovsg.laboratoryNK.service.laboratoryEmployee.LaboratoryEmployeeService;
@@ -33,10 +32,10 @@ import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
-public class TasksJournalServiceImpl implements TasksJournalService {
+public class SurveyJournalServiceImpl implements SurveyJournalService {
 
-    private final TasksJournalRepository repository;
-    private final TasksJournalMapper mapper;
+    private final SurveyJournalRepository repository;
+    private final SurveyJournalMapper mapper;
     private final EntityManager em;
     private final LaboratoryClient client;
     private final EquipmentDiagnosedService equipmentDiagnosedService;
@@ -45,49 +44,49 @@ public class TasksJournalServiceImpl implements TasksJournalService {
     private final DiagnosticDocumentService documentService;
 
     @Override
-    public ResponseTasksJournalDto save(TasksJournalDto taskJournalDto) {
-        if (repository.existsByDateAndEquipmentId(taskJournalDto.getDate(), taskJournalDto.getEquipmentId())) {
+    public ResponseSurveyJournalDto save(SurveyJournalDto journalDto) {
+        if (repository.existsByDateAndEquipmentId(journalDto.getDate(), journalDto.getEquipmentId())) {
             throw new BadRequestException(
-                    String.format("TasksJournal by date=%s and equipmentId=%s is found", taskJournalDto.getDate()
-                                                                                      , taskJournalDto.getEquipmentId())
+                    String.format("TasksJournal by date=%s and equipmentId=%s is found", journalDto.getDate()
+                                                                                       , journalDto.getEquipmentId())
             );
         }
-        EquipmentDiagnosed equipment = equipmentDiagnosedService.getById(taskJournalDto.getEquipmentId());
-        ResponseTasksJournalDto taskJournal = mapper.mapToResponseTaskJournalDto(
-                                                         repository.save(getTasksJournalData(taskJournalDto, equipment))
+        EquipmentDiagnosed equipment = equipmentDiagnosedService.getById(journalDto.getEquipmentId());
+        ResponseSurveyJournalDto journal = mapper.mapToResponseTaskJournalDto(
+                                                         repository.save(getTasksJournalData(journalDto, equipment))
         );
-        documentService.save(taskJournal);
-        return taskJournal;
+        documentService.save(journalDto, journal);
+        return journal;
     }
 
     @Override
-    public ResponseTasksJournalDto update(TasksJournalDto taskJournalDto) {
-        if (repository.existsById(taskJournalDto.getId())) {
-            documentService.existsByTaskJournalId(taskJournalDto.getId());
-            EquipmentDiagnosed equipment = equipmentDiagnosedService.getById(taskJournalDto.getEquipmentId());
-            ResponseTasksJournalDto taskJournal = mapper.mapToResponseTaskJournalDto(
-                    repository.save(getTasksJournalData(taskJournalDto, equipment))
+    public ResponseSurveyJournalDto update(SurveyJournalDto journalDto) {
+        if (repository.existsById(journalDto.getId())) {
+            documentService.validateByStatus(journalDto.getId());
+            EquipmentDiagnosed equipment = equipmentDiagnosedService.getById(journalDto.getEquipmentId());
+            ResponseSurveyJournalDto journal = mapper.mapToResponseTaskJournalDto(
+                    repository.save(getTasksJournalData(journalDto, equipment))
             );
-            documentService.update(taskJournal);
-            return taskJournal;
+            documentService.save(journalDto, journal);
+            return journal;
         }
         throw new NotFoundException(
-                String.format("TasksJournal with id=%s not found for update", taskJournalDto.getId())
+                String.format("TasksJournal with id=%s not found for update", journalDto.getId())
         );
     }
 
     @Override
-    public List<ResponseTasksJournalDto> getAll(LocalDate startPeriod, LocalDate endPeriod) {
-        QTasksJournal tasksJournal = QTasksJournal.tasksJournal;
+    public List<ResponseSurveyJournalDto> getAll(LocalDate startPeriod, LocalDate endPeriod) {
+        QSurveyJournal journal = QSurveyJournal.surveyJournal;
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         if (startPeriod != null && endPeriod != null) {
-            booleanBuilder.and(tasksJournal.date.after(startPeriod));
-            booleanBuilder.and(QTasksJournal.tasksJournal.date.before(endPeriod));
+            booleanBuilder.and(journal.date.after(startPeriod));
+            booleanBuilder.and(journal.date.before(endPeriod));
         } else {
-            booleanBuilder.and(tasksJournal.date.eq(LocalDate.now()));
+            booleanBuilder.and(journal.date.eq(LocalDate.now()));
         }
-        return new JPAQueryFactory(em).from(tasksJournal)
-                .select(tasksJournal)
+        return new JPAQueryFactory(em).from(journal)
+                .select(journal)
                 .where(booleanBuilder)
                 .fetch()
                 .stream()
@@ -104,7 +103,7 @@ public class TasksJournalServiceImpl implements TasksJournalService {
         throw new NotFoundException(String.format("TasksJournal with id=%s not found for delete", id));
     }
 
-    private TasksJournal getTasksJournalData(TasksJournalDto taskJournalDto, EquipmentDiagnosed equipment) {
+    private SurveyJournal getTasksJournalData(SurveyJournalDto taskJournalDto, EquipmentDiagnosed equipment) {
         BranchDto branch = client.getBranch(taskJournalDto.getBranchId());
         HeatSupplyAreaDto heatSupplyArea = branch.getHeatSupplyAreas()
                                                  .stream()
@@ -127,7 +126,7 @@ public class TasksJournalServiceImpl implements TasksJournalService {
                                     , taskJournalDto);
     }
 
-    private TasksJournal setLaboratoryEmployee(TasksJournal taskJournal, TasksJournalDto taskJournalDto) {
+    private SurveyJournal setLaboratoryEmployee(SurveyJournal taskJournal, SurveyJournalDto taskJournalDto) {
         Map<Long, LaboratoryEmployee> employees = employeeService.getAllById(
                                                     Stream.of(taskJournalDto.getLaboratoryEmployeesIds()
                                                                     , List.of(taskJournalDto.getLaboratoryEmployeeId()))
