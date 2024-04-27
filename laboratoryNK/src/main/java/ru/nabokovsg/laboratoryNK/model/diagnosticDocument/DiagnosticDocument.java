@@ -33,16 +33,15 @@ public class DiagnosticDocument {
     @Column(name = "date")
     private LocalDate date;
     @Column(name = "installation_location")
-    private LocalDate installationLocation;
+    private String installationLocation;
     @Column(name = "next_date")
     private LocalDate nextDate;
     @Column(name = "document_number")
     private Integer documentNumber;
-    @Column(name = "status")
-    @Enumerated(EnumType.STRING)
-    private DocumentStatus status;
-    @Column(name = "drawing")
-    private Boolean drawing;
+    @Column(name = "document_status")
+    private String documentStatus;
+    @Column(name = "drawing_status")
+    private String drawingStatus;
     @Column(name = "document_path")
     private String documentPath;
     @Column(name = "drawing_path")

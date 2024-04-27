@@ -28,19 +28,13 @@ import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
 
 @Service
 @RequiredArgsConstructor
-public class DiagnosticDocumentServiceImpl implements DiagnosticDocumentService {
+public class DiagnosticDocumentServiceImpl extends DiagnosticDocumentStatusFactory implements DiagnosticDocumentService {
 
     private final DiagnosticDocumentRepository repository;
     private final DiagnosticDocumentMapper mapper;
     private final EntityManager em;
     private final DiagnosticDocumentTypeService documentTypeService;
     private final StringBuilderService builderService;
-
-    private final static String ABSENT = "ожидаются результаты обследования";
-    private final static String VERIFICATION = "ожидается проверка документа";
-    private final static String ACCEPTED = "проверка выполнена, замечания отсутствуют";
-    private final static String REMARK = "есть замечания";
-    private final static String RECORD = "документ записан в файл";
 
     @Override
     public void save(SurveyJournalDto journalDto, ResponseSurveyJournalDto journal) {
@@ -49,11 +43,12 @@ public class DiagnosticDocumentServiceImpl implements DiagnosticDocumentService 
                                                                               journalDto.getDiagnosticDocumentTypeId());
             repository.save(
                     mapper.mapToDiagnosticDocument(journal
-                                                 , journalDto.getEquipmentId()
-                                                 , diagnosticDocumentType
-                                                 , builderService.buildDiagnosticDocumentType(diagnosticDocumentType)
-                                                 , getDocumentStatus(journalDto.isDrawing())
-                                                 , getDocumentNumber())
+                            , journalDto.getEquipmentId()
+                            , diagnosticDocumentType
+                            , builderService.buildDiagnosticDocumentType(diagnosticDocumentType)
+                            , getDiagnosticDocumentStatus(DocumentStatus.NEW_DOCUMENT)
+                            , getDrawingStatus(DocumentStatus.NEW_DRAWING, journalDto.isDrawing())
+                    , getDocumentNumber())
             );
         }
     }
@@ -62,8 +57,7 @@ public class DiagnosticDocumentServiceImpl implements DiagnosticDocumentService 
     public void update(SurveyJournalDto journalDto, ResponseSurveyJournalDto journal) {
         DiagnosticDocument document = repository.findByTaskJournalId(journal.getId());
         if (document != null) {
-            if (document.getStatus().equals(DocumentStatus.ABSENT)
-                    || document.getStatus().equals(DocumentStatus.ABSENT_DOCUMENT)) {
+            if (document.getDocumentStatus().equals(getDiagnosticDocumentStatus(DocumentStatus.NEW_DOCUMENT))) {
                 DiagnosticDocumentType diagnosticDocumentType = documentTypeService.getById(
                                                                               journalDto.getDiagnosticDocumentTypeId());
                 repository.save(
@@ -109,9 +103,14 @@ public class DiagnosticDocumentServiceImpl implements DiagnosticDocumentService 
     }
 
     @Override
+    public DiagnosticDocumentDto manageStatus(Long id, boolean drawing, boolean document, String path) {
+        return null;
+    }
+
+    @Override
     public void validateByStatus(Long taskJournalId) {
         DiagnosticDocument document = repository.findByTaskJournalId(taskJournalId);
-        if (document.getStatus().equals(DocumentStatus.RECORD)) {
+        if (document.getDocumentStatus().equals(getDiagnosticDocumentStatus(DocumentStatus.NEW_DOCUMENT))) {
             throw new BadRequestException(
                     String.format("Document has been created for writing in the task log with number=%s"
                                                                                         , document.getDocumentNumber())
@@ -124,6 +123,8 @@ public class DiagnosticDocumentServiceImpl implements DiagnosticDocumentService 
         return repository.findById(id)
                .orElseThrow(() -> new NotFoundException(String.format("Diagnostic document with id=%s not found", id)));
     }
+
+    public void manageStatus()
 
     private Integer getDocumentNumber() {
         LocalDate now = LocalDate.now();
@@ -138,12 +139,5 @@ public class DiagnosticDocumentServiceImpl implements DiagnosticDocumentService 
             return 1;
         }
         return (++number);
-    }
-
-    private DocumentStatus getDocumentStatus(boolean drawing) {
-        if (drawing) {
-            return DocumentStatus.ABSENT;
-        }
-        return DocumentStatus.ABSENT_DOCUMENT;
     }
 }

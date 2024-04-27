@@ -16,6 +16,8 @@ public interface DiagnosticDocumentService {
 
     List<DiagnosticDocumentDto> getAll(LocalDate startPeriod, LocalDate endPeriod, boolean week, boolean month);
 
+    DiagnosticDocumentDto manageStatus(Long id, boolean drawing, boolean document, String path);
+
    void validateByStatus(Long taskJournalId);
     DiagnosticDocument getById(Long id);
 }

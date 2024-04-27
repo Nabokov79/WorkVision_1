@@ -2,13 +2,11 @@ package ru.nabokovsg.laboratoryNK.model.diagnosticDocument;
 
 public enum DocumentStatus {
 
-    ABSENT,
-    ABSENT_DOCUMENT,
-    ABSENT_DRAWING,
+    WAITING,
     VERIFICATION,
-    DOCUMENT_VERIFICATION,
-    DRAWING_VERIFICATION,
     ACCEPTED,
     REMARK,
-    RECORD
+    NEW_DOCUMENT,
+    UPDATE_DOCUMENT,
+    NEW_DRAWING,
 }

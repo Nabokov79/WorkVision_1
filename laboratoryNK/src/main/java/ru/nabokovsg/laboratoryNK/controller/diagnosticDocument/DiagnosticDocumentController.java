@@ -6,10 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.laboratoryNK.dto.diagnosticDocument.DiagnosticDocumentDto;
 import ru.nabokovsg.laboratoryNK.service.diagnosticDocument.DiagnosticDocumentService;
 
@@ -40,5 +37,15 @@ public class DiagnosticDocumentController {
                                                 , @RequestParam(value = "endPeriod")
                                                   @Parameter(description = "Получить за месяц") boolean month) {
         return ResponseEntity.ok().body(service.getAll(startPeriod, endPeriod, week, month));
+    }
+
+    @Operation(summary = "Управление статусами документа")
+    @GetMapping("/{id}")
+    public ResponseEntity<DiagnosticDocumentDto> manageStatus(
+              @PathVariable @Parameter(description = "Индентификатор") Long id
+            , @RequestParam(value = "drawing", required = false) boolean drawing
+            , @RequestParam(value = "document", required = false) boolean document
+            , @Parameter(description = "Путь к файлу в хранилище") String path) {
+        return ResponseEntity.ok().body(service.manageStatus(id, document, drawing, path));
     }
 }
