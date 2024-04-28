@@ -22,6 +22,8 @@ public class Remark {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "document_id",  nullable = false)
     private DiagnosticDocument document;
+    @Column(name = "employee_id")
+    private Long employeeId;
     @Column(name = "initials")
     private String initials;
     @Column(name = "document_corrected")

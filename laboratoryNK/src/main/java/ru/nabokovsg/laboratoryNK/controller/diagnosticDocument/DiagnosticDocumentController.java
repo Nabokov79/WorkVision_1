@@ -38,14 +38,4 @@ public class DiagnosticDocumentController {
                                                   @Parameter(description = "Получить за месяц") boolean month) {
         return ResponseEntity.ok().body(service.getAll(startPeriod, endPeriod, week, month));
     }
-
-    @Operation(summary = "Управление статусами документа")
-    @GetMapping("/{id}")
-    public ResponseEntity<DiagnosticDocumentDto> manageStatus(
-              @PathVariable @Parameter(description = "Индентификатор") Long id
-            , @RequestParam(value = "drawing", required = false) boolean drawing
-            , @RequestParam(value = "document", required = false) boolean document
-            , @Parameter(description = "Путь к файлу в хранилище") String path) {
-        return ResponseEntity.ok().body(service.manageStatus(id, document, drawing, path));
-    }
 }

@@ -103,11 +103,6 @@ public class DiagnosticDocumentServiceImpl extends DiagnosticDocumentStatusFacto
     }
 
     @Override
-    public DiagnosticDocumentDto manageStatus(Long id, boolean drawing, boolean document, String path) {
-        return null;
-    }
-
-    @Override
     public void validateByStatus(Long taskJournalId) {
         DiagnosticDocument document = repository.findByTaskJournalId(taskJournalId);
         if (document.getDocumentStatus().equals(getDiagnosticDocumentStatus(DocumentStatus.NEW_DOCUMENT))) {
@@ -124,7 +119,11 @@ public class DiagnosticDocumentServiceImpl extends DiagnosticDocumentStatusFacto
                .orElseThrow(() -> new NotFoundException(String.format("Diagnostic document with id=%s not found", id)));
     }
 
-    public void manageStatus()
+    @Override
+    public void updateStatus(DiagnosticDocument document, DocumentStatus status) {
+        document.setDocumentStatus(getDiagnosticDocumentStatus(status));
+        repository.save(document);
+    }
 
     private Integer getDocumentNumber() {
         LocalDate now = LocalDate.now();

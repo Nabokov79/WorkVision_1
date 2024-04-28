@@ -1,5 +1,6 @@
 package ru.nabokovsg.laboratoryNK.service.diagnosticDocument;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -9,14 +10,14 @@ import ru.nabokovsg.laboratoryNK.dto.remark.ResponseRemarkDto;
 import ru.nabokovsg.laboratoryNK.exceptions.BadRequestException;
 import ru.nabokovsg.laboratoryNK.exceptions.NotFoundException;
 import ru.nabokovsg.laboratoryNK.mapper.diagnosticDocument.RemarkMapper;
-import ru.nabokovsg.laboratoryNK.model.diagnosticDocument.DiagnosticDocument;
-import ru.nabokovsg.laboratoryNK.model.diagnosticDocument.QRemark;
-import ru.nabokovsg.laboratoryNK.model.diagnosticDocument.Remark;
-import ru.nabokovsg.laboratoryNK.model.laboratoryEmployee.LaboratoryEmployee;
+import ru.nabokovsg.laboratoryNK.model.QSurveyJournal;
+import ru.nabokovsg.laboratoryNK.model.diagnosticDocument.*;
+import ru.nabokovsg.laboratoryNK.model.laboratoryEmployee.QLaboratoryEmployee;
 import ru.nabokovsg.laboratoryNK.repository.diagnosticDocument.RemarkRepository;
 import ru.nabokovsg.laboratoryNK.service.laboratoryEmployee.LaboratoryEmployeeService;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -35,6 +36,7 @@ public class RemarkServiceImpl implements RemarkService {
             remark = repository.save(mapper.mapToRemark(remarkDto
                             , employeeService.getById(remarkDto.getEmployeeId())
                             , documentService.getById(remarkDto.getDocumentId())));
+            documentService.updateStatus(remark.getDocument(), DocumentStatus.REMARK);
             return mapper.mapToRemarkDto(remark);
         }
        throw new BadRequestException(String.format("Remark was found: %s", remark.getRemark()));
@@ -50,36 +52,41 @@ public class RemarkServiceImpl implements RemarkService {
     }
 
     @Override
-    public List<ResponseRemarkDto> getAll(Long id, Boolean inspector) {
-//        if (inspector) {
-//            return repository.findAllByInspectorIdOrderByIdDesc(id)
-//                             .stream()
-//                             .map(mapper::mapToFullRemarkDto)
-//                             .toList();
-//        } else {
-//            QRemark remark = QRemark.remark1;
-//            return new JPAQueryFactory(em).from(remark)
-//                                          .select(remark)
-//                                          .where(QSubscriber.subscriber.id.eq(id))
-//                                          .orderBy(remark.id.desc())
-//                                          .fetch()
-//                                          .stream()
-//                                          .map(mapper::mapToFullRemarkDto)
-//                                          .toList();
-//        }
-        return null;
+    public List<ResponseRemarkDto> getAll(Long id) {
+        Set<Remark> remarks = repository.findAllByEmployeeId(id);
+        if (remarks.isEmpty()) {
+            QRemark remark = QRemark.remark1;
+            QSurveyJournal journal = QSurveyJournal.surveyJournal;
+            QDiagnosticDocument document = QDiagnosticDocument.diagnosticDocument;
+            QLaboratoryEmployee employee = QLaboratoryEmployee.laboratoryEmployee;
+            BooleanBuilder booleanBuilder = new BooleanBuilder();
+            booleanBuilder.and(document.surveyJournalId.eq(journal.id));
+            booleanBuilder.and(remark.document.id.eq(document.id));
+            booleanBuilder.and(employee.id.eq(id));
+            return new JPAQueryFactory(em).from(remark)
+                                          .select(remark)
+                                          .where(booleanBuilder)
+                                          .fetch()
+                                          .stream()
+                                          .map(mapper::mapToRemarkDto)
+                                          .toList();
+        }
+        return remarks.stream()
+                .map(mapper::mapToRemarkDto)
+                .toList();
+    }
+
+    @Override
+    public void delete(Long id) {
+        Remark remark = getById(id);
+        repository.deleteById(id);
+        if (repository.countAllByDocumentId(remark.getDocument().getId()) == 0) {
+            documentService.updateStatus(remark.getDocument(), DocumentStatus.ACCEPTED);
+        }
     }
 
     private Remark getById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format("Remark with id=%s not found", id)));
-    }
-
-   private void delete(Long id) {
-        if (repository.existsById(id)) {
-            repository.deleteById(id);
-            return;
-        }
-        throw new NotFoundException(String.format("Remark with id=%s not found for delete", id));
     }
 }

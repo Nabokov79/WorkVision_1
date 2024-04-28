@@ -10,7 +10,7 @@ import ru.nabokovsg.laboratoryNK.model.diagnosticDocument.DiagnosticDocumentType
 @Mapper(componentModel = "spring")
 public interface DiagnosticDocumentMapper {
 
-    @Mapping(source = "journal.id", target = "taskJournalId")
+    @Mapping(source = "journal.id", target = "surveyJournalId")
     @Mapping(source = "journal.equipmentDiagnosed", target = "equipmentDiagnosed")
     @Mapping(source = "journal.date", target = "date")
     @Mapping(source = "journal.building", target = "installationLocation")
@@ -29,7 +29,7 @@ public interface DiagnosticDocumentMapper {
                                              , String drawingStatus
                                              , Integer documentNumber);
 
-    @Mapping(source = "document.taskJournalId", target = "taskJournalId")
+    @Mapping(source = "document.surveyJournalId", target = "surveyJournalId")
     @Mapping(source = "journal.equipmentDiagnosed", target = "equipmentDiagnosed")
     @Mapping(source = "equipmentId", target = "equipmentDiagnosedId")
     @Mapping(source = "documentType", target = "documentType")

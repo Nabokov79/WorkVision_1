@@ -12,6 +12,7 @@ import ru.nabokovsg.laboratoryNK.model.laboratoryEmployee.LaboratoryEmployee;
 public interface RemarkMapper {
 
     @Mapping(source = "remarkDto.remark", target = "remark")
+    @Mapping(source = "employee.employeeId", target = "employeeId")
     @Mapping(source = "employee.initials", target = "initials")
     @Mapping(source = "document", target = "document")
     @Mapping(source = "remarkDto.id", target = "id")

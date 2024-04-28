@@ -11,5 +11,7 @@ public interface RemarkService {
 
     ResponseRemarkDto update(RemarkDto remarkDto);
 
-    List<ResponseRemarkDto> getAll(Long id, Boolean inspector);
+    List<ResponseRemarkDto> getAll(Long id);
+
+    void delete(Long id);
 }

@@ -4,6 +4,7 @@ import ru.nabokovsg.laboratoryNK.dto.diagnosticDocument.DiagnosticDocumentDto;
 import ru.nabokovsg.laboratoryNK.dto.surveyJournal.ResponseSurveyJournalDto;
 import ru.nabokovsg.laboratoryNK.dto.surveyJournal.SurveyJournalDto;
 import ru.nabokovsg.laboratoryNK.model.diagnosticDocument.DiagnosticDocument;
+import ru.nabokovsg.laboratoryNK.model.diagnosticDocument.DocumentStatus;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,8 +17,9 @@ public interface DiagnosticDocumentService {
 
     List<DiagnosticDocumentDto> getAll(LocalDate startPeriod, LocalDate endPeriod, boolean week, boolean month);
 
-    DiagnosticDocumentDto manageStatus(Long id, boolean drawing, boolean document, String path);
-
    void validateByStatus(Long taskJournalId);
+
     DiagnosticDocument getById(Long id);
+
+    void updateStatus(DiagnosticDocument document, DocumentStatus status);
 }

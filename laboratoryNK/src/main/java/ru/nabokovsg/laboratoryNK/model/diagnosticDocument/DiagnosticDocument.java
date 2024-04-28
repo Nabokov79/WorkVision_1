@@ -19,8 +19,8 @@ public class DiagnosticDocument {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "task_journal_id")
-    private Long taskJournalId;
+    @Column(name = "survey_journal_id")
+    private Long surveyJournalId;
     @Column(name = "equipment_diagnosed")
     private String equipmentDiagnosed;
     @Column(name = "equipment_diagnosed_id")

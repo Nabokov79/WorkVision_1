@@ -25,26 +25,31 @@ public class RemarkController {
 
     private final RemarkService service;
 
-    @Operation(summary = "Добавление данных нового замечания к документу или чертежу")
+    @Operation(summary = "Добавление нового замечания ")
     @PostMapping
     public ResponseEntity<ResponseRemarkDto> save(
             @RequestBody @Parameter(description = "Замечание") RemarkDto remarkDto) {
         return ResponseEntity.ok().body(service.save(remarkDto));
     }
 
-    @Operation(summary = "Изменение данных замечания к документу или чертежу")
+    @Operation(summary = "Изменение данных замечания")
     @PatchMapping
     public ResponseEntity<ResponseRemarkDto> update(
             @RequestBody @Parameter(description = "Замечание") RemarkDto remarkDto) {
         return ResponseEntity.ok().body(service.update(remarkDto));
     }
 
-    @Operation(summary = "Получение замечаний к документу и чертежу")
+    @Operation(summary = "Получение замечаний")
     @GetMapping("/all/{id}")
     public ResponseEntity<List<ResponseRemarkDto>> getAll(
-                                 @PathVariable
-                                 @Parameter(description = "Индентификатор сотрудника") Long id,
-                                 @RequestParam(name = "inspector") Boolean inspector) {
-        return ResponseEntity.ok().body(service.getAll(id, inspector));
+                                 @PathVariable @Parameter(description = "Индентификатор сотрудника") Long id) {
+        return ResponseEntity.ok().body(service.getAll(id));
+    }
+
+    @Operation(summary = "Удаление замечания")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable @Parameter(description = "Индентификатор") Long id) {
+        service.delete(id);
+        return ResponseEntity.ok("Замечание успешно удалено.");
     }
 }
