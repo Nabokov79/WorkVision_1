@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
-import ru.nabokovsg.laboratoryNK.dto.client.BranchDto;
-import ru.nabokovsg.laboratoryNK.dto.client.EmployeeDto;
+import ru.nabokovsg.laboratoryNK.dto.client.*;
 
 import java.util.List;
 
@@ -30,11 +29,43 @@ public class CompanyClient {
                 .blockFirst();
     }
 
+    public OrganizationDto getOrganization(String path) {
+        return client.get()
+                .uri(path)
+                .retrieve()
+                .bodyToMono(OrganizationDto.class)
+                .block();
+    }
+
     public BranchDto getBranch(String path) {
         return client.get()
                 .uri(path)
                 .retrieve()
                 .bodyToMono(BranchDto.class)
+                .block();
+    }
+
+    public DepartmentDto getDepartment(String path) {
+        return client.get()
+                .uri(path)
+                .retrieve()
+                .bodyToMono(DepartmentDto.class)
+                .block();
+    }
+
+    public HeatSupplyAreaDto getHeatSupplyArea(String path) {
+        return client.get()
+                .uri(path)
+                .retrieve()
+                .bodyToMono(HeatSupplyAreaDto.class)
+                .block();
+    }
+
+    public ExploitationRegionDto getExploitationRegion(String path) {
+        return client.get()
+                .uri(path)
+                .retrieve()
+                .bodyToMono(ExploitationRegionDto.class)
                 .block();
     }
 }

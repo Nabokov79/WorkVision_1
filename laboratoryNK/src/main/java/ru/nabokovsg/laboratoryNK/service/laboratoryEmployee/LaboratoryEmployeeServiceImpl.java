@@ -10,7 +10,7 @@ import ru.nabokovsg.laboratoryNK.exceptions.NotFoundException;
 import ru.nabokovsg.laboratoryNK.mapper.laboratoryEmployee.LaboratoryEmployeeMapper;
 import ru.nabokovsg.laboratoryNK.model.laboratoryEmployee.LaboratoryEmployee;
 import ru.nabokovsg.laboratoryNK.repository.laboratoryEmployee.LaboratoryEmployeeRepository;
-import ru.nabokovsg.laboratoryNK.service.StringBuilderService;
+import ru.nabokovsg.laboratoryNK.service.common.StringBuilderService;
 
 import java.util.List;
 

@@ -2,10 +2,10 @@ package ru.nabokovsg.laboratoryNK.mapper.diagnosticDocument;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.nabokovsg.laboratoryNK.dto.diagnosticDocument.DiagnosticDocumentDto;
-import ru.nabokovsg.laboratoryNK.dto.surveyJournal.ResponseSurveyJournalDto;
-import ru.nabokovsg.laboratoryNK.model.diagnosticDocument.DiagnosticDocument;
-import ru.nabokovsg.laboratoryNK.model.diagnosticDocument.DiagnosticDocumentType;
+import ru.nabokovsg.laboratoryNK.dto.diagnosticDocuments.DiagnosticDocumentDto;
+import ru.nabokovsg.laboratoryNK.dto.common.surveyJournal.ResponseSurveyJournalDto;
+import ru.nabokovsg.laboratoryNK.model.diagnosticDocuments.DiagnosticDocument;
+import ru.nabokovsg.laboratoryNK.model.diagnosticDocuments.DiagnosticDocumentType;
 
 @Mapper(componentModel = "spring")
 public interface DiagnosticDocumentMapper {

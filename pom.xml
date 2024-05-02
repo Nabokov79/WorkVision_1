@@ -5,7 +5,7 @@
 	<modules>
 		<module>company</module>
 		<module>laboratoryNK</module>
-	</modules>
+    </modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
