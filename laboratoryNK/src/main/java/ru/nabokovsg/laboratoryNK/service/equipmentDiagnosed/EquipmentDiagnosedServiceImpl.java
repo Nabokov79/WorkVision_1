@@ -12,6 +12,7 @@ import ru.nabokovsg.laboratoryNK.model.equipmentDiagnosed.EquipmentDiagnosed;
 import ru.nabokovsg.laboratoryNK.exceptions.NotFoundException;
 import ru.nabokovsg.laboratoryNK.mapper.equipmentDiagnosed.EquipmentDiagnosedMapper;
 import ru.nabokovsg.laboratoryNK.model.equipmentDiagnosed.QEquipmentDiagnosed;
+import ru.nabokovsg.laboratoryNK.model.equipmentDiagnosed.QEquipmentType;
 import ru.nabokovsg.laboratoryNK.repository.equipmentDiagnosed.EquipmentDiagnosedRepository;
 
 import java.util.List;
@@ -31,8 +32,8 @@ public class EquipmentDiagnosedServiceImpl implements EquipmentDiagnosedService 
         return mapper.mapToResponseShortEquipmentDto(
                 Objects.requireNonNullElseGet(getByPredicate(equipmentDto),
                         () -> repository.save(
-                                        mapper.mapToEquipment(equipmentDto
-                                                , equipmentTypeService.getById(equipmentDto.getEquipmentTypeId())))));
+                                mapper.mapToEquipment(equipmentDto
+                                        , equipmentTypeService.getById(equipmentDto.getEquipmentTypeId())))));
     }
 
     @Override
@@ -53,8 +54,8 @@ public class EquipmentDiagnosedServiceImpl implements EquipmentDiagnosedService 
     @Override
     public List<ResponseShortEquipmentDto> getAll(Long id) {
         return repository.findAllByBuildingId(id).stream()
-                                                 .map(mapper::mapToResponseShortEquipmentDto)
-                                                 .toList();
+                .map(mapper::mapToResponseShortEquipmentDto)
+                .toList();
     }
 
     @Override
@@ -74,10 +75,10 @@ public class EquipmentDiagnosedServiceImpl implements EquipmentDiagnosedService 
 
     private EquipmentDiagnosed getByPredicate(EquipmentDto equipmentDto) {
         QEquipmentDiagnosed equipment = QEquipmentDiagnosed.equipmentDiagnosed;
+        QEquipmentType equipmentType = QEquipmentType.equipmentType;
         BooleanBuilder booleanBuilder = new BooleanBuilder();
-        if (equipmentDto.getEquipmentName() != null) {
-            booleanBuilder.and(equipment.equipmentName.eq(equipmentDto.getEquipmentName()));
-        }
+        booleanBuilder.and(equipmentType.id.eq(equipmentDto.getEquipmentTypeId()));
+        booleanBuilder.and(equipment.equipmentName.eq(equipmentType.equipmentName));
         if (equipmentDto.getStationaryNumber() != null) {
             booleanBuilder.and(equipment.stationaryNumber.eq(equipmentDto.getStationaryNumber()));
         }
@@ -88,8 +89,8 @@ public class EquipmentDiagnosedServiceImpl implements EquipmentDiagnosedService 
             booleanBuilder.and(equipment.model.eq(equipmentDto.getModel()));
         }
         return new JPAQueryFactory(em).from(equipment)
-                                      .select(equipment)
-                                      .where(booleanBuilder)
-                                      .fetchOne();
+                .select(equipment)
+                .where(booleanBuilder)
+                .fetchOne();
     }
 }

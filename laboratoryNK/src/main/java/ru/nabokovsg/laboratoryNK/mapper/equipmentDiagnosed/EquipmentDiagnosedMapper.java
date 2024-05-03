@@ -13,10 +13,10 @@ public interface EquipmentDiagnosedMapper {
 
     @Mapping(source = "equipmentType", target = "equipmentType")
     @Mapping(source = "equipmentDto.buildingId", target = "buildingId")
-    @Mapping(source = "equipmentDto.equipmentName", target = "equipmentName")
+    @Mapping(source = "equipmentType.equipmentName", target = "equipmentName")
     @Mapping(source = "equipmentDto.stationaryNumber", target = "stationaryNumber")
     @Mapping(source = "equipmentDto.volume", target = "volume")
-    @Mapping(source = "equipmentDto.model", target = "model")
+    @Mapping(source = "equipmentType.model", target = "model")
     @Mapping(source = "equipmentDto.id", target = "id")
     EquipmentDiagnosed mapToEquipment(EquipmentDto equipmentDto, EquipmentType equipmentType);
 
