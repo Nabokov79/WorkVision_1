@@ -31,18 +31,16 @@ public class EquipmentDiagnosedServiceImpl implements EquipmentDiagnosedService 
         return mapper.mapToResponseShortEquipmentDto(
                 Objects.requireNonNullElseGet(getByPredicate(equipmentDto),
                         () -> repository.save(
-                                        mapper.mapToEquipment(equipmentDto, equipmentTypeService.create(equipmentDto))
-                )
-             )
-        );
+                                        mapper.mapToEquipment(equipmentDto
+                                                , equipmentTypeService.getById(equipmentDto.getEquipmentTypeId())))));
     }
 
     @Override
     public ResponseShortEquipmentDto update(EquipmentDto equipmentDto) {
         if (repository.existsById(equipmentDto.getId())) {
             return mapper.mapToResponseShortEquipmentDto(
-                    repository.save(mapper.mapToEquipment(equipmentDto, equipmentTypeService.create(equipmentDto)))
-            );
+                    repository.save(mapper.mapToEquipment(equipmentDto
+                            , equipmentTypeService.getById(equipmentDto.getEquipmentTypeId()))));
         }
         throw new NotFoundException(String.format("Equipment with id=%s not found for update", equipmentDto.getId()));
     }

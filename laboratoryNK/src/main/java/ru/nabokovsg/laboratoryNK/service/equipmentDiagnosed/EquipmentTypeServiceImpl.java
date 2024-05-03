@@ -1,15 +1,12 @@
 package ru.nabokovsg.laboratoryNK.service.equipmentDiagnosed;
 
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.jpa.impl.JPAQueryFactory;
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.nabokovsg.laboratoryNK.dto.equipmentDiagnosed.equipmentType.EquipmentTypeDto;
 import ru.nabokovsg.laboratoryNK.dto.equipmentDiagnosed.equipmentType.ResponseEquipmentTypeDto;
-import ru.nabokovsg.laboratoryNK.dto.equipmentDiagnosed.equipments.EquipmentDto;
+import ru.nabokovsg.laboratoryNK.exceptions.NotFoundException;
 import ru.nabokovsg.laboratoryNK.model.equipmentDiagnosed.EquipmentType;
 import ru.nabokovsg.laboratoryNK.mapper.equipmentDiagnosed.EquipmentTypeMapper;
-import ru.nabokovsg.laboratoryNK.model.equipmentDiagnosed.QEquipmentType;
 import ru.nabokovsg.laboratoryNK.repository.equipmentDiagnosed.EquipmentTypeRepository;
 
 import java.util.List;
@@ -21,35 +18,50 @@ public class EquipmentTypeServiceImpl implements EquipmentTypeService {
 
     private final EquipmentTypeRepository repository;
     private final EquipmentTypeMapper mapper;
-    private final EntityManager em;
 
     @Override
-    public EquipmentType create(EquipmentDto equipmentDto) {
-        return Objects.requireNonNullElseGet(getByPredicate(equipmentDto)
-                        , () -> repository.save(mapper.mapToEquipmentType(equipmentDto))
-        );
+    public ResponseEquipmentTypeDto save(EquipmentTypeDto elementTypeDto) {
+        return mapper.mapResponseEquipmentTypeDto(
+                Objects.requireNonNullElseGet(repository.findByEquipmentNameAndModel(elementTypeDto.getEquipmentName()
+                                                                                   , elementTypeDto.getModel()),
+                                            () -> repository.save(mapper.mapToEquipmentType(elementTypeDto))));
+    }
+
+    @Override
+    public ResponseEquipmentTypeDto update(EquipmentTypeDto elementTypeDto) {
+        if (repository.existsById(elementTypeDto.getId())) {
+            return mapper.mapResponseEquipmentTypeDto(repository.save(mapper.mapToEquipmentType(elementTypeDto)));
+        }
+        throw new NotFoundException(
+                String.format("Equipment type with id=%s not found for update", elementTypeDto.getId()));
+    }
+
+    @Override
+    public ResponseEquipmentTypeDto get(Long id) {
+        return mapper.mapResponseEquipmentTypeDto(getById(id));
     }
 
     @Override
     public List<ResponseEquipmentTypeDto> getAll() {
         return repository.findAll()
                          .stream()
-                         .map(mapper::mapFullEquipmentTypeDto)
+                         .map(mapper::mapResponseEquipmentTypeDto)
                          .toList();
     }
 
-    private EquipmentType getByPredicate(EquipmentDto equipmentDto) {
-        QEquipmentType equipmentType = QEquipmentType.equipmentType;
-        BooleanBuilder booleanBuilder = new BooleanBuilder();
-        if (equipmentDto.getEquipmentName() != null) {
-            booleanBuilder.and(QEquipmentType.equipmentType.equipmentName.eq(equipmentDto.getEquipmentName()));
+    @Override
+    public void delete(Long id) {
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return;
         }
-        if (equipmentDto.getModel() != null) {
-            booleanBuilder.and(QEquipmentType.equipmentType.model.eq(equipmentDto.getModel()));
-        }
-        return new JPAQueryFactory(em).from(equipmentType)
-                .select(equipmentType)
-                .where(booleanBuilder)
-                .fetchOne();
+        throw new NotFoundException(String.format("Equipment type with id=%s not found for delete", id));
+    }
+
+    @Override
+    public EquipmentType getById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new NotFoundException(
+                        String.format("Equipment type with id=%s not found for delete", id)));
     }
 }

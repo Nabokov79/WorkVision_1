@@ -17,8 +17,8 @@ public class EquipmentDto {
     private Long id;
     @Schema(description = "Индентификатор котельной, цтп")
     private Long buildingId;
-    @Schema(description = "Наименование")
-    private String equipmentName;
+    @Schema(description = "Индентификатор типа оборудования")
+    private Long equipmentTypeId;
     @Schema(description = "Стационарный номер")
     private Integer stationaryNumber;
     @Schema(description = "Объем")
