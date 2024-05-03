@@ -5,6 +5,7 @@
 	<modules>
 		<module>company</module>
 		<module>laboratoryNK</module>
+        <module>measurementNK</module>
     </modules>
 
 	<parent>
