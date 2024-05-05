@@ -5,11 +5,11 @@ import ru.nabokovsg.laboratoryNK.dto.client.BuildingDto;
 import ru.nabokovsg.laboratoryNK.dto.client.DivisionDto;
 import ru.nabokovsg.laboratoryNK.dto.client.EmployeeDto;
 import ru.nabokovsg.laboratoryNK.dto.common.laboratoryCertificate.LaboratoryCertificateDto;
+import ru.nabokovsg.laboratoryNK.dto.equipmentDiagnosed.EquipmentDto;
 import ru.nabokovsg.laboratoryNK.dto.template.subsectionTemplate.DivisionParamDto;
 import ru.nabokovsg.laboratoryNK.model.common.Documentation;
 import ru.nabokovsg.laboratoryNK.model.common.MeasuringTool;
 import ru.nabokovsg.laboratoryNK.model.diagnosticDocuments.DiagnosticDocumentType;
-import ru.nabokovsg.laboratoryNK.model.equipmentDiagnosed.EquipmentDiagnosed;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public interface StringBuilderService {
 
     String buildBuilding(BuildingDto building);
 
-    String buildEquipmentDiagnosed(EquipmentDiagnosed equipment);
+    String buildEquipmentDiagnosed(EquipmentDto equipment);
 
     String buildDiagnosticDocumentType(DiagnosticDocumentType diagnosticDocumentType);
 

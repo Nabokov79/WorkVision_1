@@ -11,16 +11,15 @@ import ru.nabokovsg.laboratoryNK.dto.client.ExploitationRegionDto;
 import ru.nabokovsg.laboratoryNK.dto.client.HeatSupplyAreaDto;
 import ru.nabokovsg.laboratoryNK.dto.common.surveyJournal.ResponseSurveyJournalDto;
 import ru.nabokovsg.laboratoryNK.dto.common.surveyJournal.SurveyJournalDto;
+import ru.nabokovsg.laboratoryNK.dto.equipmentDiagnosed.EquipmentDto;
 import ru.nabokovsg.laboratoryNK.exceptions.BadRequestException;
 import ru.nabokovsg.laboratoryNK.exceptions.NotFoundException;
 import ru.nabokovsg.laboratoryNK.mapper.common.SurveyJournalMapper;
 import ru.nabokovsg.laboratoryNK.model.common.QSurveyJournal;
 import ru.nabokovsg.laboratoryNK.model.common.SurveyJournal;
-import ru.nabokovsg.laboratoryNK.model.equipmentDiagnosed.EquipmentDiagnosed;
 import ru.nabokovsg.laboratoryNK.model.laboratoryEmployee.LaboratoryEmployee;
 import ru.nabokovsg.laboratoryNK.repository.common.SurveyJournalRepository;
 import ru.nabokovsg.laboratoryNK.service.diagnosticDocuments.DiagnosticDocumentService;
-import ru.nabokovsg.laboratoryNK.service.equipmentDiagnosed.EquipmentDiagnosedService;
 import ru.nabokovsg.laboratoryNK.service.laboratoryEmployee.LaboratoryEmployeeService;
 
 import java.time.LocalDate;
@@ -38,7 +37,6 @@ public class SurveyJournalServiceImpl implements SurveyJournalService {
     private final SurveyJournalMapper mapper;
     private final EntityManager em;
     private final LaboratoryClient client;
-    private final EquipmentDiagnosedService equipmentDiagnosedService;
     private final LaboratoryEmployeeService employeeService;
     private final StringBuilderService builderService;
     private final DiagnosticDocumentService documentService;
@@ -51,9 +49,10 @@ public class SurveyJournalServiceImpl implements SurveyJournalService {
                                                                                        , journalDto.getEquipmentId())
             );
         }
-        EquipmentDiagnosed equipment = equipmentDiagnosedService.getById(journalDto.getEquipmentId());
+        EquipmentDto equipment = client.getEquipmentDiagnosedDto(journalDto.getEquipmentId());
+        equipment.setFull(journalDto.getFull());
         ResponseSurveyJournalDto journal = mapper.mapToResponseTaskJournalDto(
-                                                         repository.save(getTasksJournalData(journalDto, equipment))
+                                                         repository.save(getSurveyJournalData(journalDto, equipment))
         );
         documentService.save(journalDto, journal);
         return journal;
@@ -63,11 +62,12 @@ public class SurveyJournalServiceImpl implements SurveyJournalService {
     public ResponseSurveyJournalDto update(SurveyJournalDto journalDto) {
         if (repository.existsById(journalDto.getId())) {
             documentService.validateByStatus(journalDto.getId());
-            EquipmentDiagnosed equipment = equipmentDiagnosedService.getById(journalDto.getEquipmentId());
+            EquipmentDto equipment = client.getEquipmentDiagnosedDto(journalDto.getEquipmentId());
+            equipment.setFull(journalDto.getFull());
             ResponseSurveyJournalDto journal = mapper.mapToResponseTaskJournalDto(
-                    repository.save(getTasksJournalData(journalDto, equipment))
+                    repository.save(getSurveyJournalData(journalDto, equipment))
             );
-            documentService.save(journalDto, journal);
+            documentService.update(journalDto, journal);
             return journal;
         }
         throw new NotFoundException(
@@ -103,7 +103,7 @@ public class SurveyJournalServiceImpl implements SurveyJournalService {
         throw new NotFoundException(String.format("TasksJournal with id=%s not found for delete", id));
     }
 
-    private SurveyJournal getTasksJournalData(SurveyJournalDto taskJournalDto, EquipmentDiagnosed equipment) {
+    private SurveyJournal getSurveyJournalData(SurveyJournalDto taskJournalDto, EquipmentDto equipment) {
         BranchDto branch = client.getBranch(taskJournalDto.getBranchId());
         HeatSupplyAreaDto heatSupplyArea = branch.getHeatSupplyAreas()
                                                  .stream()
@@ -122,8 +122,9 @@ public class SurveyJournalServiceImpl implements SurveyJournalService {
                                                         .stream()
                                                         .collect(Collectors.toMap(b -> b.getAddress().getId(), b -> b))
                                                         .get(taskJournalDto.getAddressId()))
+                                                       , equipment.getId()
                                                        , builderService.buildEquipmentDiagnosed(equipment))
-                                    , taskJournalDto);
+                                        , taskJournalDto);
     }
 
     private SurveyJournal setLaboratoryEmployee(SurveyJournal taskJournal, SurveyJournalDto taskJournalDto) {

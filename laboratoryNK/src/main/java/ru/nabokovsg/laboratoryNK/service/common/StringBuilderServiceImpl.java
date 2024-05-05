@@ -6,12 +6,11 @@ import ru.nabokovsg.laboratoryNK.dto.client.BuildingDto;
 import ru.nabokovsg.laboratoryNK.dto.client.DivisionDto;
 import ru.nabokovsg.laboratoryNK.dto.client.EmployeeDto;
 import ru.nabokovsg.laboratoryNK.dto.common.laboratoryCertificate.LaboratoryCertificateDto;
+import ru.nabokovsg.laboratoryNK.dto.equipmentDiagnosed.EquipmentDto;
 import ru.nabokovsg.laboratoryNK.dto.template.subsectionTemplate.DivisionParamDto;
 import ru.nabokovsg.laboratoryNK.model.common.Documentation;
-
 import ru.nabokovsg.laboratoryNK.model.common.MeasuringTool;
 import ru.nabokovsg.laboratoryNK.model.diagnosticDocuments.DiagnosticDocumentType;
-import ru.nabokovsg.laboratoryNK.model.equipmentDiagnosed.EquipmentDiagnosed;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -38,7 +37,7 @@ public class StringBuilderServiceImpl implements StringBuilderService {
     }
 
     @Override
-    public String buildEquipmentDiagnosed(EquipmentDiagnosed equipment) {
+    public String buildEquipmentDiagnosed(EquipmentDto equipment) {
         String equipmentDiagnosed = equipment.getEquipmentName();
         if (equipment.getModel() != null) {
             equipmentDiagnosed = String.join(" ", equipmentDiagnosed, equipment.getModel());

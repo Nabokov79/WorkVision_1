@@ -44,4 +44,6 @@ public class SurveyJournalDto {
     private Long diagnosticDocumentTypeId;
     @Schema(description = "необходимо приложить чертеж")
     private boolean drawing;
+    @Schema(description = "Оборудование с теплоносителем или без него")
+    private Boolean full;
 }

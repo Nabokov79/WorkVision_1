@@ -3,6 +3,7 @@ package ru.nabokovsg.laboratoryNK.client;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nabokovsg.laboratoryNK.dto.client.*;
+import ru.nabokovsg.laboratoryNK.dto.equipmentDiagnosed.EquipmentDto;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public class LaboratoryClient {
 
     private final CompanyClient companyClient;
+    private final DiagnosedNKClient measurementNKClient;
     private static final String DELIMITER = "/";
     private static final String API_PREFIX_EMPLOYEE = "/employee";
     private static final String API_PREFIX_ORGANIZATION = "/organization";
@@ -18,6 +20,7 @@ public class LaboratoryClient {
     private static final String API_PREFIX_DEPARTMENT = "/department";
     private static final String API_PREFIX_HEAT_SUPPLE_AREA = "/heat/supply/area";
     private static final String API_PREFIX_EXPLOITATION_REGION = "/exploitation";
+    private static final String API_PREFIX_DIAGNOSED = "/equipments";
 
     public List<EmployeeDto> getAllEmployees(Long id, String divisionType) {
         return companyClient.getAllEmployees(String.join(DELIMITER, API_PREFIX_EMPLOYEE,
@@ -41,5 +44,10 @@ public class LaboratoryClient {
     public ExploitationRegionDto getExploitationRegion(Long id) {
         return companyClient.getExploitationRegion(
                 String.join(DELIMITER, API_PREFIX_EXPLOITATION_REGION, String.valueOf(id)));
+    }
+
+    public EquipmentDto getEquipmentDiagnosedDto(Long id) {
+        return measurementNKClient.getEquipmentDiagnosedDto(
+                String.join(DELIMITER, API_PREFIX_DIAGNOSED, String.valueOf(id)));
     }
 }

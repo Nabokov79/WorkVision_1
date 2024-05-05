@@ -14,17 +14,19 @@ public interface SurveyJournalMapper {
     @Mapping(source = "heatSupplyArea", target = "heatSupplyArea")
     @Mapping(source = "exploitationRegion", target = "exploitationRegion")
     @Mapping(source = "building", target = "building")
+    @Mapping(source = "equipmentId", target = "equipmentId")
     @Mapping(source = "equipmentDiagnosed", target = "equipmentDiagnosed")
     @Mapping(source = "taskJournalDto.workType", target = "workType")
     @Mapping(source = "taskJournalDto.taskSource", target = "taskSource")
     @Mapping(source = "taskJournalDto.comment", target = "comment")
     @Mapping(source = "taskJournalDto.id", target = "id")
     SurveyJournal mapToTaskJournal(SurveyJournalDto taskJournalDto
-                                , String branch
-                                , String heatSupplyArea
-                                , String exploitationRegion
-                                , String building
-                                , String equipmentDiagnosed);
+                                 , String branch
+                                 , String heatSupplyArea
+                                 , String exploitationRegion
+                                 , String building
+                                 , Long equipmentId
+                                 , String equipmentDiagnosed);
 
     ResponseSurveyJournalDto mapToResponseTaskJournalDto(SurveyJournal journal);
 }
