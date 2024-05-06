@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.nabokovsg.gateway.client.laboratoryNK.DocumentHeaderClient;
-import ru.nabokovsg.gateway.dto.laboratoryNK.documentHeader.NewDocumentHeaderDto;
-import ru.nabokovsg.gateway.dto.laboratoryNK.documentHeader.UpdateDocumentHeaderDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.documentHeader.NewDocumentHeaderForProtocolDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.documentHeader.NewDocumentHeaderForReportDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.documentHeader.UpdateDocumentHeaderForProtocolDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.documentHeader.UpdateDocumentHeaderForReportDto;
 
 @RestController
 @RequestMapping(
@@ -30,17 +32,35 @@ public class DocumentHeaderController {
     private final DocumentHeaderClient client;
 
     @Operation(summary = "Добавление нового заголовка")
-    @PostMapping
-    public Mono<Object> save(@RequestBody @Valid
-                             @Parameter(description = "Данные формирования заголовка") NewDocumentHeaderDto headerDto) {
-        return client.save(headerDto);
+    @PostMapping("/report")
+    public Mono<Object> saveForReport(@RequestBody @Valid
+                                      @Parameter(description = "Данные для формирования заголовка отчета")
+                                          NewDocumentHeaderForReportDto headerDto) {
+        return client.saveForReport(headerDto);
     }
 
     @Operation(summary = "Изменение информации в заголовка")
-    @PatchMapping
-    public Mono<Object> update(@RequestBody @Valid
-                          @Parameter(description = "Данные формирования заголовка") UpdateDocumentHeaderDto headerDto) {
-        return client.update(headerDto);
+    @PatchMapping("/report")
+    public Mono<Object> updateForReport(@RequestBody @Valid
+                          @Parameter(description = "Данные для формирования заголовка отчета")
+                                            UpdateDocumentHeaderForReportDto headerDto) {
+        return client.updateForReport(headerDto);
+    }
+
+    @Operation(summary = "Добавление нового заголовка")
+    @PostMapping("/protocol")
+    public Mono<Object> saveForProtocol(@RequestBody @Valid
+                             @Parameter(description = "Данные для формирования заголовка протокола")
+                                 NewDocumentHeaderForProtocolDto headerDto) {
+        return client.saveForProtocol(headerDto);
+    }
+
+    @Operation(summary = "Изменение информации в заголовка")
+    @PatchMapping("/protocol")
+    public Mono<Object> updateForProtocol(@RequestBody @Valid
+                               @Parameter(description = "Данные для формирования заголовка протокола")
+                                   UpdateDocumentHeaderForProtocolDto headerDto) {
+        return client.updateForProtocol(headerDto);
     }
 
     @Operation(summary = "Получить заголовки документа")

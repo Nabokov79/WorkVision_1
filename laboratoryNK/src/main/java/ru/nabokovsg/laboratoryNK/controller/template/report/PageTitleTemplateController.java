@@ -13,7 +13,7 @@ import ru.nabokovsg.laboratoryNK.service.template.report.PageTitleTemplateServic
 
 @RestController
 @RequestMapping(
-        value = "/title-page",
+        value = "/template/title-page",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor

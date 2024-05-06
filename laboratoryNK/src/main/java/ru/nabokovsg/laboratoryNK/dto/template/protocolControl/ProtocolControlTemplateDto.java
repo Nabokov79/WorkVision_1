@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Данные для добавления/изменения заголовка протокола/заключения")
+@Schema(description = "Данные для добавления/изменения протокола по результатам контроля качества")
 public class ProtocolControlTemplateDto {
 
     @Schema(description = "Индентификатор")

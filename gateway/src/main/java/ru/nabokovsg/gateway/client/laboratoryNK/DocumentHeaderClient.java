@@ -7,8 +7,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.nabokovsg.gateway.client.BaseClient;
-import ru.nabokovsg.gateway.dto.laboratoryNK.documentHeader.NewDocumentHeaderDto;
-import ru.nabokovsg.gateway.dto.laboratoryNK.documentHeader.UpdateDocumentHeaderDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.documentHeader.NewDocumentHeaderForProtocolDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.documentHeader.NewDocumentHeaderForReportDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.documentHeader.UpdateDocumentHeaderForProtocolDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.documentHeader.UpdateDocumentHeaderForReportDto;
 
 @Service
 public class DocumentHeaderClient extends BaseClient {
@@ -23,11 +25,19 @@ public class DocumentHeaderClient extends BaseClient {
                 .build());
     }
 
-    public Mono<Object> save(NewDocumentHeaderDto headerDto) {
+    public Mono<Object> saveForReport(NewDocumentHeaderForReportDto headerDto) {
         return post(API_PREFIX, headerDto);
     }
 
-    public Mono<Object> update(UpdateDocumentHeaderDto headerDto) {
+    public Mono<Object> updateForReport(UpdateDocumentHeaderForReportDto headerDto) {
+        return patch(API_PREFIX, headerDto);
+    }
+
+    public Mono<Object> saveForProtocol(NewDocumentHeaderForProtocolDto headerDto) {
+        return post(API_PREFIX, headerDto);
+    }
+
+    public Mono<Object> updateForProtocol(UpdateDocumentHeaderForProtocolDto headerDto) {
         return patch(API_PREFIX, headerDto);
     }
 

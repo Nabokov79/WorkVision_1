@@ -14,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "Данные для добавления заголовка документа")
-public class NewDocumentHeaderDto {
+public class NewDocumentHeaderForProtocolDto {
 
     @Schema(description = "Индентификатор типа документа диагностики")
     @NotNull(message = "document type id should not be null")
@@ -28,6 +28,8 @@ public class NewDocumentHeaderDto {
     @Positive(message = "division id can only be positive")
     private Long divisionId;
     @Schema(description = "Индентификатор сотрудника структурного подразделения")
+    @NotNull(message = "employee id should not be null")
+    @Positive(message = "employee id can only be positive")
     private Long employeeId;
     @Schema(description = "Указать в документе полное наименование")
     @NotNull(message = "specifyFullName should not be null")
@@ -38,7 +40,7 @@ public class NewDocumentHeaderDto {
     @Schema(description = "Указать лицензию/аттестацию")
     @NotNull(message = "specifyLicense should not be null")
     private Boolean specifyLicense;
-    @Schema(description = "Указать контактные данные организации")
+    @Schema(description = "Указать контактные данные структурнеого подразделения")
     @NotNull(message = "specifyContacts should not be null")
     private Boolean specifyContacts;
 }
