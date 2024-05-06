@@ -6,7 +6,7 @@ import ru.nabokovsg.laboratoryNK.dto.client.DivisionDto;
 import ru.nabokovsg.laboratoryNK.dto.client.EmployeeDto;
 import ru.nabokovsg.laboratoryNK.dto.common.laboratoryCertificate.LaboratoryCertificateDto;
 import ru.nabokovsg.laboratoryNK.dto.equipmentDiagnosed.EquipmentDto;
-import ru.nabokovsg.laboratoryNK.dto.template.subsectionTemplate.DivisionParamDto;
+import ru.nabokovsg.laboratoryNK.dto.template.subsectionTemplate.DivisionDataDto;
 import ru.nabokovsg.laboratoryNK.model.common.Documentation;
 import ru.nabokovsg.laboratoryNK.model.common.MeasuringTool;
 import ru.nabokovsg.laboratoryNK.model.diagnosticDocuments.DiagnosticDocumentType;
@@ -27,7 +27,7 @@ public interface StringBuilderService {
 
     String buildDocumentation(Documentation documentation);
 
-    String buildDivision(DivisionParamDto param, DivisionDto division, List<LaboratoryCertificateDto> certificates);
+    String buildDivision(DivisionDataDto param, DivisionDto division, List<LaboratoryCertificateDto> certificates);
 
     String buildCertificate(List<LaboratoryCertificateDto> certificates);
 

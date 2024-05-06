@@ -7,7 +7,7 @@ import ru.nabokovsg.laboratoryNK.dto.client.DivisionDto;
 import ru.nabokovsg.laboratoryNK.dto.client.EmployeeDto;
 import ru.nabokovsg.laboratoryNK.dto.common.laboratoryCertificate.LaboratoryCertificateDto;
 import ru.nabokovsg.laboratoryNK.dto.equipmentDiagnosed.EquipmentDto;
-import ru.nabokovsg.laboratoryNK.dto.template.subsectionTemplate.DivisionParamDto;
+import ru.nabokovsg.laboratoryNK.dto.template.subsectionTemplate.DivisionDataDto;
 import ru.nabokovsg.laboratoryNK.model.common.Documentation;
 import ru.nabokovsg.laboratoryNK.model.common.MeasuringTool;
 import ru.nabokovsg.laboratoryNK.model.diagnosticDocuments.DiagnosticDocumentType;
@@ -82,15 +82,15 @@ public class StringBuilderServiceImpl implements StringBuilderService {
     }
 
     @Override
-    public String buildDivision(DivisionParamDto param
+    public String buildDivision(DivisionDataDto param
                               , DivisionDto division
                               , List<LaboratoryCertificateDto> certificates) {
         String divisionData = String.join(". "
                 , getDivisionName(division.getFullName(), param.getUserDivisionName()));
-        if (param.getAddress()) {
+        if (param.getSpecifyAddress()) {
             divisionData = String.join(". ", divisionData, buildAddress(division.getAddress()));
         }
-        if (param.getCertificate()) {
+        if (param.getSpecifyCertificate()) {
             divisionData = String.join(". ", divisionData, buildCertificate(certificates));
         }
         return divisionData;

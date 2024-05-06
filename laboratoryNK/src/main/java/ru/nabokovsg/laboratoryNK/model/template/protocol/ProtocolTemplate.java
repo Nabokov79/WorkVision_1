@@ -2,7 +2,7 @@ package ru.nabokovsg.laboratoryNK.model.template.protocol;
 
 import jakarta.persistence.*;
 import lombok.*;
-import ru.nabokovsg.laboratoryNK.controller.template.ConclusionTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.ConclusionTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.Appendices;
 import ru.nabokovsg.laboratoryNK.model.template.DocumentHeader;
 import ru.nabokovsg.laboratoryNK.model.template.SubsectionTemplate;

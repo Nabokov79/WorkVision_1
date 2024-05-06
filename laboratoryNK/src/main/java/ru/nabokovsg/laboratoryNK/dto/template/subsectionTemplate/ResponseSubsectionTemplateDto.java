@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @Getter
 @AllArgsConstructor
-@Schema(description = "Данные подраздела")
+@Schema(description = "Шаблон подраздела")
 public class ResponseSubsectionTemplateDto {
 
     @Schema(description = "Индентификатор")

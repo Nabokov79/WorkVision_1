@@ -1,8 +1,8 @@
 package ru.nabokovsg.laboratoryNK.service.template;
 
-import ru.nabokovsg.laboratoryNK.controller.template.ConclusionTemplate;
 import ru.nabokovsg.laboratoryNK.dto.template.conclusion.ConclusionTemplateDto;
 import ru.nabokovsg.laboratoryNK.dto.template.conclusion.ResponseConclusionTemplateDto;
+import ru.nabokovsg.laboratoryNK.model.template.ConclusionTemplate;
 
 public interface ConclusionTemplateService {
 

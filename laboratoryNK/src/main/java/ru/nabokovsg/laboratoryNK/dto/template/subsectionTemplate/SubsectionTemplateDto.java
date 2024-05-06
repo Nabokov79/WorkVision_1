@@ -14,19 +14,19 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Данные для добавления/изменения информации в подразделе")
+@Schema(description = "Данные для добавления/изменения шаблона подразделя")
 public class SubsectionTemplateDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
     @Schema(description = "Порядковый номер подраздела")
-    private Double sequentialNumber;
+    private Integer sequentialNumber;
     @Schema(description = "Наименование подраздела")
     private String subsectionName;
     @Schema(description = "Текст пользователя")
     private String userText;
-    @Schema(description = "Тип данных подраздела")
-    private DivisionParamDto divisionParam;
+    @Schema(description = "Данных структурного подразделения")
+    private DivisionDataDto divisionParam;
     @Schema(description = "Индентификатор таблицы")
     private Long tableId;
     @Schema(description = "Данные нормативно-технической документации")

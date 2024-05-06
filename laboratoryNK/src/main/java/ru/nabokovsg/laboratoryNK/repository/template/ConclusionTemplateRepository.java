@@ -1,7 +1,7 @@
 package ru.nabokovsg.laboratoryNK.repository.template;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.nabokovsg.laboratoryNK.controller.template.ConclusionTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.ConclusionTemplate;
 
 import java.util.Optional;
 

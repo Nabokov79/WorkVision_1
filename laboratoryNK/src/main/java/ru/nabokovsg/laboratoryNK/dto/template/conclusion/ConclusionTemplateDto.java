@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Данные для добавления/изменения заключений к протоколам")
+@Schema(description = "Данные для добавления/изменения шаблона заключений документа")
 public class ConclusionTemplateDto {
 
     @Schema(description = "Индентификатор")

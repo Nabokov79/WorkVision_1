@@ -62,8 +62,8 @@ public class ProtocolReportTemplateServiceImpl implements ProtocolReportTemplate
     }
 
     @Override
-    public List<ShortResponseProtocolReportTemplateDto> getAll() {
-        return repository.findAll()
+    public List<ShortResponseProtocolReportTemplateDto> getAll(Long id) {
+        return repository.findAllBySectionId(id)
                          .stream()
                          .map(mapper::mapToShortProtocolReportTemplateDto)
                          .toList();

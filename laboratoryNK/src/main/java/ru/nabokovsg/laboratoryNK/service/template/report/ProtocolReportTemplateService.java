@@ -15,7 +15,7 @@ public interface ProtocolReportTemplateService {
 
     ResponseProtocolReportTemplateDto get(Long id);
 
-    List<ShortResponseProtocolReportTemplateDto> getAll();
+    List<ShortResponseProtocolReportTemplateDto> getAll(Long id);
 
     void delete(Long id);
 

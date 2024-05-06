@@ -52,11 +52,10 @@ public class SectionTemplateServiceImpl implements SectionTemplateService {
 
     @Override
     public List<ShortResponseSectionTemplateDto> getAll(Long id) {
-        return null;
-//        return repository.findAllByReportIdOrderById(id)
-//                         .stream()
-//                         .map(mapper::mapToShortResponseSectionTemplateDto)
-//                         .toList();
+        return repository.findByReportTemplateId(id)
+                         .stream()
+                         .map(mapper::mapToShortResponseSectionTemplateDto)
+                         .toList();
     }
 
     @Override

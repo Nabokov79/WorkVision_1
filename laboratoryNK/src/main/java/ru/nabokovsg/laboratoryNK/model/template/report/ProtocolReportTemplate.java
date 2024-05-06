@@ -3,7 +3,7 @@ package ru.nabokovsg.laboratoryNK.model.template.report;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import ru.nabokovsg.laboratoryNK.controller.template.ConclusionTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.ConclusionTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.SubsectionTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.TableTemplate;
 

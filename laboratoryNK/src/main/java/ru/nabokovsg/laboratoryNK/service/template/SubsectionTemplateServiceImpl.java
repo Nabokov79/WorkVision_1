@@ -6,7 +6,7 @@ import ru.nabokovsg.laboratoryNK.client.LaboratoryClient;
 import ru.nabokovsg.laboratoryNK.dto.client.DivisionDto;
 import ru.nabokovsg.laboratoryNK.dto.template.measuringToolTemplate.MeasuringToolTemplateDto;
 import ru.nabokovsg.laboratoryNK.dto.template.regulatoryDocumentationTemplate.RegulatoryDocumentationTemplateDto;
-import ru.nabokovsg.laboratoryNK.dto.template.subsectionTemplate.DivisionParamDto;
+import ru.nabokovsg.laboratoryNK.dto.template.subsectionTemplate.DivisionDataDto;
 import ru.nabokovsg.laboratoryNK.dto.template.subsectionTemplate.ResponseSubsectionTemplateDto;
 import ru.nabokovsg.laboratoryNK.dto.template.subsectionTemplate.SubsectionTemplateDto;
 import ru.nabokovsg.laboratoryNK.exceptions.BadRequestException;
@@ -141,7 +141,7 @@ public class SubsectionTemplateServiceImpl implements SubsectionTemplateService 
         return templates;
     }
 
-    private SubsectionTemplate setDivision(SubsectionTemplate template, DivisionParamDto param) {
+    private SubsectionTemplate setDivision(SubsectionTemplate template, DivisionDataDto param) {
         DivisionDto division;
         switch (convertToDivisionType(param.getDivisionType())) {
             case BRANCH -> division = mapper.mapFromBranch(client.getBranch(param.getDivisionId()));

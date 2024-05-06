@@ -15,7 +15,7 @@ import ru.nabokovsg.laboratoryNK.service.template.DocumentHeaderService;
 import java.util.List;
 @RestController
 @RequestMapping(
-        value = "/document/header",
+        value = "/template/document/header",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -43,7 +43,7 @@ public class DocumentHeaderController {
     @Operation(summary = "Получить заголовки документа")
     @GetMapping("/{id}")
     public ResponseEntity<List<ResponseDocumentHeaderDto>> getAll(
-            @PathVariable @Parameter(name = "Индентификатор типа токумента") Long id) {
+            @PathVariable @Parameter(name = "Индентификатор типа документа") Long id) {
         return ResponseEntity.ok().body(service.getAll(id));
     }
 

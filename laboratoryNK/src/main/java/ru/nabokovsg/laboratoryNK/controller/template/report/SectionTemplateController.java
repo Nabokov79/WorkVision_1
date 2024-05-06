@@ -26,17 +26,17 @@ public class SectionTemplateController {
 
     private final SectionTemplateService service;
 
-    @Operation(summary = "Добавить новые разделы")
+    @Operation(summary = "Добавить новый раздел")
     @PostMapping
     public ResponseEntity<ResponseSectionTemplateDto> save(
-            @RequestBody @Parameter(description = "Данные шаблона разделов") SectionTemplateDto sectionDto) {
+            @RequestBody @Parameter(description = "Данные шаблона разделф") SectionTemplateDto sectionDto) {
         return ResponseEntity.ok().body(service.save(sectionDto));
     }
 
-    @Operation(summary = "Изменение данных разделов")
+    @Operation(summary = "Изменение данные раздела")
     @PatchMapping
     public ResponseEntity<ResponseSectionTemplateDto> update(
-            @RequestBody @Parameter(description = "Данные шаблона разделов") SectionTemplateDto sectionDto) {
+            @RequestBody @Parameter(description = "Данные шаблона разделф") SectionTemplateDto sectionDto) {
         return ResponseEntity.ok().body(service.update(sectionDto));
     }
 
@@ -50,7 +50,7 @@ public class SectionTemplateController {
     @Operation(summary = "Получить разделы отчета")
     @GetMapping("/all/report/{id}")
     public ResponseEntity<List<ShortResponseSectionTemplateDto>> getAll(
-                                             @PathVariable @Parameter(description = "Индентификатор отчета") Long id) {
+                                      @PathVariable @Parameter(description = "Индентификатор шаблона отчета") Long id) {
         return ResponseEntity.ok().body(service.getAll(id));
     }
 

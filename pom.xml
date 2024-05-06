@@ -7,6 +7,7 @@
 		<module>company</module>
 		<module>laboratoryNK</module>
         <module>diagnosedNK</module>
+        <module>gateway</module>
     </modules>
 
 	<parent>
@@ -55,13 +56,13 @@
 			<dependency>
 				<groupId>io.swagger.core.v3</groupId>
 				<artifactId>swagger-annotations</artifactId>
-				<version>2.2.8</version>
+				<version>2.2.16</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.springdoc</groupId>
-				<artifactId>springdoc-openapi-ui</artifactId>
-				<version>1.6.15</version>
+				<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+				<version>2.5.0</version>
 			</dependency>
 
 			<dependency>

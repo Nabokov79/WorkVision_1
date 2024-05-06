@@ -2,7 +2,7 @@ package ru.nabokovsg.laboratoryNK.mapper.template.protocol;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.nabokovsg.laboratoryNK.controller.template.ConclusionTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.ConclusionTemplate;
 import ru.nabokovsg.laboratoryNK.dto.template.protocol.ProtocolTemplateDto;
 import ru.nabokovsg.laboratoryNK.dto.template.protocol.ResponseProtocolTemplateDto;
 import ru.nabokovsg.laboratoryNK.dto.template.protocol.ShortResponseProtocolTemplateDto;

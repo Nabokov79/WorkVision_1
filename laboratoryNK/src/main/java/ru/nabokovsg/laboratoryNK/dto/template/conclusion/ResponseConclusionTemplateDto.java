@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-@Schema(description = "Заключения к протоколам")
+@Schema(description = "Шаблон заключений документа")
 public class ResponseConclusionTemplateDto {
 
     @Schema(description = "Индентификатор")

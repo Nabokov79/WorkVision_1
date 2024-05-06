@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.laboratoryNK.dto.template.report.protocolReport.ProtocolReportTemplateDto;
 import ru.nabokovsg.laboratoryNK.dto.template.report.protocolReport.ResponseProtocolReportTemplateDto;
@@ -21,7 +20,6 @@ import java.util.List;
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
-@Validated
 @Tag(name="Шаблон протокола отчета",
         description="API для работы с данными шаблона протокола отчета")
 public class ProtocolReportTemplateController {
@@ -49,10 +47,11 @@ public class ProtocolReportTemplateController {
         return ResponseEntity.ok().body(service.get(id));
     }
 
-    @Operation(summary = "Получить краткие данные протоколов")
-    @GetMapping
-    public ResponseEntity<List<ShortResponseProtocolReportTemplateDto>> getAll() {
-        return ResponseEntity.ok().body(service.getAll());
+    @Operation(summary = "Получить список протоколов раздела")
+    @GetMapping("/all/{id}")
+    public ResponseEntity<List<ShortResponseProtocolReportTemplateDto>> getAll(
+            @PathVariable @Parameter(description = "Индентификатор") Long id) {
+        return ResponseEntity.ok().body(service.getAll(id));
     }
 
     @Operation(summary = "Удалить шаблон протокола")

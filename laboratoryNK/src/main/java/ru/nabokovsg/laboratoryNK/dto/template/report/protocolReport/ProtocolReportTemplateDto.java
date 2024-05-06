@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 @Getter
 @AllArgsConstructor
-@Schema(description = "Данные для добавления/изменения шаблона заголовка протокола отчета")
+@Schema(description = "Данные для добавления/изменения шаблона протокола отчета")
 public class ProtocolReportTemplateDto {
 
     @Schema(description = "Индентификатор")
