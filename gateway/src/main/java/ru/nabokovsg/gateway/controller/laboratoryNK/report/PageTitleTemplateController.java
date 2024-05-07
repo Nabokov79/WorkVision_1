@@ -17,7 +17,7 @@ import ru.nabokovsg.gateway.dto.laboratoryNK.report.pageTitle.UpdatePageTitleTem
 
 @RestController
 @RequestMapping(
-        value = "/WorkVisionWeb/title-page",
+        value = "/WorkVisionWeb/laboratory/nk/template/title-page",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor

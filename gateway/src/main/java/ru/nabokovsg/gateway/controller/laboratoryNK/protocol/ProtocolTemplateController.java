@@ -18,7 +18,7 @@ import ru.nabokovsg.gateway.dto.laboratoryNK.protocol.UpdateProtocolTemplateDto;
 
 @RestController
 @RequestMapping(
-        value = "/WorkVisionWeb/protocol",
+        value = "/WorkVisionWeb/laboratory/nk/template/protocol",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor

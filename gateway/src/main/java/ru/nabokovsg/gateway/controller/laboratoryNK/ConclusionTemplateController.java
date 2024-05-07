@@ -17,7 +17,7 @@ import ru.nabokovsg.gateway.dto.laboratoryNK.conclusion.UpdateConclusionTemplate
 
 @RestController
 @RequestMapping(
-        value = "/WorkVisionWeb/conclusion",
+        value = "/WorkVisionWeb/laboratory/nk/template/conclusion",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor

@@ -17,10 +17,11 @@ import ru.nabokovsg.gateway.dto.company.branch.UpdateBranchDto;
 
 @RestController
 @RequestMapping(
-        value = "/WorkVisionWeb/branch",
+        value = "/WorkVisionWeb/company/branch",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
+@Valid
 @Tag(name="Филиал организации",
         description="API для работы с данными филиала")
 public class BranchController {
@@ -53,7 +54,7 @@ public class BranchController {
     }
 
     @Operation(summary = "Удаление данных филиала")
-    @DeleteMapping("/branch/{id}")
+    @DeleteMapping("/{id}")
     public Mono<String> delete(@PathVariable @NotNull @Positive @Parameter(description = "Индентификатор") Long id) {
         return client.delete(id);
     }

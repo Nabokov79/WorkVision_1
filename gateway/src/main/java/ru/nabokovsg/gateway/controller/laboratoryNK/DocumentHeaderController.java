@@ -20,7 +20,7 @@ import ru.nabokovsg.gateway.dto.laboratoryNK.documentHeader.UpdateDocumentHeader
 
 @RestController
 @RequestMapping(
-        value = "/WorkVisionWeb/document/header",
+        value = "/WorkVisionWeb/laboratory/nk/template/document/header",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor

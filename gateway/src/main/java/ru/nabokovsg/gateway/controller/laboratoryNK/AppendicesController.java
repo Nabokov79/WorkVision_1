@@ -17,7 +17,7 @@ import ru.nabokovsg.gateway.dto.laboratoryNK.appendices.UpdateAppendicesDto;
 
 @RestController
 @RequestMapping(
-        value = "/WorkVisionWeb/appendices",
+        value = "/WorkVisionWeb/laboratory/nk/template/appendices",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated

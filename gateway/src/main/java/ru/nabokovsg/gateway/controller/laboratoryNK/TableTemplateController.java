@@ -17,7 +17,7 @@ import ru.nabokovsg.gateway.dto.laboratoryNK.table.UpdateTableTemplateDto;
 
 @RestController
 @RequestMapping(
-        value = "/WorkVisionWeb/table",
+        value = "/WorkVisionWeb/laboratory/nk/template/table",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor

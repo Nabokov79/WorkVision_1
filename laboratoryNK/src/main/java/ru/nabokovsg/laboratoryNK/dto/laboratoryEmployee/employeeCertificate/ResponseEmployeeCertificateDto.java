@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @AllArgsConstructor
-@Schema(description = "Возвращаемый сертификат аттестации сотрудника.")
+@Schema(description = "Данные аттестации сотрудника")
 public class ResponseEmployeeCertificateDto {
 
     @Schema(description = "Индентификатор")

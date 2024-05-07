@@ -53,9 +53,9 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public List<ShortResponseOrganizationDto> getAll() {
-        return repository.findAllOrganization().stream()
-                                               .map(mapper::mapToShortOrganizationDto)
-                                               .toList();
+        return repository.findAll().stream()
+                                   .map(mapper::mapToShortOrganizationDto)
+                                   .toList();
     }
 
 

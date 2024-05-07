@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -18,10 +19,11 @@ import ru.nabokovsg.gateway.dto.company.employee.UpdateEmployeeDto;
 
 @RestController
 @RequestMapping(
-        value = "/WorkVisionWeb/employee",
+        value = "/WorkVisionWeb/company/employees",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
+@Validated
 @Tag(name="Сотрудники",
      description="API для работы с данными сотрудников")
 public class EmployeeController {

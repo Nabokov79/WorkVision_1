@@ -18,7 +18,7 @@ import ru.nabokovsg.gateway.dto.laboratoryNK.report.reportProtocol.UpdateProtoco
 
 @RestController
 @RequestMapping(
-        value = "/WorkVisionWeb/report/protocol",
+        value = "/WorkVisionWeb/laboratory/nk/template/report/protocol",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -31,17 +31,15 @@ public class ProtocolReportTemplateController {
 
     @Operation(summary = "Шаблон нового протокола")
     @PostMapping
-    public Mono<Object> save(@RequestBody @Valid
-                             @Parameter(name = "Шаблон протокола в составе отчета")
-                             NewProtocolReportTemplateDto protocolDto) {
+    public Mono<Object> save(@RequestBody @Valid @Parameter(name = "Шаблон протокола в составе отчета")
+                                                            NewProtocolReportTemplateDto protocolDto) {
         return client.save(protocolDto);
     }
 
     @Operation(summary = "Изменение шаблона протокола")
     @PatchMapping
-    public Mono<Object> update(@RequestBody @Valid
-                               @Parameter(name = "Шаблон протокола в составе отчета")
-                               UpdateProtocolReportTemplateDto protocolDto) {
+    public Mono<Object> update(@RequestBody @Valid @Parameter(name = "Шаблон протокола в составе отчета")
+                                                            UpdateProtocolReportTemplateDto protocolDto) {
         return client.update(protocolDto);
     }
 

@@ -15,7 +15,7 @@ import ru.nabokovsg.gateway.client.laboratoryNK.RegulatoryDocumentationTemplateC
 
 @RestController
 @RequestMapping(
-        value = "/WorkVisionWeb/document/documentation",
+        value = "/WorkVisionWeb/laboratory/nk/template/document/documentation",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor

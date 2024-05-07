@@ -15,7 +15,7 @@ import ru.nabokovsg.gateway.client.laboratoryNK.MeasuringToolTemplateClient;
 
 @RestController
 @RequestMapping(
-        value = "/WorkVisionWeb/measuring/tool",
+        value = "/WorkVisionWeb/laboratory/nk/template/measuring/tool",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor

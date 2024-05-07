@@ -2,8 +2,6 @@ package ru.nabokovsg.gateway.dto.company.address;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,8 +23,7 @@ public class NewAddressDto {
     @NotBlank(message = "street name should not be blank")
     private String street;
     @Schema(description = "Номер дома")
-    @NotNull(message = "house number should not be blank")
-    @Positive(message = "house number can only be positive")
+    @NotBlank(message = "house number should not be blank")
     private String houseNumber;
     @Schema(description = "Номер корпуса дома")
     private String buildingNumber;

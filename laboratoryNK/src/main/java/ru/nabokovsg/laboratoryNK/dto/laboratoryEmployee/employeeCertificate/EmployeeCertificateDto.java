@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @AllArgsConstructor
-@Schema(description = "Данные для добавления/изменения информации о сертификате сотрудника")
+@Schema(description = "Данные для добавления/изменения информации о аттестации сотрудника")
 public class EmployeeCertificateDto {
 
     @Schema(description = "Индентификатор")

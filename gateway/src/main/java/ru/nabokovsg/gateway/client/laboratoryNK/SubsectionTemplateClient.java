@@ -21,11 +21,11 @@ public class SubsectionTemplateClient extends BaseClient {
                 .build());
     }
 
-    public Mono<Object> saveWithUseText(NewSubsectionWithUseTextTemplateDto subsectionsDto) {
+    public Mono<Object> saveWithUserText(NewSubsectionWithUseTextTemplateDto subsectionsDto) {
         return post(API_PREFIX, subsectionsDto);
     }
 
-    public Mono<Object> updateWithUseText(UpdateSubsectionWithUseTextTemplateDto subsectionsDto) {
+    public Mono<Object> updateWithUserText(UpdateSubsectionWithUseTextTemplateDto subsectionsDto) {
         return patch(API_PREFIX, subsectionsDto);
     }
 

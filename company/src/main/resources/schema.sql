@@ -4,8 +4,8 @@ CREATE TABLE IF NOT EXISTS ADDRESSES
     index           INTEGER,
     city            VARCHAR                                 NOT NULL,
     street          VARCHAR                                 NOT NULL,
-    house_number    INTEGER                                 NOT NULL,
-    building_number INTEGER,
+    house_number    VARCHAR                                 NOT NULL,
+    building_number VARCHAR,
     letter          VARCHAR,
     CONSTRAINT pk_address PRIMARY KEY (id),
     CONSTRAINT UQ_ADDRESSES UNIQUE (city, street, house_number, building_number, letter)

@@ -27,8 +27,7 @@ public class UpdateAddressDto {
     @NotBlank(message = "street name should not be blank")
     private String street;
     @Schema(description = "Номер дома")
-    @NotNull(message = "house number should not be blank")
-    @Positive(message = "house number can only be positive")
+    @NotBlank(message = "house number should not be blank")
     private String houseNumber;
     @Schema(description = "Номер корпуса дома")
     private String buildingNumber;

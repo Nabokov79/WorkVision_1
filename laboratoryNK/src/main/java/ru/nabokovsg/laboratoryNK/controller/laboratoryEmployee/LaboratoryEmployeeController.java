@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.laboratoryNK.dto.laboratoryEmployee.employees.ResponseLaboratoryEmployeeDto;
 import ru.nabokovsg.laboratoryNK.dto.laboratoryEmployee.employees.ShortResponseLaboratoryEmployeeDto;
@@ -20,7 +19,6 @@ import java.util.List;
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
-@Validated
 @Tag(name="Сотрудники лаборатории НК",
         description="API для работы с сервисом работы с данными сотрудников лаборатории НК")
 public class LaboratoryEmployeeController {
@@ -45,7 +43,7 @@ public class LaboratoryEmployeeController {
     }
 
     @Operation(summary = "Получение данных всех сотрудников")
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<ShortResponseLaboratoryEmployeeDto>> getAll() {
         return ResponseEntity.ok().body(service.getAll());
     }

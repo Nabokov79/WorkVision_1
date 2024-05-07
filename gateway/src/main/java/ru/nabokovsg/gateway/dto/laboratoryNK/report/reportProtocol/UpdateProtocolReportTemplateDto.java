@@ -16,8 +16,8 @@ import java.util.List;
 public class UpdateProtocolReportTemplateDto {
 
     @Schema(description = "Индентификатор")
-    @NotNull(message = "section template id should not be null")
-    @Positive(message = "section template id can only be positive")
+    @NotNull(message = "protocol report template id should not be null")
+    @Positive(message = "protocol report template id can only be positive")
     private Long id;
     @Schema(description = "Индентификатор типа документа")
     @NotNull(message = "document type id should not be null")

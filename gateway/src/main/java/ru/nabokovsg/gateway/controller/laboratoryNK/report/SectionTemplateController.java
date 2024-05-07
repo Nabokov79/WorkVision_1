@@ -20,7 +20,7 @@ import ru.nabokovsg.gateway.dto.laboratoryNK.report.section.UpdateSectionWithSub
 
 @RestController
 @RequestMapping(
-        value = "/WorkVisionWeb/section",
+        value = "/WorkVisionWeb/laboratory/nk/template/section",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -32,28 +32,28 @@ public class SectionTemplateController {
     private final SectionTemplateClient client;
 
     @Operation(summary = "Добавить новые разделы")
-    @PostMapping
+    @PostMapping("/subsection")
     public Mono<Object> saveWithSubsection(@RequestBody @Valid @Parameter(description = "Данные шаблона раздела")
                                                                     NewSectionWithSubsectionTemplateDto sectionDto) {
         return client.saveWithSubsection(sectionDto);
     }
 
     @Operation(summary = "Изменение данных разделов")
-    @PatchMapping
+    @PatchMapping("/subsection")
     public Mono<Object> updateWithSubsection(@RequestBody @Valid @Parameter(description = "Данные шаблона разделф")
                                                                 UpdateSectionWithSubsectionTemplateDto sectionDto) {
         return client.updateWithSubsection(sectionDto);
     }
 
     @Operation(summary = "Добавить новые разделы")
-    @PostMapping
+    @PostMapping("/protocol")
     public Mono<Object> saveWithProtocol(@RequestBody @Valid @Parameter(description = "Данные шаблона раздела")
                                                                     NewSectionWithProtocolTemplateDto sectionDto) {
         return client.saveWithProtocol(sectionDto);
     }
 
     @Operation(summary = "Изменение данных разделов")
-    @PatchMapping
+    @PatchMapping("/protocol")
     public Mono<Object> updateWithProtocol( @RequestBody @Valid @Parameter(description = "Данные шаблона разделф")
                                                                     UpdateSectionWithProtocolTemplateDto sectionDto) {
         return client.updateWithProtocol(sectionDto);

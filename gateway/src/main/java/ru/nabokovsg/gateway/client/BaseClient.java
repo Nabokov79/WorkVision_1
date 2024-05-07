@@ -26,6 +26,9 @@ public class BaseClient {
                 .uri(path)
                 .bodyValue(body)
                 .retrieve()
+                .onStatus(
+                        HttpStatus.NOT_FOUND::equals,
+                        response -> response.bodyToMono(String.class).map(NotFoundException::new))
                 .bodyToMono(Object.class);
     }
 
@@ -33,6 +36,9 @@ public class BaseClient {
         return client.get()
                 .uri(path)
                 .retrieve()
+                .onStatus(
+                        HttpStatus.NOT_FOUND::equals,
+                        response -> response.bodyToMono(String.class).map(NotFoundException::new))
                 .bodyToMono(Object.class);
     }
 
@@ -42,6 +48,9 @@ public class BaseClient {
                         .queryParam(paramName, param)
                         .build())
                 .retrieve()
+                .onStatus(
+                        HttpStatus.NOT_FOUND::equals,
+                        response -> response.bodyToMono(String.class).map(NotFoundException::new))
                 .bodyToMono(Object.class);
     }
 
@@ -85,10 +94,9 @@ public class BaseClient {
         return client.delete()
                 .uri(path)
                 .retrieve()
-                .onStatus(status -> status == HttpStatus.NOT_FOUND
-                        , clientResponse -> Mono.just(
-                                new NotFoundException(
-                                        String.format("Object by path=%s not found for delete",  path))))
+                .onStatus(
+                        HttpStatus.NOT_FOUND::equals,
+                        response -> response.bodyToMono(String.class).map(NotFoundException::new))
                 .bodyToMono(String.class);
     }
 }

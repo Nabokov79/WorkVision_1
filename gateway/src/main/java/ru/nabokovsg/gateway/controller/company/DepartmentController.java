@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -17,10 +18,11 @@ import ru.nabokovsg.gateway.dto.company.department.UpdateDepartmentDto;
 
 @RestController
 @RequestMapping(
-        value = "/WorkVisionWeb/department",
+        value = "/WorkVisionWeb/company/department",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
+@Validated
 @Tag(name="Подразделение филиала организации",
         description="API для работы с данными подразделения филиала организации")
 public class DepartmentController {
@@ -50,7 +52,7 @@ public class DepartmentController {
     @Operation(summary = "Получение кратких сведений о подразделении филиала")
     @GetMapping("/all/{id}")
     public Flux<Object> getAll(@PathVariable @NotNull @Positive
-                                   @Parameter(description = "Индентификатор филиала") Long id) {
+                               @Parameter(description = "Индентификатор филиала") Long id) {
         return client.getAll(id);
     }
 

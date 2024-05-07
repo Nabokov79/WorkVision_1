@@ -16,7 +16,7 @@ import ru.nabokovsg.gateway.dto.laboratoryNK.subsection.*;
 
 @RestController
 @RequestMapping(
-        value = "/WorkVisionWeb/subsection",
+        value = "/WorkVisionWeb/laboratory/nk/template/subsection",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -28,70 +28,70 @@ public class SubsectionTemplateController {
     private final SubsectionTemplateClient client;
 
     @Operation(summary = "Добавление нового шаблона подраздела c текстом пользователя")
-    @PostMapping
-    public Mono<Object> saveWithUseText(@RequestBody @Valid@Parameter(description = "Шаблон подраздела")
+    @PostMapping("/text")
+    public Mono<Object> saveWithUserText(@RequestBody @Valid@Parameter(description = "Шаблон подраздела")
                                                                 NewSubsectionWithUseTextTemplateDto subsectionsDto) {
-        return client.saveWithUseText(subsectionsDto);
+        return client.saveWithUserText(subsectionsDto);
     }
 
     @Operation(summary = "Изменение данных шаблона подраздела c текстом пользователя")
-    @PatchMapping
-    public Mono<Object> updateWithUseText(@RequestBody @Valid @Parameter(description = "Шаблон подраздела")
+    @PatchMapping("/text")
+    public Mono<Object> updateWithUserText(@RequestBody @Valid @Parameter(description = "Шаблон подраздела")
                                                              UpdateSubsectionWithUseTextTemplateDto subsectionsDto) {
-        return client.updateWithUseText(subsectionsDto);
+        return client.updateWithUserText(subsectionsDto);
     }
 
     @Operation(summary = "Добавление нового шаблона подраздела раздела с данными структурного подразделения")
-    @PostMapping
+    @PostMapping("/division")
     public Mono<Object> saveWithDivisionData(@RequestBody @Valid @Parameter(description = "Шаблон подраздела")
                                                         NewSubsectionWithDivisionDataTemplateDto subsectionsDto) {
         return client.saveWithDivisionData(subsectionsDto);
     }
 
     @Operation(summary = "Изменение данных шаблона подраздела с данными структурного подразделения")
-    @PatchMapping
+    @PatchMapping("/division")
     public Mono<Object> updateWithDivisionData(@RequestBody @Valid @Parameter(description = "Шаблон подраздела")
                                                           UpdateSubsectionWithDivisionDataTemplateDto subsectionsDto) {
         return client.updateWithDivisionData(subsectionsDto);
     }
 
     @Operation(summary = "Добавление нового шаблона подраздела раздела с данными нормативно-технической документации")
-    @PostMapping
+    @PostMapping("/documentation")
     public Mono<Object> saveWithDocumentation(@RequestBody @Valid @Parameter(description = "Шаблон подраздела")
                                                            NewSubsectionWithDocumentationTemplateDto subsectionsDto) {
         return client.saveWithDocumentation(subsectionsDto);
     }
 
     @Operation(summary = "Изменение данных шаблона подраздела с данными нормативно-технической документации")
-    @PatchMapping
+    @PatchMapping("/documentation")
     public Mono<Object> updateWithDocumentation(@RequestBody @Valid@Parameter(description = "Шаблон подраздела")
                                                           UpdateSubsectionWithDocumentationTemplateDto subsectionsDto) {
         return client.updateWithDocumentation(subsectionsDto);
     }
 
     @Operation(summary = "Добавление нового шаблона подраздела раздела с таблицей")
-    @PostMapping
+    @PostMapping("/table")
     public Mono<Object> saveWithTable(@RequestBody @Valid@Parameter(description = "Шаблон подраздела")
                                                                     NewSubsectionWithTableTemplateDto subsectionsDto) {
         return client.saveWithTable(subsectionsDto);
     }
 
     @Operation(summary = "Изменение данных шаблона подраздела с таблицей")
-    @PatchMapping
+    @PatchMapping("/table")
     public Mono<Object> updateWithTable(@RequestBody @Valid @Parameter(description = "Шаблон подраздела")
                                                                 UpdateSubsectionWithTableTemplateDto subsectionsDto) {
         return client.updateWithTable(subsectionsDto);
     }
 
     @Operation(summary = "Добавление нового шаблона подраздела раздела с данными приборов измерений и средств контроля")
-    @PostMapping
+    @PostMapping("/measuring-tool")
     public Mono<Object> saveWithMeasuringTool(@RequestBody @Valid @Parameter(description = "Шаблон подраздела")
                                                             NewSubsectionWitMeasuringToolTemplateDto subsectionsDto) {
         return client.saveWithMeasuringTool(subsectionsDto);
     }
 
     @Operation(summary = "Изменение данных шаблона подраздела с данными приборов измерений и средств контроля")
-    @PatchMapping
+    @PatchMapping("/measuring-tool")
     public Mono<Object> updateWithTable(@RequestBody @Valid @Parameter(description = "Шаблон подраздела")
                                                         UpdateSubsectionWitMeasuringToolTemplateDto subsectionsDto) {
         return client.updateWithMeasuringTool(subsectionsDto);

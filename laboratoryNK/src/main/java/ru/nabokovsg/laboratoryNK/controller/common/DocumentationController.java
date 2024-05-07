@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(
-        value = "/documentation",
+        value = "/laboratory/documentation",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -41,12 +41,12 @@ public class DocumentationController {
     @Operation(summary = "Получение данных документов")
     @GetMapping("/all")
     public ResponseEntity<List<DocumentationDto>> getAll(
-                                                @RequestParam(name = "id", required = false)
-                                                @Parameter(description = "Индентификаторы документов") List<Long> ids,
-                                                @RequestParam(name = "number", required = false)
-                                                @Parameter(description = "Номер документа") String number,
-                                                @RequestParam(name = "title", required = false)
-                                                @Parameter(description = "Название документа") String title) {
+                                                  @RequestParam(name = "id", required = false)
+                                                  @Parameter(description = "Индентификаторы документов") List<Long> ids
+                                                , @RequestParam(name = "number", required = false)
+                                                  @Parameter(description = "Номер документа") String number
+                                                , @RequestParam(name = "title", required = false)
+                                                  @Parameter(description = "Название документа") String title) {
         return ResponseEntity.ok().body(service.getAll(ids, number, title));
     }
 

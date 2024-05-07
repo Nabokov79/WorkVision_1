@@ -77,22 +77,23 @@ public class DiagnosticDocumentServiceImpl extends DiagnosticDocumentStatusFacto
     public List<DiagnosticDocumentDto> getAll(LocalDate startPeriod, LocalDate endPeriod, boolean week, boolean month) {
         QDiagnosticDocument document = QDiagnosticDocument.diagnosticDocument;
         BooleanBuilder booleanBuilder = new BooleanBuilder();
-        if (startPeriod != null && endPeriod != null) {
-            booleanBuilder.and(document.date.after(startPeriod));
-            booleanBuilder.and(document.date.before(endPeriod));
-        } else {
+        if (startPeriod == null || endPeriod == null) {
             LocalDate now = LocalDate.now();
             if (week) {
-                booleanBuilder.and(document.date.after(now.with(DayOfWeek.MONDAY).minusDays(1)));
-                booleanBuilder.and(document.date.before(now.with(DayOfWeek.SUNDAY).plusDays(1)));
+                startPeriod = now.with(now.with(DayOfWeek.MONDAY).minusDays(1));
+                endPeriod = now.with(now.with(DayOfWeek.SUNDAY).plusDays(1));
             }
             if (month) {
                 startPeriod = now.with(ChronoField.DAY_OF_MONTH, 1).minusDays(1);
                 endPeriod = now.with(ChronoField.DAY_OF_MONTH, now.lengthOfMonth()).plusDays(1);
-                booleanBuilder.and(document.date.after(startPeriod));
-                booleanBuilder.and(document.date.before(endPeriod));
+            }
+            if (!month && !week) {
+                startPeriod = now.with(ChronoField.DAY_OF_MONTH, 1).minusDays(1);
+                endPeriod = now.with(ChronoField.DAY_OF_MONTH, now.lengthOfMonth()).plusDays(1);
             }
         }
+        booleanBuilder.and(document.date.after(startPeriod));
+        booleanBuilder.and(document.date.before(endPeriod));
         return new JPAQueryFactory(em).from(document)
                 .select(document)
                 .where(booleanBuilder)

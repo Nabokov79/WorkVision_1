@@ -32,9 +32,9 @@ public class DiagnosticDocumentController {
                                                   @Parameter(description = "Начало периода") LocalDate startPeriod
                                                 , @RequestParam(value = "endPeriod", required = false)
                                                   @Parameter(description = "Окончание периода") LocalDate endPeriod
-                                                , @RequestParam(value = "endPeriod")
+                                                , @RequestParam(value = "week")
                                                   @Parameter(description = "Получить за неделю") boolean week
-                                                , @RequestParam(value = "endPeriod")
+                                                , @RequestParam(value = "month")
                                                   @Parameter(description = "Получить за месяц") boolean month) {
         return ResponseEntity.ok().body(service.getAll(startPeriod, endPeriod, week, month));
     }
