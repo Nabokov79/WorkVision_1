@@ -9,10 +9,7 @@ public enum ActionsOnParameter {
     MAX_MIN,
     QUANTITY,
     SQUARE,
-    MIN_SQUARE,
-    MAX_SQUARE,
-    MIN_MAX_SQUARE,
-    SIZE,
+    REPLACE,
     NO_ACTION;
 
     public static Optional<ActionsOnParameter> from(String action) {

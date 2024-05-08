@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.diagnosedNK.dto.measurement.geodesicMeasurement.GeodesicMeasurementDto;
 import ru.nabokovsg.diagnosedNK.dto.measurement.geodesicMeasurement.GeodeticMeasurementEquipmentDto;
 import ru.nabokovsg.diagnosedNK.dto.measurement.geodesicMeasurement.ResponseGeodesicMeasurementDto;
-import ru.nabokovsg.diagnosedNK.service.measurement.GeodesicMeasurementService;
+import ru.nabokovsg.diagnosedNK.service.measurement.gm.GeodesicMeasurementService;
 
 import java.util.List;
 

@@ -2,6 +2,7 @@ package ru.nabokovsg.diagnosedNK.service.norms;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.nabokovsg.diagnosedNK.exceptions.NotFoundException;
 import ru.nabokovsg.diagnosedNK.mapper.norms.MeasuredParameterMapper;
 import ru.nabokovsg.diagnosedNK.model.norms.Defect;
 import ru.nabokovsg.diagnosedNK.model.norms.ElementRepair;
@@ -52,5 +53,14 @@ public class MeasuredParameterServiceImpl implements MeasuredParameterService {
                                 , constService.getUnitMeasurement(p.getUnitMeasurement())))
                         .toList())
         );
+    }
+
+    @Override
+    public Set<MeasuredParameter> getAllByDefectId(Long defectId) {
+        Set<MeasuredParameter> measuredParameters = repository.findAllByDefectId(defectId);
+        if (measuredParameters.isEmpty()) {
+            throw new NotFoundException(String.format("MeasuredParameter for defect with id=%s not found", defectId));
+        }
+        return measuredParameters;
     }
 }

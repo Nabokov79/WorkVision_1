@@ -15,4 +15,6 @@ public interface MeasuredParameterService {
     Set<MeasuredParameter> saveForElementRepair(ElementRepair repair, List<MeasuredParameterDto> parametersDto);
 
     Set<MeasuredParameter> update(List<MeasuredParameterDto> parametersDto);
+
+    Set<MeasuredParameter> getAllByDefectId(Long defectId);
 }

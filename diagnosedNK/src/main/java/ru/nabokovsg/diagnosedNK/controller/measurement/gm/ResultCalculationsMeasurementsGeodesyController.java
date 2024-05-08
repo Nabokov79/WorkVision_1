@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.diagnosedNK.dto.measurement.referencePoint.ReferencePointDto;
 import ru.nabokovsg.diagnosedNK.dto.measurement.сontrolPoint.ResultControlPoint;
-import ru.nabokovsg.diagnosedNK.service.measurement.ResultCalculationsMeasurementsGeodesyService;
+import ru.nabokovsg.diagnosedNK.service.measurement.gm.ResultCalculationsMeasurementsGeodesyService;
 
 import java.util.List;
 

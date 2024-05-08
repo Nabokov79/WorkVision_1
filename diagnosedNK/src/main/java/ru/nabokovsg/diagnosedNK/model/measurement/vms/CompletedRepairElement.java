@@ -28,8 +28,5 @@ public class CompletedRepairElement {
     @Column(name = "repair_name")
     private String repairName;
     @OneToMany(mappedBy = "completedRepairElement", fetch = FetchType.LAZY)
-    private Set<ParameterMeasurement> parameterMeasurements;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "visual_measuring_survey_id",  nullable = false)
-    private VisualMeasuringSurvey visualMeasuringSurvey;
+    private Set<CalculationParameterMeasurement> parameterMeasurements;
 }

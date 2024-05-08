@@ -18,7 +18,11 @@ public class DefectMeasurement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+    @Column(name = "survey_journal_id")
+    private Long surveyJournalId;
+    @Column(name = "equipment_id")
+    private Long equipmentId;
     @Column(name = "element_id")
     private Long elementId;
     @Column(name = "part_element_id")
@@ -28,8 +32,5 @@ public class DefectMeasurement {
     @Column(name = "defect_name")
     private String defectName;
     @OneToMany(mappedBy = "completedRepairElement", fetch = FetchType.LAZY)
-    private Set<ParameterMeasurement> parameterMeasurements;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "visual_measuring_survey_id",  nullable = false)
-    private VisualMeasuringSurvey visualMeasuringSurvey;
+    private Set<CalculationParameterMeasurement> parameterMeasurements;
 }

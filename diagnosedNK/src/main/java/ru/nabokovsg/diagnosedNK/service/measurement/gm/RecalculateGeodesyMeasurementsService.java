@@ -1,4 +1,4 @@
-package ru.nabokovsg.diagnosedNK.service.measurement;
+package ru.nabokovsg.diagnosedNK.service.measurement.gm;
 
 import ru.nabokovsg.diagnosedNK.model.measurement.gm.GeodesicMeasurement;
 
