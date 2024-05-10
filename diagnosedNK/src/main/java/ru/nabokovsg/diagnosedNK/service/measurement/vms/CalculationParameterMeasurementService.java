@@ -1,26 +1,25 @@
 package ru.nabokovsg.diagnosedNK.service.measurement.vms;
 
+import ru.nabokovsg.diagnosedNK.dto.measurement.vms.parameterMeasurement.ParameterMeasurementDto;
 import ru.nabokovsg.diagnosedNK.model.measurement.vms.CalculationParameterMeasurement;
-import ru.nabokovsg.diagnosedNK.model.norms.ActionsOnParameter;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public interface CalculationParameterMeasurementService {
 
-    Set<CalculationParameterMeasurement> calculationDefectMeasurement(ActionsOnParameter actionsOnParameter
-            , List<CalculationParameterMeasurement> parameterMeasurementsDb
-            , List<CalculationParameterMeasurement> parameterMeasurements);
-    Set<CalculationParameterMeasurement> calculationParameterMeasurement(ActionsOnParameter actionsOnParameter
-            , List<CalculationParameterMeasurement> parameterMeasurementsDb
-            , List<CalculationParameterMeasurement> parameterMeasurements);
-    void replace(Map<String, ResultParameterMeasurement> parameters, Map<String, Double> parametersDto);
-    CalculationParameterMeasurement countMin(ResultParameterMeasurement parameter, Double measurement);
+    CalculationParameterMeasurement countMin(CalculationParameterMeasurement parameterMeasurement
+                                           , ParameterMeasurementDto parameterMeasurementDto);
 
-    CalculationParameterMeasurement countMax(ResultParameterMeasurement parameter, Double measurement);
+    CalculationParameterMeasurement countMax(CalculationParameterMeasurement parameterMeasurement
+                                           , ParameterMeasurementDto parameterMeasurementDto);
 
-    CalculationParameterMeasurement countQuantity(ResultParameterMeasurement parameter, Double measurement);
+    CalculationParameterMeasurement countMaxAndMin(CalculationParameterMeasurement parameterMeasurement
+                                                 , ParameterMeasurementDto parameterMeasurementDto);
 
-    void countSquare(Map<String, CalculationParameterMeasurement> parameters, Map<String, Double> parametersDto, ActionsOnParameter action);
+    Set<CalculationParameterMeasurement> countSquare(Map<Long, CalculationParameterMeasurement> parameterMeasurements
+                                                   , Map<String, ParameterMeasurementDto> parameterMeasurementsDto);
+
+   Set<CalculationParameterMeasurement> countQuantity(Map<Long, CalculationParameterMeasurement> parameterMeasurements
+                                                    , Map<String, ParameterMeasurementDto> parameterMeasurementsDto);
 }

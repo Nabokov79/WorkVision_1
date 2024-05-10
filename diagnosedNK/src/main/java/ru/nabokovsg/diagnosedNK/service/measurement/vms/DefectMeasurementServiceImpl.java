@@ -7,13 +7,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nabokovsg.diagnosedNK.exceptions.NotFoundException;
 import ru.nabokovsg.diagnosedNK.mapper.measurement.vms.DefectMeasurementMapper;
+import ru.nabokovsg.diagnosedNK.model.measurement.utm.UltrasonicThicknessMeasurement;
 import ru.nabokovsg.diagnosedNK.model.measurement.vms.DefectMeasurement;
+import ru.nabokovsg.diagnosedNK.model.measurement.vms.QCalculationParameterMeasurement;
 import ru.nabokovsg.diagnosedNK.model.measurement.vms.QDefectMeasurement;
 import ru.nabokovsg.diagnosedNK.model.norms.Defect;
 import ru.nabokovsg.diagnosedNK.repository.measurement.vms.DefectMeasurementRepository;
 import ru.nabokovsg.diagnosedNK.service.norms.DefectService;
-import ru.nabokovsg.diagnosedNK.dto.measurement.vms.DefectMeasurementDto;
-import ru.nabokovsg.diagnosedNK.dto.measurement.vms.ResponseDefectMeasurementDto;
+import ru.nabokovsg.diagnosedNK.dto.measurement.vms.defectMeasurement.DefectMeasurementDto;
+import ru.nabokovsg.diagnosedNK.dto.measurement.vms.defectMeasurement.ResponseDefectMeasurementDto;
 
 import java.util.List;
 
@@ -26,7 +28,6 @@ public class DefectMeasurementServiceImpl implements DefectMeasurementService {
     private final ParameterMeasurementService parameterMeasurementService;
     private final EntityManager em;
     private final DefectService defectsService;
-    private final CalculationParameterMeasurementService calculationParameterService;
 
     @Override
     public ResponseDefectMeasurementDto save(DefectMeasurementDto defectMeasurementDto) {
@@ -35,8 +36,10 @@ public class DefectMeasurementServiceImpl implements DefectMeasurementService {
         if (defectMeasurement == null) {
             defectMeasurement = repository.save(mapper.mapToDefectMeasurement(defectMeasurementDto, defect));
         }
-        defectMeasurement.getParameterMeasurements().addAll(parameterMeasurementService.save(defect.getActionsOnParameter()
-                                                                    , defectMeasurement
+        defectMeasurement.getParameterMeasurements().addAll(parameterMeasurementService.save(
+                                                                      defect.getTypeCalculation()
+                                                                    , defect.getMeasuredParameters()
+                                                                    , defectMeasurement.getParameterMeasurements()
                                                                     , defectMeasurementDto.getParameterMeasurements()));
         return mapper.mapToResponseDefectMeasurementDto(defectMeasurement);
     }
@@ -58,6 +61,29 @@ public class DefectMeasurementServiceImpl implements DefectMeasurementService {
         throw new NotFoundException(String.format("Defect measurement with id=%s not found for delete", id));
     }
 
+    @Override
+    public Double getMaxCorrosionValueByPredicate(UltrasonicThicknessMeasurement measurement) {
+        QDefectMeasurement defect = QDefectMeasurement.defectMeasurement;
+        QCalculationParameterMeasurement parameter = QCalculationParameterMeasurement.calculationParameterMeasurement;
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        booleanBuilder.and(defect.surveyJournalId.eq(measurement.getSurveyJournalId()));
+        booleanBuilder.and(defect.equipmentId.eq(measurement.getEquipmentId()));
+        booleanBuilder.and(defect.elementId.eq(measurement.getElementId()));
+        booleanBuilder.and(defect.useCalculateThickness.eq(true));
+        if (measurement.getPartElementId() != null) {
+            booleanBuilder.and(defect.partElementId.eq(measurement.getPartElementId()));
+        }
+        booleanBuilder.and(parameter.defectMeasurement.id.eq(defect.id));
+        Double corrosion = new JPAQueryFactory(em).from(parameter)
+                .select(parameter.firstValue)
+                .where(booleanBuilder)
+                .fetchFirst();
+        if (corrosion == null) {
+            throw new NotFoundException(String.format("Max corrosion value not found corrosion=%s", corrosion));
+        }
+        return corrosion;
+    }
+
     private DefectMeasurement getByPredicate(DefectMeasurementDto defectMeasurementDto) {
         QDefectMeasurement defect = QDefectMeasurement.defectMeasurement;
         BooleanBuilder booleanBuilder = new BooleanBuilder();
@@ -68,9 +94,6 @@ public class DefectMeasurementServiceImpl implements DefectMeasurementService {
             booleanBuilder.and(defect.partElementId.eq(defectMeasurementDto.getPartElementId()));
         }
         booleanBuilder.and(defect.defectId.eq(defectMeasurementDto.getDefectId()));
-        if (defectMeasurementDto.getPartElementId() != null) {
-            booleanBuilder.and(defect.partElementId.eq(defectMeasurementDto.getPartElementId()));
-        }
         return new JPAQueryFactory(em).from(defect)
                 .select(defect)
                 .where(booleanBuilder)

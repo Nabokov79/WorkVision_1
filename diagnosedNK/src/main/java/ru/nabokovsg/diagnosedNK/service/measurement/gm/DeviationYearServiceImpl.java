@@ -2,9 +2,9 @@ package ru.nabokovsg.diagnosedNK.service.measurement.gm;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.nabokovsg.diagnosedNK.mapper.measurement.DeviationYearMapper;
+import ru.nabokovsg.diagnosedNK.mapper.measurement.gm.DeviationYearMapper;
 import ru.nabokovsg.diagnosedNK.model.measurement.gm.ReferencePoint;
-import ru.nabokovsg.diagnosedNK.repository.measurement.DeviationYearRepository;
+import ru.nabokovsg.diagnosedNK.repository.measurement.gm.DeviationYearRepository;
 
 import java.time.LocalDate;
 import java.util.List;

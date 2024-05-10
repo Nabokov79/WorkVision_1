@@ -4,12 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nabokovsg.diagnosedNK.dto.measurement.сontrolPoint.PointDifferenceDto;
 import ru.nabokovsg.diagnosedNK.exceptions.NotFoundException;
-import ru.nabokovsg.diagnosedNK.mapper.measurement.PointDifferenceMapper;
+import ru.nabokovsg.diagnosedNK.mapper.measurement.gm.PointDifferenceMapper;
 import ru.nabokovsg.diagnosedNK.model.measurement.gm.ControlPoint;
 import ru.nabokovsg.diagnosedNK.model.measurement.gm.GeodesicPointType;
 import ru.nabokovsg.diagnosedNK.model.measurement.gm.PointDifference;
 import ru.nabokovsg.diagnosedNK.model.norms.AcceptableDeviationsGeodesy;
-import ru.nabokovsg.diagnosedNK.repository.measurement.PointDifferenceRepository;
+import ru.nabokovsg.diagnosedNK.repository.measurement.gm.PointDifferenceRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;

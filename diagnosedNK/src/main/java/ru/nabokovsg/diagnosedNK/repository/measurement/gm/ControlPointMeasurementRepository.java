@@ -1,4 +1,4 @@
-package ru.nabokovsg.diagnosedNK.repository.measurement;
+package ru.nabokovsg.diagnosedNK.repository.measurement.gm;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.nabokovsg.diagnosedNK.model.measurement.gm.ControlPoint;

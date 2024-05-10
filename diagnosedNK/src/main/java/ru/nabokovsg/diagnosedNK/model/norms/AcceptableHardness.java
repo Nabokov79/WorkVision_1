@@ -21,6 +21,8 @@ public class AcceptableHardness {
     private Long equipmentTypeId;
     @Column(name = "element_id")
     private Long elementId;
+    @Column(name = "part_element_id")
+    private Long partElementId;
     @Column(name = "min_allowable_diameter")
     private Integer minAllowableDiameter;
     @Column(name = "min_hardness")

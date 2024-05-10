@@ -2,13 +2,13 @@ package ru.nabokovsg.diagnosedNK.service.norms;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.webjars.NotFoundException;
 import ru.nabokovsg.diagnosedNK.dto.norms.elementRepair.ElementRepairDto;
 import ru.nabokovsg.diagnosedNK.dto.norms.elementRepair.ResponseElementRepairDto;
 import ru.nabokovsg.diagnosedNK.dto.norms.elementRepair.ResponseShortElementRepairDto;
 import ru.nabokovsg.diagnosedNK.exceptions.BadRequestException;
+import ru.nabokovsg.diagnosedNK.exceptions.NotFoundException;
 import ru.nabokovsg.diagnosedNK.mapper.norms.ElementRepairMapper;
-import ru.nabokovsg.diagnosedNK.model.norms.ActionsOnParameter;
+import ru.nabokovsg.diagnosedNK.model.norms.TypeCalculation;
 import ru.nabokovsg.diagnosedNK.model.norms.ElementRepair;
 import ru.nabokovsg.diagnosedNK.repository.norms.ElementRepairRepository;
 
@@ -28,7 +28,7 @@ public class ElementRepairServiceImpl implements ElementRepairService {
         ElementRepair repair = repository.findByRepairName(repairDto.getRepairName());
         if (repair == null) {
             repair = repository.save(mapper.mapToElementRepair(repairDto
-                                                        , getActionsOnParameter(repairDto.getActionsOnParameter())));
+                                                        , getTypeCalculation(repairDto.getTypeCalculation())));
             repair.setMeasuredParameters(
                                     parameterService.saveForElementRepair(repair, repairDto.getMeasuredParameters()));
         }
@@ -38,8 +38,8 @@ public class ElementRepairServiceImpl implements ElementRepairService {
     @Override
     public ResponseElementRepairDto update(ElementRepairDto repairDto) {
         if (repository.existsById(repairDto.getId())) {
-            ElementRepair repair = repository.save(mapper.mapToElementRepair(repairDto
-                                                          , getActionsOnParameter(repairDto.getActionsOnParameter())));
+            ElementRepair repair =  repository.save(mapper.mapToElementRepair(repairDto
+                                                                , getTypeCalculation(repairDto.getTypeCalculation())));
             repair.setMeasuredParameters(parameterService.update(repairDto.getMeasuredParameters()));
             return mapper.mapToResponseElementRepairDto(repair);
         }
@@ -48,8 +48,7 @@ public class ElementRepairServiceImpl implements ElementRepairService {
 
     @Override
     public ResponseElementRepairDto get(Long id) {
-        return mapper.mapToResponseElementRepairDto( repository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Repair method with id=%s not found", id))));
+        return mapper.mapToResponseElementRepairDto(getById(id));
     }
 
     @Override
@@ -69,8 +68,15 @@ public class ElementRepairServiceImpl implements ElementRepairService {
         throw new NotFoundException(String.format("Repair method with id=%s not found for delete", id));
     }
 
-    private ActionsOnParameter getActionsOnParameter(String actions) {
-        return ActionsOnParameter.from(actions).orElseThrow(
-                () -> new BadRequestException(String.format("Unsupported type actionsOnParameter=%s", actions)));
+    @Override
+    public ElementRepair getById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Repair method with id=%s not found", id)));
+    }
+
+    private TypeCalculation getTypeCalculation(String calculation) {
+        return TypeCalculation.from(calculation).orElseThrow(
+                () -> new BadRequestException(
+                        String.format("Unsupported element repair calculation type=%s", calculation)));
     }
 }

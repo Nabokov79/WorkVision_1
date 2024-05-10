@@ -18,11 +18,12 @@ public class VisualInspection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "survey_journal_id")
+    private Long surveyJournalId;
+    @Column(name = "equipment_id")
+    private Long equipmentId;
     @Column(name = "element_id")
     private Long elementId;
     @Column(name = "inspection")
     private String inspection;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "visual_measuring_survey_id",  nullable = false)
-    private VisualMeasuringSurvey visualMeasuringSurvey;
 }

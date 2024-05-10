@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nabokovsg.diagnosedNK.dto.measurement.сontrolPoint.ControlPointDto;
 import ru.nabokovsg.diagnosedNK.exceptions.NotFoundException;
-import ru.nabokovsg.diagnosedNK.mapper.measurement.ControlPointMeasurementMapper;
+import ru.nabokovsg.diagnosedNK.mapper.measurement.gm.ControlPointMeasurementMapper;
 import ru.nabokovsg.diagnosedNK.model.measurement.gm.ControlPoint;
 import ru.nabokovsg.diagnosedNK.model.measurement.gm.GeodesicMeasurement;
-import ru.nabokovsg.diagnosedNK.repository.measurement.ControlPointMeasurementRepository;
+import ru.nabokovsg.diagnosedNK.repository.measurement.gm.ControlPointMeasurementRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;

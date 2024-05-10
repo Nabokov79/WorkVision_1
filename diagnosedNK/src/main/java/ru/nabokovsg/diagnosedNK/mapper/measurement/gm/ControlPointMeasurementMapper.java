@@ -1,4 +1,4 @@
-package ru.nabokovsg.diagnosedNK.mapper.measurement;
+package ru.nabokovsg.diagnosedNK.mapper.measurement.gm;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

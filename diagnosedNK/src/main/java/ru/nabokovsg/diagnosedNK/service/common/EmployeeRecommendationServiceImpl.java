@@ -2,9 +2,9 @@ package ru.nabokovsg.diagnosedNK.service.common;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.webjars.NotFoundException;
 import ru.nabokovsg.diagnosedNK.dto.common.employeeRecommendation.EmployeeRecommendationDto;
 import ru.nabokovsg.diagnosedNK.dto.common.employeeRecommendation.ResponseEmployeeRecommendationDto;
+import ru.nabokovsg.diagnosedNK.exceptions.NotFoundException;
 import ru.nabokovsg.diagnosedNK.mapper.common.EmployeeRecommendationMapper;
 import ru.nabokovsg.diagnosedNK.repository.common.EmployeeRecommendationRepository;
 

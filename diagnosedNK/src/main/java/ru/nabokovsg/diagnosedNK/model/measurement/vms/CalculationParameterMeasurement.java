@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "parameters_measurements")
+@Table(name = "result_measurement_parameters")
 public class CalculationParameterMeasurement {
 
     @Id
@@ -19,13 +19,16 @@ public class CalculationParameterMeasurement {
     private Long id;
     @Column(name = "parameter_name")
     private String parameterName;
-    @Column(name = "min_value")
-    private Double minValue;
-    @Column(name = "max_value")
-    private Double maxValue;
+    @Column(name = "first_value")
+    private Double firstValue;
+    @Column(name = "second_value")
+    private Double secondValue;
     @Column(name = "unit_measurement")
     private String unitMeasurement;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "defect_measurement_id",  nullable = false)
     private DefectMeasurement defectMeasurement;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "completed_repair_id",  nullable = false)
+    private CompletedRepairElement completedRepairElement;
 }

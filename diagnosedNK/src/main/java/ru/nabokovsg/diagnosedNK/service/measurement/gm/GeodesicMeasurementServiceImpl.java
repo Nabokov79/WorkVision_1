@@ -2,13 +2,13 @@ package ru.nabokovsg.diagnosedNK.service.measurement.gm;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.webjars.NotFoundException;
 import ru.nabokovsg.diagnosedNK.dto.measurement.geodesicMeasurement.GeodesicMeasurementDto;
 import ru.nabokovsg.diagnosedNK.dto.measurement.geodesicMeasurement.GeodeticMeasurementEquipmentDto;
 import ru.nabokovsg.diagnosedNK.dto.measurement.geodesicMeasurement.ResponseGeodesicMeasurementDto;
-import ru.nabokovsg.diagnosedNK.mapper.measurement.GeodesicMeasurementMapper;
+import ru.nabokovsg.diagnosedNK.exceptions.NotFoundException;
+import ru.nabokovsg.diagnosedNK.mapper.measurement.gm.GeodesicMeasurementMapper;
 import ru.nabokovsg.diagnosedNK.model.measurement.gm.GeodesicMeasurement;
-import ru.nabokovsg.diagnosedNK.repository.measurement.GeodesicMeasurementRepository;
+import ru.nabokovsg.diagnosedNK.repository.measurement.gm.GeodesicMeasurementRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;

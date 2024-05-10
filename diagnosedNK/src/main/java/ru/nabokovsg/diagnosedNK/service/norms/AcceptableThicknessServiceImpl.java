@@ -5,10 +5,12 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.webjars.NotFoundException;
 import ru.nabokovsg.diagnosedNK.dto.norms.acceptableThickness.AcceptableThicknessDto;
 import ru.nabokovsg.diagnosedNK.dto.norms.acceptableThickness.ResponseAcceptableThicknessDto;
+import ru.nabokovsg.diagnosedNK.exceptions.NotFoundException;
 import ru.nabokovsg.diagnosedNK.mapper.norms.AcceptableThicknessMapper;
+import ru.nabokovsg.diagnosedNK.model.equipmentDiagnosed.QEquipmentDiagnosed;
+import ru.nabokovsg.diagnosedNK.model.measurement.utm.UltrasonicThicknessMeasurement;
 import ru.nabokovsg.diagnosedNK.model.norms.AcceptableThickness;
 import ru.nabokovsg.diagnosedNK.model.norms.QAcceptableThickness;
 import ru.nabokovsg.diagnosedNK.repository.norms.AcceptableThicknessRepository;
@@ -58,6 +60,25 @@ public class AcceptableThicknessServiceImpl implements AcceptableThicknessServic
             return;
         }
         throw new NotFoundException(String.format("AcceptableThickness with id=%s not found for delete", id));
+    }
+
+    @Override
+    public AcceptableThickness getAcceptableThickness(UltrasonicThicknessMeasurement measurement) {
+        QAcceptableThickness thickness = QAcceptableThickness.acceptableThickness;
+        QEquipmentDiagnosed equipment = QEquipmentDiagnosed.equipmentDiagnosed;
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        booleanBuilder.and(equipment.equipmentType.id.eq(thickness.equipmentTypeId));
+        booleanBuilder.and(thickness.elementId.eq(measurement.getElementId()));
+        if (measurement.getPartElementId() != null) {
+            booleanBuilder.and(thickness.partElementId.eq(measurement.getPartElementId()));
+        }
+        if (measurement.getDiameter() != null) {
+            booleanBuilder.and(thickness.diameter.eq(measurement.getDiameter()));
+        }
+        return new JPAQueryFactory(em).from(thickness)
+                .select(thickness)
+                .where(booleanBuilder)
+                .fetchOne();
     }
 
     private AcceptableThickness getByPredicate(AcceptableThicknessDto thicknessDto) {

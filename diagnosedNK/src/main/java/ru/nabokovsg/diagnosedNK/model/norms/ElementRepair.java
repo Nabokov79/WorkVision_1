@@ -21,9 +21,9 @@ public class ElementRepair {
     private long id;
     @Column(name = "repair_name")
     private String repairName;
-    @Column(name = "actions_on_parameter")
+    @Column(name = "type_calculation")
     @Enumerated(EnumType.STRING)
-    private ActionsOnParameter actionsOnParameter;
+    private TypeCalculation typeCalculation;
     @OneToMany(mappedBy = "elementRepair", fetch = FetchType.LAZY)
     private Set<MeasuredParameter> measuredParameters;
 }

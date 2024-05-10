@@ -25,9 +25,9 @@ public class Defect {
     private Boolean notMeetRequirements;
     @Column(name = "use_calculate_thickness")
     private Boolean useCalculateThickness;
-    @Column(name = "actions_on_parameter")
+    @Column(name = "type_calculation")
     @Enumerated(EnumType.STRING)
-    private ActionsOnParameter actionsOnParameter;
+    private TypeCalculation typeCalculation;
     @OneToMany(mappedBy = "defect", fetch = FetchType.LAZY)
     private Set<MeasuredParameter> measuredParameters;
 }

@@ -1,4 +1,4 @@
-package ru.nabokovsg.diagnosedNK.dto.measurement.vms;
+package ru.nabokovsg.diagnosedNK.dto.measurement.vms.defectMeasurement;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

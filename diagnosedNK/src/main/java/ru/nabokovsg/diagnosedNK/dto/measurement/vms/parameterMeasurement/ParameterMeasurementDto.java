@@ -17,8 +17,6 @@ public class ParameterMeasurementDto {
     private Long id;
     @Schema(description = "Индентификатор параметра")
     private Long parameterId;
-    @Schema(description = "Минимальное значение параметра")
-    private Double minValue;
-    @Schema(description = "Максимальное значение параметра")
-    private Double maxValue;
+    @Schema(description = "Значение параметра")
+    private Double value;
 }

@@ -8,7 +8,7 @@ import ru.nabokovsg.diagnosedNK.dto.norms.defects.ResponseShortDefectDto;
 import ru.nabokovsg.diagnosedNK.exceptions.BadRequestException;
 import ru.nabokovsg.diagnosedNK.exceptions.NotFoundException;
 import ru.nabokovsg.diagnosedNK.mapper.norms.DefectMapper;
-import ru.nabokovsg.diagnosedNK.model.norms.ActionsOnParameter;
+import ru.nabokovsg.diagnosedNK.model.norms.TypeCalculation;
 import ru.nabokovsg.diagnosedNK.model.norms.Defect;
 import ru.nabokovsg.diagnosedNK.repository.norms.DefectRepository;
 import java.util.List;
@@ -26,7 +26,7 @@ public class DefectServiceImpl implements DefectService {
         Defect defect = repository.findByDefectName(defectDto.getDefectName());
         if (defect == null) {
             defect = repository.save(mapper.mapToDefect(defectDto
-                                                      , getActionsOnParameter(defectDto.getActionsOnParameter())));
+                                                      , getTypeCalculation(defectDto.getTypeCalculation())));
             defect.setMeasuredParameters(parameterService.saveForDefect(defect, defectDto.getMeasuredParameters()));
         }
         return mapper.mapToResponseDefectDto(defect);
@@ -36,7 +36,7 @@ public class DefectServiceImpl implements DefectService {
     public ResponseDefectDto update(DefectDto defectDto) {
         if (repository.existsById(defectDto.getId())) {
             Defect defect = repository.save(mapper.mapToDefect(defectDto
-                                                           , getActionsOnParameter(defectDto.getActionsOnParameter())));
+                                                           , getTypeCalculation(defectDto.getTypeCalculation())));
             defect.setMeasuredParameters(parameterService.saveForDefect(defect, defectDto.getMeasuredParameters()));
             return mapper.mapToResponseDefectDto(defect);
         }
@@ -71,8 +71,8 @@ public class DefectServiceImpl implements DefectService {
                 .orElseThrow(() -> new NotFoundException(String.format("Defect with id=%s not found", id)));
     }
 
-    private ActionsOnParameter getActionsOnParameter(String actions) {
-        return ActionsOnParameter.from(actions).orElseThrow(
-                () -> new BadRequestException(String.format("Unsupported type actionsOnParameter=%s", actions)));
+    private TypeCalculation getTypeCalculation(String calculation) {
+        return TypeCalculation.from(calculation).orElseThrow(
+                () -> new BadRequestException(String.format("Unsupported defect calculation type=%s", calculation)));
     }
 }

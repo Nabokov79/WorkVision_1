@@ -31,6 +31,10 @@ public class DefectMeasurement {
     private Long defectId;
     @Column(name = "defect_name")
     private String defectName;
-    @OneToMany(mappedBy = "completedRepairElement", fetch = FetchType.LAZY)
+    @Column(name = "not_meet_requirements")
+    private Boolean notMeetRequirements;
+    @Column(name = "use_calculate_thickness")
+    private Boolean useCalculateThickness;
+    @OneToMany(mappedBy = "defectMeasurement", fetch = FetchType.LAZY)
     private Set<CalculationParameterMeasurement> parameterMeasurements;
 }

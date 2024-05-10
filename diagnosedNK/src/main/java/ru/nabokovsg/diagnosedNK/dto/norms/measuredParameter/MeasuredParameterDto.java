@@ -19,4 +19,6 @@ public class MeasuredParameterDto {
     private String measuredParameter;
     @Schema(description = "Единица измерения параметра")
     private String unitMeasurement;
+    @Schema(description = "Требуемые вычисления параметров дефекта")
+    private String typeCalculation;
 }

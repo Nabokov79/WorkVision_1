@@ -19,6 +19,10 @@ public class CompletedRepairElement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "survey_journal_id")
+    private Long surveyJournalId;
+    @Column(name = "equipment_id")
+    private Long equipmentId;
     @Column(name = "element_id")
     private Long elementId;
     @Column(name = "part_element_id")

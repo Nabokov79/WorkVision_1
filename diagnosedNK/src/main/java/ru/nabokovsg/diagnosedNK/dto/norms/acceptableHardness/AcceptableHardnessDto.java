@@ -19,6 +19,8 @@ public class AcceptableHardnessDto {
     private Long equipmentTypeId;
     @Schema(description = "Индентификатор элемента оборудования")
     private Long elementId;
+    @Schema(description = "Индентификатор подэлемента элемента оборудования")
+    private Long partElementId;
     @Schema(description = "Минимальная допустимая твердость металла элемента")
     private Integer minHardness;
     @Schema(description = "Максимальная допустимая твердость металла элемента")

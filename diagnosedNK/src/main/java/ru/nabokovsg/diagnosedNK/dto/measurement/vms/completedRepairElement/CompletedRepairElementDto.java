@@ -1,4 +1,4 @@
-package ru.nabokovsg.diagnosedNK.dto.measurement.vms;
+package ru.nabokovsg.diagnosedNK.dto.measurement.vms.completedRepairElement;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -6,14 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.nabokovsg.diagnosedNK.dto.measurement.vms.parameterMeasurement.ParameterMeasurementDto;
+
 import java.util.List;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Результаты измерения дефекта элемента, подэлемента оборудования")
-public class DefectMeasurementDto {
+@Schema(description = "Результаты измерения ремонта элемента, подэлемента оборудования")
+public class CompletedRepairElementDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
@@ -25,8 +26,8 @@ public class DefectMeasurementDto {
     private Long elementId;
     @Schema(description = "Индентификатор подэлемента")
     private Long partElementId;
-    @Schema(description = "Индентификатор дефекта")
-    private Long defectId;
-    @Schema(description = "Измеренные параметры дефекта")
+    @Schema(description = "Индентификатор ремонта")
+    private Long repairId;
+    @Schema(description = "Измеренные параметры выполненного ремонта элемента")
     private List<ParameterMeasurementDto> parameterMeasurements;
 }

@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.nabokovsg.diagnosedNK.dto.measurement.vms.DefectMeasurementDto;
-import ru.nabokovsg.diagnosedNK.dto.measurement.vms.ResponseDefectMeasurementDto;
+import ru.nabokovsg.diagnosedNK.dto.measurement.vms.defectMeasurement.DefectMeasurementDto;
+import ru.nabokovsg.diagnosedNK.dto.measurement.vms.defectMeasurement.ResponseDefectMeasurementDto;
 import ru.nabokovsg.diagnosedNK.service.measurement.vms.DefectMeasurementService;
 
 import java.util.List;

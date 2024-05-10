@@ -18,7 +18,7 @@ public class ElementRepairDto {
     @Schema(description = "Наименование типа ремонта")
     private String repairName;
     @Schema(description = "Требуемые вычисления параметров ремонта элемента")
-    private String actionsOnParameter;
+    private String typeCalculation;
     @Schema(description = "Измеряемые параметры ремонта элемента")
     private List<MeasuredParameterDto> measuredParameters;
 }

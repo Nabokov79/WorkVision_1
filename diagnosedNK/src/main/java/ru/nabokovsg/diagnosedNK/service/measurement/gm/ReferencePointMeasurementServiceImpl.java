@@ -4,11 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nabokovsg.diagnosedNK.dto.measurement.referencePoint.ReferencePointDto;
 import ru.nabokovsg.diagnosedNK.exceptions.NotFoundException;
-import ru.nabokovsg.diagnosedNK.mapper.measurement.ReferencePointMapper;
+import ru.nabokovsg.diagnosedNK.mapper.measurement.gm.ReferencePointMapper;
 import ru.nabokovsg.diagnosedNK.model.measurement.gm.GeodesicMeasurement;
 import ru.nabokovsg.diagnosedNK.model.measurement.gm.ReferencePoint;
 import ru.nabokovsg.diagnosedNK.model.norms.AcceptableDeviationsGeodesy;
-import ru.nabokovsg.diagnosedNK.repository.measurement.ReferencePointRepository;
+import ru.nabokovsg.diagnosedNK.repository.measurement.gm.ReferencePointRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;

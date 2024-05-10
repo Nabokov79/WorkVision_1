@@ -21,7 +21,7 @@ public class DefectDto {
     @Schema(description = "Указание недопустимости дефекта")
     private Boolean notMeetRequirements;
     @Schema(description = "Требуемые вычисления параметров дефекта")
-    private String actionsOnParameter;
+    private String typeCalculation;
     @Schema(description = "Измеряемые параметры дефекта")
     private List<MeasuredParameterDto> measuredParameters;
 }
