@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import ru.nabokovsg.laboratoryNK.dto.template.appendices.AppendicesDto;
+import ru.nabokovsg.laboratoryNK.dto.template.appendices.AppendicesTemplateDto;
 import ru.nabokovsg.laboratoryNK.dto.template.conclusion.ResponseConclusionTemplateDto;
 import ru.nabokovsg.laboratoryNK.dto.template.documentHeader.ResponseDocumentHeaderDto;
 import ru.nabokovsg.laboratoryNK.dto.template.subsectionTemplate.ResponseSubsectionTemplateDto;
@@ -34,5 +34,5 @@ public class ResponseProtocolTemplateDto {
     @Schema(description = "Заключение по результатм")
     private ResponseConclusionTemplateDto conclusionTemplate;
     @Schema(description = "Приложения")
-    private List<AppendicesDto> appendices;
+    private List<AppendicesTemplateDto> appendices;
 }

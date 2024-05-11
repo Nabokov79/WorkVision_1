@@ -3,7 +3,7 @@ package ru.nabokovsg.laboratoryNK.model.template.protocol;
 import jakarta.persistence.*;
 import lombok.*;
 import ru.nabokovsg.laboratoryNK.model.template.ConclusionTemplate;
-import ru.nabokovsg.laboratoryNK.model.template.Appendices;
+import ru.nabokovsg.laboratoryNK.model.template.AppendicesTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.DocumentHeader;
 import ru.nabokovsg.laboratoryNK.model.template.SubsectionTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.TableTemplate;
@@ -44,5 +44,5 @@ public class ProtocolTemplate {
     @JoinColumn(name = "conclusion_template_id", referencedColumnName = "id")
     private ConclusionTemplate conclusionTemplate;
     @OneToMany(mappedBy = "reportTemplate", fetch = FetchType.LAZY)
-    private Set<Appendices> appendices;
+    private Set<AppendicesTemplate> appendices;
 }

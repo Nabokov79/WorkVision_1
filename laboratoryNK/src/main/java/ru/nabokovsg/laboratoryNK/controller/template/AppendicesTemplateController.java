@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.nabokovsg.laboratoryNK.dto.template.appendices.AppendicesDto;
-import ru.nabokovsg.laboratoryNK.dto.template.appendices.ResponseAppendicesDto;
-import ru.nabokovsg.laboratoryNK.service.template.AppendicesService;
+import ru.nabokovsg.laboratoryNK.dto.template.appendices.AppendicesTemplateDto;
+import ru.nabokovsg.laboratoryNK.dto.template.appendices.ResponseAppendicesTemplateDto;
+import ru.nabokovsg.laboratoryNK.service.template.AppendicesTemplateService;
 
 @RestController
 @RequestMapping(
@@ -19,21 +19,21 @@ import ru.nabokovsg.laboratoryNK.service.template.AppendicesService;
 @RequiredArgsConstructor
 @Tag(name="Приложения документа",
         description="API для работы с данными приложений документа")
-public class AppendicesController {
+public class AppendicesTemplateController {
 
-    private final AppendicesService service;
+    private final AppendicesTemplateService service;
 
     @Operation(summary = "Сохранить новое приложение для документа")
     @PostMapping
-    public ResponseEntity<ResponseAppendicesDto> save(
-                                    @RequestBody @Parameter(name = "Приложение") AppendicesDto appendicesDto) {
+    public ResponseEntity<ResponseAppendicesTemplateDto> save(
+                                    @RequestBody @Parameter(name = "Приложение") AppendicesTemplateDto appendicesDto) {
         return ResponseEntity.ok().body(service.save(appendicesDto));
     }
 
     @Operation(summary = "Изменение данных приложения документа")
     @PatchMapping
-    public ResponseEntity<ResponseAppendicesDto> update(
-                                    @RequestBody @Parameter(name = "Приложение") AppendicesDto appendicesDto) {
+    public ResponseEntity<ResponseAppendicesTemplateDto> update(
+                                    @RequestBody @Parameter(name = "Приложение") AppendicesTemplateDto appendicesDto) {
         return ResponseEntity.ok().body(service.update(appendicesDto));
     }
 

@@ -13,7 +13,7 @@ import ru.nabokovsg.laboratoryNK.model.template.report.ReportTemplate;
 @NoArgsConstructor
 @Entity
 @Table(name = "appendices")
-public class Appendices {
+public class AppendicesTemplate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

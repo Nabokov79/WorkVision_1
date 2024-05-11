@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.nabokovsg.laboratoryNK.model.template.Appendices;
+import ru.nabokovsg.laboratoryNK.model.template.AppendicesTemplate;
 
 import java.util.Set;
 
@@ -30,5 +30,5 @@ public class ReportTemplate {
     @OneToMany(mappedBy = "reportTemplate", fetch = FetchType.LAZY)
     private Set<SectionTemplate> sectionsTemplate;
     @OneToMany(mappedBy = "reportTemplate", fetch = FetchType.LAZY)
-    private Set<Appendices> appendices;
+    private Set<AppendicesTemplate> appendices;
 }
