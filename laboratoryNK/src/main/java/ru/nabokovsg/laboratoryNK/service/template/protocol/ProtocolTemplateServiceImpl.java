@@ -11,10 +11,7 @@ import ru.nabokovsg.laboratoryNK.mapper.template.protocol.ProtocolTemplateMapper
 import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolTemplate;
 import ru.nabokovsg.laboratoryNK.repository.template.protocol.ProtocolTemplateRepository;
 import ru.nabokovsg.laboratoryNK.service.diagnosticDocuments.DiagnosticDocumentTypeService;
-import ru.nabokovsg.laboratoryNK.service.template.ConclusionTemplateService;
-import ru.nabokovsg.laboratoryNK.service.template.DocumentHeaderService;
-import ru.nabokovsg.laboratoryNK.service.template.SubsectionTemplateService;
-import ru.nabokovsg.laboratoryNK.service.template.TableTemplateService;
+import ru.nabokovsg.laboratoryNK.service.template.*;
 
 import java.util.List;
 
@@ -29,6 +26,7 @@ public class ProtocolTemplateServiceImpl implements ProtocolTemplateService {
     private final SubsectionTemplateService subsectionService;
     private final TableTemplateService tableService;
     private final ConclusionTemplateService conclusionService;
+    private final AppendicesTemplateService appendicesTemplateService;
 
     @Override
     public ShortResponseProtocolTemplateDto save(ProtocolTemplateDto protocolDto) {
@@ -88,5 +86,6 @@ public class ProtocolTemplateServiceImpl implements ProtocolTemplateService {
     private void addProtocolTemplate(ProtocolTemplate template, ProtocolTemplateDto protocolDto) {
         subsectionService.addProtocolTemplate(template, protocolDto.getSubsectionTemplatesId());
         tableService.addProtocolTemplate(template, protocolDto.getTableTemplatesId());
+        appendicesTemplateService.addProtocolTemplate(template);
     }
 }

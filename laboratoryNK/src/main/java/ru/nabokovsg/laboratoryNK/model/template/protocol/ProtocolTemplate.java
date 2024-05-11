@@ -43,6 +43,6 @@ public class ProtocolTemplate {
     @OneToOne
     @JoinColumn(name = "conclusion_template_id", referencedColumnName = "id")
     private ConclusionTemplate conclusionTemplate;
-    @OneToMany(mappedBy = "reportTemplate", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "protocolTemplate", fetch = FetchType.LAZY)
     private Set<AppendicesTemplate> appendices;
 }

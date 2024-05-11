@@ -7,7 +7,10 @@ import ru.nabokovsg.laboratoryNK.dto.template.report.ShortResponseReportTemplate
 import ru.nabokovsg.laboratoryNK.exceptions.NotFoundException;
 import ru.nabokovsg.laboratoryNK.mapper.template.report.ReportTemplateMapper;
 import ru.nabokovsg.laboratoryNK.model.template.report.PageTitleTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.report.ReportTemplate;
 import ru.nabokovsg.laboratoryNK.repository.template.report.ReportTemplateRepository;
+import ru.nabokovsg.laboratoryNK.service.template.AppendicesTemplateService;
+
 import java.util.List;
 
 @Service
@@ -16,6 +19,7 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
 
     private final ReportTemplateRepository repository;
     private final ReportTemplateMapper mapper;
+    private final AppendicesTemplateService appendicesTemplateService;
 
     @Override
     public ResponseReportTemplateDto get(Long id) {
@@ -30,7 +34,7 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
 
     @Override
     public void save(Long documentTypeId, Long equipmentTypeId, PageTitleTemplate template) {
-        repository.save(mapper.mapToReportTemplate(documentTypeId, equipmentTypeId, template));
+        appendicesTemplateService.addReportTemplate(repository.save(mapper.mapToReportTemplate(documentTypeId, equipmentTypeId, template)));
     }
 
     @Override
