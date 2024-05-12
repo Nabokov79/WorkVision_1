@@ -3,7 +3,7 @@ package ru.nabokovsg.laboratoryNK.model.template;
 import jakarta.persistence.*;
 import lombok.*;
 import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolControlTemplate;
-import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.protocol.SurveyProtocolTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.report.ProtocolReportTemplate;
 
 import java.util.Set;
@@ -19,6 +19,8 @@ public class TableTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "table_type")
+    private String tableType;
     @Column(name = "sequential_number")
     private Integer sequentialNumber;
     @Column(name = "table_name")
@@ -34,7 +36,7 @@ public class TableTemplate {
     private ProtocolReportTemplate protocolReportTemplate;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "protocol_template_id")
-    private ProtocolTemplate protocolTemplate;
+    private SurveyProtocolTemplate protocolTemplate;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "protocol_control_template_id")
     private ProtocolControlTemplate protocolControlTemplate;

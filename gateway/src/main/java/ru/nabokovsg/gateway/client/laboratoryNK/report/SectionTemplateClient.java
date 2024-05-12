@@ -1,16 +1,18 @@
 package ru.nabokovsg.gateway.client.laboratoryNK.report;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.nabokovsg.gateway.client.BaseClient;
-import ru.nabokovsg.gateway.dto.laboratoryNK.report.section.NewSectionWithProtocolTemplateDto;
-import ru.nabokovsg.gateway.dto.laboratoryNK.report.section.NewSectionWithSubsectionTemplateDto;
-import ru.nabokovsg.gateway.dto.laboratoryNK.report.section.UpdateSectionWithProtocolTemplateDto;
-import ru.nabokovsg.gateway.dto.laboratoryNK.report.section.UpdateSectionWithSubsectionTemplateDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.report.section.*;
 
 @Service
 public class SectionTemplateClient extends BaseClient {
@@ -23,6 +25,15 @@ public class SectionTemplateClient extends BaseClient {
         super(WebClient.builder()
                 .baseUrl(baseUrl)
                 .build());
+    }
+
+    public Mono<Object> saveWithEquipmentPassport(NewSectionWithEquipmentPassportDto sectionDto) {
+        return post(API_PREFIX, sectionDto);
+    }
+
+
+    public Mono<Object> updateWithEquipmentPassport(UpdateSectionWithEquipmentPassportDto sectionDto) {
+        return patch(API_PREFIX, sectionDto);
     }
 
     public Mono<Object> saveWithSubsection(NewSectionWithSubsectionTemplateDto sectionDto) {

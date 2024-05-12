@@ -8,13 +8,11 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-@Schema(description = "Данные паспорта оборудования для добавления/изменения")
+@Schema(description = "Данные паспорта оборудования")
 public class ResponseEquipmentPassportDto {
 
     @Schema(description = "Индентификатор")
     private long id;
-    @Schema(description = "Индентификатор оборудования")
-    private Long equipmentId;
     @Schema(description = "Порядковый номер")
     private Integer sequentialNumber;
     @Schema(description = "Наименование")

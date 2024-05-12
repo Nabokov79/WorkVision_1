@@ -6,7 +6,7 @@ import ru.nabokovsg.laboratoryNK.dto.template.protocolControl.ProtocolControlTem
 import ru.nabokovsg.laboratoryNK.dto.template.protocolControl.ResponseProtocolControlTemplateDto;
 import ru.nabokovsg.laboratoryNK.dto.template.protocolControl.ShortResponseProtocolControlTemplateDto;
 import ru.nabokovsg.laboratoryNK.model.diagnosticDocuments.DiagnosticDocumentType;
-import ru.nabokovsg.laboratoryNK.model.template.DocumentHeader;
+import ru.nabokovsg.laboratoryNK.model.template.DocumentHeaderTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolControlTemplate;
 
 import java.util.Set;
@@ -21,7 +21,7 @@ public interface ProtocolControlTemplateMapper {
     @Mapping(source = "protocolDto.id", target = "id")
     ProtocolControlTemplate mapToProtocolTemplate(ProtocolControlTemplateDto protocolDto
                                                 , DiagnosticDocumentType documentType
-                                                , Set<DocumentHeader> documentHeaders);
+                                                , Set<DocumentHeaderTemplate> documentHeaders);
 
     ShortResponseProtocolControlTemplateDto mapToShortResponseProtocolTemplateDto(ProtocolControlTemplate protocolTemplate);
 

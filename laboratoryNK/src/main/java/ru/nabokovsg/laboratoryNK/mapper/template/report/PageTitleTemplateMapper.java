@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import ru.nabokovsg.laboratoryNK.dto.template.report.pageTitle.PageTitleTemplateDto;
 import ru.nabokovsg.laboratoryNK.dto.template.report.pageTitle.ResponsePageTitleTemplateDto;
 import ru.nabokovsg.laboratoryNK.model.diagnosticDocuments.DiagnosticDocumentType;
-import ru.nabokovsg.laboratoryNK.model.template.DocumentHeader;
+import ru.nabokovsg.laboratoryNK.model.template.DocumentHeaderTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.report.PageTitleTemplate;
 import java.util.Set;
 
@@ -20,7 +20,7 @@ public interface PageTitleTemplateMapper {
     @Mapping(source = "pageTitleDto.id", target = "id")
     PageTitleTemplate mapToPageTitleTemplate(PageTitleTemplateDto pageTitleDto
                                            , DiagnosticDocumentType documentType
-                                           , Set<DocumentHeader> documentHeaders);
+                                           , Set<DocumentHeaderTemplate> documentHeaders);
 
     ResponsePageTitleTemplateDto mapToResponsePageTitleTemplateDto(PageTitleTemplate pageTitle);
 }

@@ -8,9 +8,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.nabokovsg.laboratoryNK.dto.template.documentHeader.DocumentHeaderDto;
-import ru.nabokovsg.laboratoryNK.dto.template.documentHeader.ResponseDocumentHeaderDto;
-import ru.nabokovsg.laboratoryNK.service.template.DocumentHeaderService;
+import ru.nabokovsg.laboratoryNK.dto.template.documentHeader.DocumentHeaderTemplateDto;
+import ru.nabokovsg.laboratoryNK.dto.template.documentHeader.ResponseDocumentHeaderTemplateDto;
+import ru.nabokovsg.laboratoryNK.service.template.DocumentHeaderTemplateService;
 
 import java.util.List;
 @RestController
@@ -24,25 +24,25 @@ import java.util.List;
         description="API для работы с данными заголовка протоколов и титульных листов отчетов")
 public class DocumentHeaderController {
 
-    private final DocumentHeaderService service;
+    private final DocumentHeaderTemplateService service;
 
     @Operation(summary = "Добавление нового заголовка")
     @PostMapping
-    public ResponseEntity<ResponseDocumentHeaderDto> save(
-            @RequestBody @Parameter(description = "Данные формирования заголовка") DocumentHeaderDto headerDto) {
+    public ResponseEntity<ResponseDocumentHeaderTemplateDto> save(
+            @RequestBody @Parameter(description = "Данные формирования заголовка") DocumentHeaderTemplateDto headerDto) {
         return ResponseEntity.ok().body(service.save(headerDto));
     }
 
     @Operation(summary = "Изменение информации в заголовка")
     @PatchMapping
-    public ResponseEntity<ResponseDocumentHeaderDto> update(
-            @RequestBody @Parameter(description = "Данные формирования заголовка") DocumentHeaderDto headerDto) {
+    public ResponseEntity<ResponseDocumentHeaderTemplateDto> update(
+            @RequestBody @Parameter(description = "Данные формирования заголовка") DocumentHeaderTemplateDto headerDto) {
         return ResponseEntity.ok().body(service.update(headerDto));
     }
 
     @Operation(summary = "Получить заголовки документа")
     @GetMapping("/{id}")
-    public ResponseEntity<List<ResponseDocumentHeaderDto>> getAll(
+    public ResponseEntity<List<ResponseDocumentHeaderTemplateDto>> getAll(
             @PathVariable @Parameter(name = "Индентификатор типа документа") Long id) {
         return ResponseEntity.ok().body(service.getAll(id));
     }

@@ -20,6 +20,9 @@ public class NewColumnHeaderTemplateDto {
     @NotNull(message = "sequential number should not be null")
     @Positive(message = "sequential number can only be positive")
     private Integer sequentialNumber;
+    @Schema(description = "Заголовок столбца")
+    @NotBlank(message = "column heading should not be blank")
+    private String heading;
     @Schema(description = "Тип заголовка столбца колонки")
     @NotBlank(message = "column header type should not be blank")
     private String columnHeaderType;

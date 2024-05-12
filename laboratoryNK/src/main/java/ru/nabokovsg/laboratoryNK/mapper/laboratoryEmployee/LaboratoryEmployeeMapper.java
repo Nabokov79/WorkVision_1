@@ -16,7 +16,7 @@ public interface LaboratoryEmployeeMapper {
     @Mapping(target = "certificates", ignore = true)
     LaboratoryEmployee mapToLaboratoryEmployee(Long employeeId, String post, String initials);
 
-    ShortResponseLaboratoryEmployeeDto mapToShortLaboratoryEmployeeDto(LaboratoryEmployee employee);
+    ShortResponseLaboratoryEmployeeDto mapToShortResponseLaboratoryEmployeeDto(LaboratoryEmployee employee);
 
-    ResponseLaboratoryEmployeeDto mapToFullLaboratoryEmployeeDto(LaboratoryEmployee employee);
+    ResponseLaboratoryEmployeeDto mapToResponseLaboratoryEmployeeDto(LaboratoryEmployee employee);
 }

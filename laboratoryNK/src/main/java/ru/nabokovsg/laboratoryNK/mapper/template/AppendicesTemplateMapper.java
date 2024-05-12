@@ -6,7 +6,7 @@ import org.mapstruct.MappingTarget;
 import ru.nabokovsg.laboratoryNK.dto.template.appendices.AppendicesTemplateDto;
 import ru.nabokovsg.laboratoryNK.dto.template.appendices.ResponseAppendicesTemplateDto;
 import ru.nabokovsg.laboratoryNK.model.template.AppendicesTemplate;
-import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.protocol.SurveyProtocolTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.report.ReportTemplate;
 
 @Mapper(componentModel = "spring")
@@ -22,5 +22,5 @@ public interface AppendicesTemplateMapper {
 
     @Mapping(source = "protocolTemplate", target = "protocolTemplate")
     AppendicesTemplate mapWithProtocolTemplate(@MappingTarget AppendicesTemplate appendices
-                                                            , ProtocolTemplate protocolTemplate);
+                                                            , SurveyProtocolTemplate protocolTemplate);
 }

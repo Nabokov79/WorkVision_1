@@ -15,7 +15,7 @@ import ru.nabokovsg.laboratoryNK.mapper.template.SubsectionTemplateMapper;
 import ru.nabokovsg.laboratoryNK.model.template.DivisionType;
 import ru.nabokovsg.laboratoryNK.model.template.SubsectionTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolControlTemplate;
-import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.protocol.SurveyProtocolTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.report.ProtocolReportTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.report.SectionTemplate;
 import ru.nabokovsg.laboratoryNK.repository.template.SubsectionTemplateRepository;
@@ -118,7 +118,7 @@ public class SubsectionTemplateServiceImpl implements SubsectionTemplateService 
     }
 
     @Override
-    public void addProtocolTemplate(ProtocolTemplate template, List<Long> subsectionTemplatesId) {
+    public void addProtocolTemplate(SurveyProtocolTemplate template, List<Long> subsectionTemplatesId) {
         repository.saveAll(getAllByIds(subsectionTemplatesId)
                 .stream()
                 .map(s -> mapper.mapWithProtocolTemplate(s, template))

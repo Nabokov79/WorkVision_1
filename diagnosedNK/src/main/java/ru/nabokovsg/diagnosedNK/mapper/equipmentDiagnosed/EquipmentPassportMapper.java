@@ -15,5 +15,5 @@ public interface EquipmentPassportMapper {
     @Mapping(source = "passportDto.id", target = "id")
     EquipmentPassport mapToEquipmentPassport(EquipmentPassportDto passportDto, EquipmentDiagnosed equipment);
 
-    ResponseEquipmentPassportDto mapToFullEquipmentPassportDto(EquipmentPassport passport);
+    ResponseEquipmentPassportDto mapToResponseEquipmentPassportDto(EquipmentPassport passport);
 }

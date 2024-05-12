@@ -8,12 +8,11 @@ import org.springframework.stereotype.Service;
 import ru.nabokovsg.company.dto.building.BuildingDto;
 import ru.nabokovsg.company.dto.building.ResponseBuildingDto;
 import ru.nabokovsg.company.dto.building.ShortResponseBuildingDto;
-import ru.nabokovsg.company.exceptions.BadRequestException;
 import ru.nabokovsg.company.exceptions.NotFoundException;
 import ru.nabokovsg.company.mapper.BuildingMapper;
 import ru.nabokovsg.company.model.Building;
+import ru.nabokovsg.company.model.ConstantBuildingType;
 import ru.nabokovsg.company.model.QBuilding;
-import ru.nabokovsg.company.model.enums.BuildingType;
 import ru.nabokovsg.company.repository.BuildingRepository;
 
 import java.util.List;
@@ -21,16 +20,13 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class BuildingServiceImpl implements BuildingService {
+public class BuildingServiceImpl extends ConstantBuildingType implements BuildingService {
 
     private final BuildingRepository repository;
     private final BuildingMapper mapper;
     private final ExploitationRegionService regionService;
     private final AddressService addressService;
     private final EntityManager entityManager;
-    private final static String BOILER_ROOM = "котельная";
-    private final static String CHP = "ЦТП";
-    private final static String IHP = "ИТП";
 
     @Override
     public ShortResponseBuildingDto save(BuildingDto buildingDto) {
@@ -38,7 +34,7 @@ public class BuildingServiceImpl implements BuildingService {
                 Objects.requireNonNullElseGet(getDuplicateByPredicate(buildingDto)
                         , () -> repository.save(
                                 mapper.mapToBuilding(buildingDto
-                                                   , getConstant(buildingDto.getBuildingType())
+                                                   , get(buildingDto.getBuildingType())
                                                    , addressService.get(buildingDto.getAddressId())
                                                    , regionService.getById(buildingDto.getExploitationRegionId())))));
     }
@@ -48,7 +44,7 @@ public class BuildingServiceImpl implements BuildingService {
         if (repository.existsById(buildingDto.getId())) {
             return mapper.mapToShortBuildingDto(
                     repository.save(mapper.mapToBuilding(buildingDto
-                                                       , getConstant(buildingDto.getBuildingType())
+                                                       , get(buildingDto.getBuildingType())
                                                        , addressService.get(buildingDto.getAddressId())
                                                        , regionService.getById(buildingDto.getExploitationRegionId())))
             );
@@ -97,28 +93,5 @@ public class BuildingServiceImpl implements BuildingService {
                 .select(building)
                 .where(booleanBuilder)
                 .fetchOne();
-    }
-
-    private String getConstant(String buildingType) {
-        switch (convertToBuildingType(buildingType)) {
-            case BOILER_ROOM -> {
-                return BOILER_ROOM;
-            }
-            case CHP -> {
-                return CHP;
-            }
-            case IHP -> {
-                return IHP;
-            }
-            default -> throw new BadRequestException(
-                    String.format("Unknown building type=%s", buildingType));
-        }
-    }
-
-    private BuildingType convertToBuildingType(String buildingType) {
-        return BuildingType.from(buildingType)
-                .orElseThrow(
-                       () -> new BadRequestException(String.format("Unknown data format buildingType=%s", buildingType))
-                );
     }
 }

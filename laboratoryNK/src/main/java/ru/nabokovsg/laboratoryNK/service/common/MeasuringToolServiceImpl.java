@@ -12,10 +12,14 @@ import ru.nabokovsg.laboratoryNK.exceptions.NotFoundException;
 import ru.nabokovsg.laboratoryNK.mapper.common.MeasuringToolMapper;
 import ru.nabokovsg.laboratoryNK.model.common.MeasuringTool;
 import ru.nabokovsg.laboratoryNK.model.common.QMeasuringTool;
+import ru.nabokovsg.laboratoryNK.model.laboratoryEmployee.LaboratoryEmployee;
+import ru.nabokovsg.laboratoryNK.model.template.MeasuringToolTemplate;
 import ru.nabokovsg.laboratoryNK.repository.common.MeasuringToolRepository;
 import ru.nabokovsg.laboratoryNK.service.template.MeasuringToolTemplateService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -71,6 +75,27 @@ public class MeasuringToolServiceImpl implements MeasuringToolService {
             return;
         }
         throw new NotFoundException(String.format("measuring tool with id = %s not found for delete", id));
+    }
+
+    @Override
+    public List<MeasuringTool> getByLaboratoryEmployeeDataAndTemplate(Set<LaboratoryEmployee> employees
+                                                              , List<MeasuringToolTemplate> measuringToolsTemplates) {
+        List<Long> employeesId = employees.stream().map(LaboratoryEmployee::getId).toList();
+        List<String> tolls = new ArrayList<>();
+        List<String> models = new ArrayList<>();
+        measuringToolsTemplates.forEach(t ->{
+            tolls.add(t.getToll());
+            models.add(t.getModel());
+        });
+        QMeasuringTool measuringTool = QMeasuringTool.measuringTool;
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        booleanBuilder.and(measuringTool.laboratoryEmployeeId.in(employeesId));
+        booleanBuilder.and(measuringTool.toll.in(tolls));
+        booleanBuilder.and(measuringTool.model.in(models));
+        return new JPAQueryFactory(em).from(measuringTool)
+                .select(measuringTool)
+                .where(booleanBuilder)
+                .fetch();
     }
 
     private MeasuringTool getByPredicate(MeasuringToolDto measuringToolDto) {

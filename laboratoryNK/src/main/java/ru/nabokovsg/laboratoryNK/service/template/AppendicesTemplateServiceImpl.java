@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.nabokovsg.laboratoryNK.exceptions.NotFoundException;
 import ru.nabokovsg.laboratoryNK.mapper.template.AppendicesTemplateMapper;
 import ru.nabokovsg.laboratoryNK.model.template.AppendicesTemplate;
-import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.protocol.SurveyProtocolTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.report.ReportTemplate;
 import ru.nabokovsg.laboratoryNK.repository.template.AppendicesTemplateRepository;
 import ru.nabokovsg.laboratoryNK.dto.template.appendices.AppendicesTemplateDto;
@@ -56,7 +56,7 @@ public class AppendicesTemplateServiceImpl implements AppendicesTemplateService 
     }
 
     @Override
-    public void addProtocolTemplate(ProtocolTemplate protocolTemplate) {
+    public void addProtocolTemplate(SurveyProtocolTemplate protocolTemplate) {
         repository.save(
           mapper.mapWithProtocolTemplate(getByEquipmentTypeId(protocolTemplate.getEquipmentTypeId()), protocolTemplate)
         );

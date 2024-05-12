@@ -3,7 +3,7 @@ package ru.nabokovsg.laboratoryNK.service.template;
 import ru.nabokovsg.laboratoryNK.dto.template.subsectionTemplate.ResponseSubsectionTemplateDto;
 import ru.nabokovsg.laboratoryNK.dto.template.subsectionTemplate.SubsectionTemplateDto;
 import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolControlTemplate;
-import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.protocol.SurveyProtocolTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.report.ProtocolReportTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.report.SectionTemplate;
 
@@ -23,7 +23,7 @@ public interface SubsectionTemplateService {
 
     void addSectionTemplate(SectionTemplate template, List<Long> subsectionTemplatesId);
 
-    void addProtocolTemplate(ProtocolTemplate template, List<Long> subsectionTemplatesId);
+    void addProtocolTemplate(SurveyProtocolTemplate template, List<Long> subsectionTemplatesId);
 
     void addProtocolControlTemplate(ProtocolControlTemplate template, List<Long> subsectionTemplatesId);
 }

@@ -18,5 +18,5 @@ public interface ColumnHeaderTemplateMapper {
     ColumnHeaderTemplate mapToColumnHeaderTemplates(TableTemplate tableTemplate
                                                   , ColumnHeaderTemplateDto templateDto
                                                   , String heading
-                                                  , ColumnHeaderType columnHeaderType);
+                                                  , String columnHeaderType);
 }

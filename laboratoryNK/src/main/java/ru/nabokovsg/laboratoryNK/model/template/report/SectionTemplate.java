@@ -21,6 +21,8 @@ public class SectionTemplate {
     private Integer sequentialNumber;
     @Column(name = "section_name")
     private String sectionName;
+    @Column(name = "specify_passport")
+    private Boolean specifyEquipmentPassport;
     @OneToMany(mappedBy = "sectionTemplate", fetch = FetchType.LAZY)
     private Set<SubsectionTemplate> subsectionTemplates;
     @OneToMany(mappedBy = "sectionTemplate", fetch = FetchType.LAZY)

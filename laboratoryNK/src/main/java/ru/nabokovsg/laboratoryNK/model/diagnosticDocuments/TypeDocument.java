@@ -5,7 +5,7 @@ import java.util.Optional;
 public enum TypeDocument {
 
     REPORT,
-    INSPECTION_PROTOCOL,
+    SURVEY_PROTOCOL,
     CONTROL_PROTOCOL;
 
     public static Optional<TypeDocument> from(String document) {

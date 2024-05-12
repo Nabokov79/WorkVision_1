@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.nabokovsg.gateway.client.laboratoryNK.report.SectionTemplateClient;
-import ru.nabokovsg.gateway.dto.laboratoryNK.report.section.NewSectionWithProtocolTemplateDto;
-import ru.nabokovsg.gateway.dto.laboratoryNK.report.section.NewSectionWithSubsectionTemplateDto;
-import ru.nabokovsg.gateway.dto.laboratoryNK.report.section.UpdateSectionWithProtocolTemplateDto;
-import ru.nabokovsg.gateway.dto.laboratoryNK.report.section.UpdateSectionWithSubsectionTemplateDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.report.section.*;
 
 @RestController
 @RequestMapping(
@@ -31,6 +28,19 @@ public class SectionTemplateController {
 
     private final SectionTemplateClient client;
 
+    @Operation(summary = "Добавить новые разделы")
+    @PostMapping("/passport")
+    public Mono<Object> saveWithEquipmentPassport(@RequestBody @Valid @Parameter(description = "Данные шаблона раздела")
+                                                  NewSectionWithEquipmentPassportDto sectionDto) {
+        return client.saveWithEquipmentPassport(sectionDto);
+    }
+
+    @Operation(summary = "Изменение данных разделов")
+    @PatchMapping("/passport")
+    public Mono<Object> updateWithEquipmentPassport(@RequestBody @Valid @Parameter(description = "Данные шаблона разделф")
+                                                    UpdateSectionWithEquipmentPassportDto sectionDto) {
+        return client.updateWithEquipmentPassport(sectionDto);
+    }
     @Operation(summary = "Добавить новые разделы")
     @PostMapping("/subsection")
     public Mono<Object> saveWithSubsection(@RequestBody @Valid @Parameter(description = "Данные шаблона раздела")

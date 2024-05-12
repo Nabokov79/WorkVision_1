@@ -2,7 +2,7 @@ package ru.nabokovsg.laboratoryNK.model.template.protocol;
 
 import jakarta.persistence.*;
 import lombok.*;
-import ru.nabokovsg.laboratoryNK.model.template.DocumentHeader;
+import ru.nabokovsg.laboratoryNK.model.template.DocumentHeaderTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.SubsectionTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.TableTemplate;
 
@@ -27,7 +27,7 @@ public class ProtocolControlTemplate {
             joinColumns = {@JoinColumn(name = "protocol_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "document_header_id")})
     @ToString.Exclude
-    private Set<DocumentHeader> leftHeaderTemplates;
+    private Set<DocumentHeaderTemplate> leftHeaderTemplates;
     @Column(name = "title")
     private String title;
     @Column(name = "subtitle")

@@ -45,4 +45,13 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
                                                                                                  , equipmentTypeId));
         }
     }
+
+    @Override
+    public ReportTemplate getByDocumentTypeIdAndEquipmentTypeId(Long documentTypeId, Long equipmentTypeId) {
+        return repository.findByDocumentTypeIdAndEquipmentTypeId(documentTypeId, equipmentTypeId)
+                .orElseThrow(() -> new NotFoundException(
+                        String.format("ReportTemplate by documentTypeId=%s and equipmentTypeId=%s not found"
+                                                                                           , documentTypeId
+                                                                                           , equipmentTypeId)));
+    }
 }

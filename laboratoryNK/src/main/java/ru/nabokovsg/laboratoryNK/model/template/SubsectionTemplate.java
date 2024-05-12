@@ -3,7 +3,7 @@ package ru.nabokovsg.laboratoryNK.model.template;
 import jakarta.persistence.*;
 import lombok.*;
 import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolControlTemplate;
-import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.protocol.SurveyProtocolTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.report.ProtocolReportTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.report.SectionTemplate;
 
@@ -43,7 +43,7 @@ public class SubsectionTemplate {
     private SectionTemplate sectionTemplate;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "protocol_template_id")
-    private ProtocolTemplate protocolTemplate;
+    private SurveyProtocolTemplate protocolTemplate;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "protocol_control_template_id")
     private ProtocolControlTemplate protocolControlTemplate;

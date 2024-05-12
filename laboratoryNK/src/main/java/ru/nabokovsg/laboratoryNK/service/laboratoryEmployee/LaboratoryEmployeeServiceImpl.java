@@ -38,20 +38,20 @@ public class LaboratoryEmployeeServiceImpl implements LaboratoryEmployeeService 
             log.error(e.getMessage());
         }
         return laboratoryEmployees.stream()
-                                  .map(mapper::mapToShortLaboratoryEmployeeDto)
+                                  .map(mapper::mapToShortResponseLaboratoryEmployeeDto)
                                   .toList();
     }
 
     @Override
     public ResponseLaboratoryEmployeeDto get(Long id) {
-        return mapper.mapToFullLaboratoryEmployeeDto(getById(id));
+        return mapper.mapToResponseLaboratoryEmployeeDto(getById(id));
     }
 
     @Override
     public List<ShortResponseLaboratoryEmployeeDto> getAll() {
         return repository.findAll()
                          .stream()
-                         .map(mapper::mapToShortLaboratoryEmployeeDto)
+                         .map(mapper::mapToShortResponseLaboratoryEmployeeDto)
                          .toList();
     }
 

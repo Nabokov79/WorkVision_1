@@ -7,8 +7,9 @@ import ru.nabokovsg.laboratoryNK.dto.template.table.TableTemplateDto;
 import ru.nabokovsg.laboratoryNK.exceptions.NotFoundException;
 import ru.nabokovsg.laboratoryNK.mapper.template.TableTemplateMapper;
 import ru.nabokovsg.laboratoryNK.model.template.TableTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.TableType;
 import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolControlTemplate;
-import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.protocol.SurveyProtocolTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.report.ProtocolReportTemplate;
 import ru.nabokovsg.laboratoryNK.repository.template.TableTemplateRepository;
 
@@ -26,7 +27,8 @@ public class TableTemplateServiceImpl implements TableTemplateService {
 
     @Override
     public ResponseTableTemplateDto save(TableTemplateDto tableDto) {
-        TableTemplate tableTemplate = repository.save(mapper.mapToTableTemplate(tableDto));
+        TableTemplate tableTemplate = repository.save(mapper.mapToTableTemplate(tableDto
+                                                                , TableType.valueOf(tableDto.getTableType()).label));
         columnHeaderService.save(tableTemplate, tableDto.getColumnHeaders());
         return mapper.mapToResponseTableTemplateDto(tableTemplate);
     }
@@ -34,7 +36,8 @@ public class TableTemplateServiceImpl implements TableTemplateService {
     @Override
     public ResponseTableTemplateDto update(TableTemplateDto tableDto) {
         if (repository.existsById(tableDto.getId())) {
-            TableTemplate tableTemplate = repository.save(mapper.mapToTableTemplate(tableDto));
+            TableTemplate tableTemplate = repository.save(mapper.mapToTableTemplate(tableDto
+                                                                , TableType.valueOf(tableDto.getTableType()).label));
             columnHeaderService.save(tableTemplate, tableDto.getColumnHeaders());
             return mapper.mapToResponseTableTemplateDto(tableTemplate);
         }
@@ -64,7 +67,7 @@ public class TableTemplateServiceImpl implements TableTemplateService {
     }
 
     @Override
-    public void addProtocolTemplate(ProtocolTemplate template, List<Long> tableTemplatesId) {
+    public void addProtocolTemplate(SurveyProtocolTemplate template, List<Long> tableTemplatesId) {
         repository.saveAll(getAllByIds(tableTemplatesId)
                 .stream()
                 .map(t -> mapper.mapWithProtocolTemplate(t, template))

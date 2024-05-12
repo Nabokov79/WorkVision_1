@@ -2,7 +2,7 @@ package ru.nabokovsg.laboratoryNK.service.template;
 
 import ru.nabokovsg.laboratoryNK.dto.template.appendices.AppendicesTemplateDto;
 import ru.nabokovsg.laboratoryNK.dto.template.appendices.ResponseAppendicesTemplateDto;
-import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.protocol.SurveyProtocolTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.report.ReportTemplate;
 
 public interface AppendicesTemplateService {
@@ -15,5 +15,5 @@ public interface AppendicesTemplateService {
 
     void addReportTemplate(ReportTemplate reportTemplate);
 
-    void addProtocolTemplate(ProtocolTemplate protocolTemplate);
+    void addProtocolTemplate(SurveyProtocolTemplate protocolTemplate);
 }

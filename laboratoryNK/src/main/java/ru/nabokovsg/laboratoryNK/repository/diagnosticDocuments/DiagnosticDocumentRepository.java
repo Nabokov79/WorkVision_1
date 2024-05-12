@@ -5,5 +5,5 @@ import ru.nabokovsg.laboratoryNK.model.diagnosticDocuments.DiagnosticDocument;
 
 public interface DiagnosticDocumentRepository extends JpaRepository<DiagnosticDocument, Long> {
 
-    DiagnosticDocument findByTaskJournalId(Long taskJournalId);
+    DiagnosticDocument findBySurveyJournalId(Long surveyJournalId);
 }

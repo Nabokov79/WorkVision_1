@@ -17,7 +17,6 @@ import ru.nabokovsg.laboratoryNK.model.diagnosticDocuments.DocumentStatus;
 import ru.nabokovsg.laboratoryNK.model.diagnosticDocuments.QDiagnosticDocument;
 import ru.nabokovsg.laboratoryNK.repository.diagnosticDocuments.DiagnosticDocumentRepository;
 import ru.nabokovsg.laboratoryNK.service.common.StringBuilderService;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
@@ -55,7 +54,7 @@ public class DiagnosticDocumentServiceImpl extends DiagnosticDocumentStatusFacto
 
     @Override
     public void update(SurveyJournalDto journalDto, ResponseSurveyJournalDto journal) {
-        DiagnosticDocument document = repository.findByTaskJournalId(journal.getId());
+        DiagnosticDocument document = repository.findBySurveyJournalId(journal.getId());
         if (document != null) {
             if (document.getDocumentStatus().equals(getDiagnosticDocumentStatus(DocumentStatus.NEW_DOCUMENT))) {
                 DiagnosticDocumentType diagnosticDocumentType = documentTypeService.getById(
@@ -104,8 +103,8 @@ public class DiagnosticDocumentServiceImpl extends DiagnosticDocumentStatusFacto
     }
 
     @Override
-    public void validateByStatus(Long taskJournalId) {
-        DiagnosticDocument document = repository.findByTaskJournalId(taskJournalId);
+    public void validateByStatus(Long surveyJournalId) {
+        DiagnosticDocument document = repository.findBySurveyJournalId(surveyJournalId);
         if (document.getDocumentStatus().equals(getDiagnosticDocumentStatus(DocumentStatus.NEW_DOCUMENT))) {
             throw new BadRequestException(
                     String.format("Document has been created for writing in the task log with number=%s"

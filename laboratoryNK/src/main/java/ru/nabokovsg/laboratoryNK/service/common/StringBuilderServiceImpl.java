@@ -11,6 +11,7 @@ import ru.nabokovsg.laboratoryNK.dto.template.subsectionTemplate.DivisionDataDto
 import ru.nabokovsg.laboratoryNK.model.common.Documentation;
 import ru.nabokovsg.laboratoryNK.model.common.MeasuringTool;
 import ru.nabokovsg.laboratoryNK.model.diagnosticDocuments.DiagnosticDocumentType;
+import ru.nabokovsg.laboratoryNK.model.document.ConstantMonth;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Component
-public class StringBuilderServiceImpl implements StringBuilderService {
+public class StringBuilderServiceImpl extends ConstantMonth implements StringBuilderService {
 
     @Override
     public String buildInitials(EmployeeDto employee) {
@@ -43,6 +44,7 @@ public class StringBuilderServiceImpl implements StringBuilderService {
             equipmentDiagnosed = String.join(" ", equipmentDiagnosed, equipment.getModel());
         }
         if (equipment.getStationaryNumber() != null) {
+            equipmentDiagnosed = String.join("", equipmentDiagnosed, ",");
             equipmentDiagnosed = String.join(" ", equipmentDiagnosed
                                                         , "ст. №"
                                                         , String.valueOf(equipment.getStationaryNumber()));
@@ -138,6 +140,22 @@ public class StringBuilderServiceImpl implements StringBuilderService {
         return String.join(" "
                 , String.join(" ","тел./факс", employeeDto.getPhone(),"/", employeeDto.getFax())
                 , String.join(" ", "E-mail:", employeeDto.getEmail()));
+    }
+
+    @Override
+    public String numberAndDate(LocalDate date, Integer documentNumber) {
+        return String.join(" "
+                 , "№", String.valueOf(documentNumber)
+                         , "от", String.valueOf(date.getDayOfMonth()), get(date), String.valueOf(date.getYear()), "г.");
+    }
+
+    @Override
+    public String buildInstallationLocation(String installationLocation, String building, String buildingType) {
+        String[] workPlace = building.split(",")[0].split(" ");
+        if (workPlace[0].equals(buildingType)) {
+            workPlace[0] = "котельной";
+        }
+        return String.join(" ", installationLocation, String.join(" ", workPlace));
     }
 
     private String getDivisionName(String name, String userDivisionName){

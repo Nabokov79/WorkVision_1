@@ -11,6 +11,7 @@ import ru.nabokovsg.laboratoryNK.model.common.Documentation;
 import ru.nabokovsg.laboratoryNK.model.common.MeasuringTool;
 import ru.nabokovsg.laboratoryNK.model.diagnosticDocuments.DiagnosticDocumentType;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface StringBuilderService {
@@ -34,4 +35,8 @@ public interface StringBuilderService {
     String buildAddress(AddressDto address);
 
     String buildEmployeeContacts(EmployeeDto employeeDto);
+
+    String numberAndDate(LocalDate date, Integer documentNumber);
+
+    String buildInstallationLocation(String installationLocation, String building, String buildingType);
 }

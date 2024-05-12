@@ -76,6 +76,13 @@ public class SurveyJournalServiceImpl implements SurveyJournalService {
     }
 
     @Override
+    public SurveyJournal getById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() ->  new NotFoundException(
+                        String.format("SurveyJournal with id=%s not found for delete", id)));
+    }
+
+    @Override
     public List<ResponseSurveyJournalDto> getAll(LocalDate startPeriod, LocalDate endPeriod) {
         QSurveyJournal journal = QSurveyJournal.surveyJournal;
         BooleanBuilder booleanBuilder = new BooleanBuilder();
@@ -100,7 +107,7 @@ public class SurveyJournalServiceImpl implements SurveyJournalService {
             repository.deleteById(id);
             return;
         }
-        throw new NotFoundException(String.format("TasksJournal with id=%s not found for delete", id));
+        throw new NotFoundException(String.format("SurveyJournal with id=%s not found for delete", id));
     }
 
     private SurveyJournal getSurveyJournalData(SurveyJournalDto taskJournalDto, EquipmentDto equipment) {

@@ -22,8 +22,7 @@ public class ColumnHeaderTemplate {
     @Column(name = "heading")
     private String heading;
     @Column(name = "column_header_type")
-    @Enumerated(EnumType.STRING)
-    private ColumnHeaderType columnHeaderType;
+    private String columnHeaderType;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "table_template_id")
     private TableTemplate tableTemplate;

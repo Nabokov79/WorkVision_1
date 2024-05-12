@@ -11,6 +11,8 @@ import ru.nabokovsg.diagnosedNK.dto.equipmentDiagnosed.passport.EquipmentPasspor
 import ru.nabokovsg.diagnosedNK.dto.equipmentDiagnosed.passport.ResponseEquipmentPassportDto;
 import ru.nabokovsg.diagnosedNK.service.equipmentDiagnosed.EquipmentPassportService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(
         value = "/equipments/passport",
@@ -26,15 +28,22 @@ public class EquipmentPassportController {
     @Operation(summary = "Добавление данных паспорта")
     @PostMapping
     public ResponseEntity<ResponseEquipmentPassportDto> save(@RequestBody
-                                                 @Parameter(description = "Пасспорт") EquipmentPassportDto passportDto) {
+                                               @Parameter(description = "Пасспорт") EquipmentPassportDto passportDto) {
         return ResponseEntity.ok().body(service.save(passportDto));
     }
 
     @Operation(summary = "Изменение данных паспорта")
     @PatchMapping
     public ResponseEntity<ResponseEquipmentPassportDto> update(@RequestBody
-                                                   @Parameter(description = "Паспорт") EquipmentPassportDto passportDto) {
+                                                 @Parameter(description = "Паспорт") EquipmentPassportDto passportDto) {
         return ResponseEntity.ok().body(service.update(passportDto));
+    }
+
+    @Operation(summary = "Получить данные паспорта оборудования")
+    @GetMapping("/all/{id}")
+    public ResponseEntity<List<ResponseEquipmentPassportDto>> getAll(
+                                       @PathVariable @Parameter(description = "Индентификатор оборудования") Long id) {
+        return ResponseEntity.ok().body(service.getAll(id));
     }
 
     @Operation(summary = "Удаление данных паспорта")

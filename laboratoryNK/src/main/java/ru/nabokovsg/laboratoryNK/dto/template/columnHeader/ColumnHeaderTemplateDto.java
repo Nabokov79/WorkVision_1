@@ -15,6 +15,8 @@ public class ColumnHeaderTemplateDto {
     private Long id;
     @Schema(description = "Порядковый номер столбца")
     private Integer sequentialNumber;
+    @Schema(description = "Заголовок столбца")
+    private String heading;
     @Schema(description = "Тип заголовка столбца колонки")
     private String columnHeaderType;
 }

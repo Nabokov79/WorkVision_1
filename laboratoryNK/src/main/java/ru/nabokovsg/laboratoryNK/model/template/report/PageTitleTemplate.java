@@ -2,7 +2,7 @@ package ru.nabokovsg.laboratoryNK.model.template.report;
 
 import jakarta.persistence.*;
 import lombok.*;
-import ru.nabokovsg.laboratoryNK.model.template.DocumentHeader;
+import ru.nabokovsg.laboratoryNK.model.template.DocumentHeaderTemplate;
 
 import java.util.Set;
 
@@ -23,7 +23,7 @@ public class PageTitleTemplate {
             joinColumns = {@JoinColumn(name = "page_title_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "document_header_id")})
     @ToString.Exclude
-    private Set<DocumentHeader> documentHeaders;
+    private Set<DocumentHeaderTemplate> documentHeaders;
     @Column(name = "title")
     private String title;
     @Column(name = "subtitle")

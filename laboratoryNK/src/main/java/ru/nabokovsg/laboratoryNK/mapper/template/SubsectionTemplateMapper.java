@@ -11,7 +11,7 @@ import ru.nabokovsg.laboratoryNK.dto.template.subsectionTemplate.SubsectionTempl
 import ru.nabokovsg.laboratoryNK.model.template.SubsectionTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.TableTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolControlTemplate;
-import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.protocol.SurveyProtocolTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.report.ProtocolReportTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.report.SectionTemplate;
 
@@ -48,7 +48,7 @@ public interface SubsectionTemplateMapper {
     @Mapping(target = "sequentialNumber", ignore = true)
     @Mapping(target = "id", ignore = true)
     SubsectionTemplate mapWithProtocolTemplate(@MappingTarget SubsectionTemplate subsectionsTemplate
-                                                            , ProtocolTemplate protocolTemplate);
+                                                            , SurveyProtocolTemplate protocolTemplate);
 
     @Mapping(source = "protocolControlTemplate", target = "protocolControlTemplate")
     @Mapping(target = "sequentialNumber", ignore = true)

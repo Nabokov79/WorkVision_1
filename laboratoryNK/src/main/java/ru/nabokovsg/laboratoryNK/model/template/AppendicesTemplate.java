@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolTemplate;
+import ru.nabokovsg.laboratoryNK.model.template.protocol.SurveyProtocolTemplate;
 import ru.nabokovsg.laboratoryNK.model.template.report.ReportTemplate;
 
 @Setter
@@ -32,5 +32,5 @@ public class AppendicesTemplate {
     private ReportTemplate reportTemplate;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "protocol_template_id",  nullable = false)
-    private ProtocolTemplate protocolTemplate;
+    private SurveyProtocolTemplate protocolTemplate;
 }

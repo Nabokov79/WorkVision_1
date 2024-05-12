@@ -8,7 +8,7 @@ import ru.nabokovsg.laboratoryNK.mapper.template.protocol.ProtocolControlTemplat
 import ru.nabokovsg.laboratoryNK.model.template.protocol.ProtocolControlTemplate;
 import ru.nabokovsg.laboratoryNK.repository.template.protocol.ProtocolControlTemplateRepository;
 import ru.nabokovsg.laboratoryNK.service.diagnosticDocuments.DiagnosticDocumentTypeService;
-import ru.nabokovsg.laboratoryNK.service.template.DocumentHeaderService;
+import ru.nabokovsg.laboratoryNK.service.template.DocumentHeaderTemplateService;
 import ru.nabokovsg.laboratoryNK.service.template.SubsectionTemplateService;
 import ru.nabokovsg.laboratoryNK.service.template.TableTemplateService;
 import ru.nabokovsg.laboratoryNK.dto.template.protocolControl.ProtocolControlTemplateDto;
@@ -22,7 +22,7 @@ public class ProtocolControlTemplateServiceImpl implements ProtocolControlTempla
 
     private final ProtocolControlTemplateRepository repository;
     private final ProtocolControlTemplateMapper mapper;
-    private final DocumentHeaderService documentHeaderService;
+    private final DocumentHeaderTemplateService documentHeaderService;
     private final DiagnosticDocumentTypeService documentTypeService;
     private final SubsectionTemplateService subsectionService;
     private final TableTemplateService tableService;

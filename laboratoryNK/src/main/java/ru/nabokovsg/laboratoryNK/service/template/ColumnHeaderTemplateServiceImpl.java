@@ -28,7 +28,8 @@ public class ColumnHeaderTemplateServiceImpl implements ColumnHeaderTemplateServ
                 columnHeaderTemplatesDto.stream()
                                         .map(t -> {
                                            ColumnHeaderType type = ColumnHeaderType.valueOf(t.getColumnHeaderType());
-                                           return mapper.mapToColumnHeaderTemplates(tableTemplate, t, type.label, type);
+                                           return mapper.mapToColumnHeaderTemplates(tableTemplate, t
+                                                                                , t.getHeading(), type.label);
                                              })
                                        .toList());
     }
@@ -43,7 +44,7 @@ public class ColumnHeaderTemplateServiceImpl implements ColumnHeaderTemplateServ
                 columnHeaderTemplatesDto.stream()
                         .map(t -> {
                             ColumnHeaderType type = ColumnHeaderType.valueOf(t.getColumnHeaderType());
-                            return mapper.mapToColumnHeaderTemplates(tableTemplate, t, type.label, type);
+                            return mapper.mapToColumnHeaderTemplates(tableTemplate, t, t.getHeading(), type.label);
                         })
                         .toList());
     }

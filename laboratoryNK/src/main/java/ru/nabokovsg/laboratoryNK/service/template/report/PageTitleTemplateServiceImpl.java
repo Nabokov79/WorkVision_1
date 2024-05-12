@@ -9,7 +9,7 @@ import ru.nabokovsg.laboratoryNK.mapper.template.report.PageTitleTemplateMapper;
 import ru.nabokovsg.laboratoryNK.model.template.report.PageTitleTemplate;
 import ru.nabokovsg.laboratoryNK.repository.template.report.PageTitleTemplateRepository;
 import ru.nabokovsg.laboratoryNK.service.diagnosticDocuments.DiagnosticDocumentTypeService;
-import ru.nabokovsg.laboratoryNK.service.template.DocumentHeaderService;
+import ru.nabokovsg.laboratoryNK.service.template.DocumentHeaderTemplateService;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +17,7 @@ public class PageTitleTemplateServiceImpl implements PageTitleTemplateService {
 
     private final PageTitleTemplateRepository repository;
     private final PageTitleTemplateMapper mapper;
-    private final DocumentHeaderService documentHeaderService;
+    private final DocumentHeaderTemplateService documentHeaderService;
     private final ReportTemplateService reportService;
     private final DiagnosticDocumentTypeService documentTypeService;
 
