@@ -2,8 +2,11 @@ package ru.nabokovsg.diagnosedNK.mapper.measurement.vms;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import ru.nabokovsg.diagnosedNK.dto.measurement.vms.defectMeasurement.DefectMeasurementDto;
 import ru.nabokovsg.diagnosedNK.dto.measurement.vms.defectMeasurement.ResponseDefectMeasurementDto;
+import ru.nabokovsg.diagnosedNK.model.equipmentDiagnosed.EquipmentElement;
+import ru.nabokovsg.diagnosedNK.model.equipmentDiagnosed.PartElement;
 import ru.nabokovsg.diagnosedNK.model.measurement.vms.DefectMeasurement;
 import ru.nabokovsg.diagnosedNK.model.norms.Defect;
 
@@ -11,7 +14,8 @@ import ru.nabokovsg.diagnosedNK.model.norms.Defect;
 public interface DefectMeasurementMapper {
 
     @Mapping(source = "defectDto.surveyJournalId", target = "surveyJournalId")
-    @Mapping(source = "defectDto.elementId", target = "elementId")
+    @Mapping(source = "element.id", target = "elementId")
+    @Mapping(source = "element.elementName", target = "elementName")
     @Mapping(source = "defectDto.partElementId", target = "partElementId")
     @Mapping(source = "defect.id", target = "defectId")
     @Mapping(source = "defect.defectName", target = "defectName")
@@ -19,7 +23,11 @@ public interface DefectMeasurementMapper {
     @Mapping(source = "defect.notMeetRequirements", target = "notMeetRequirements")
     @Mapping(source = "defectDto.id", target = "id")
     @Mapping(target = "parameterMeasurements", ignore = true)
-    DefectMeasurement mapToDefectMeasurement(DefectMeasurementDto defectDto, Defect defect);
+    DefectMeasurement mapWithEquipmentElement(DefectMeasurementDto defectDto, Defect defect, EquipmentElement element);
+
+    @Mapping(source = "partElement.id", target = "partElementId")
+    @Mapping(source = "partElement.partName", target = "partName")
+    DefectMeasurement mapWithPartElement(@MappingTarget DefectMeasurement measurement, PartElement partElement);
 
     ResponseDefectMeasurementDto mapToResponseDefectMeasurementDto(DefectMeasurement defectMeasurement);
 }

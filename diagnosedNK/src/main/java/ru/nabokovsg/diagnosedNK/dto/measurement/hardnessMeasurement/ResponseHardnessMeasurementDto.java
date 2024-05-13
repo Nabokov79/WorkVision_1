@@ -17,8 +17,12 @@ public class ResponseHardnessMeasurementDto {
     private Long equipmentId;
     @Schema(description = "Индентификатор элемента")
     private Long elementId;
+    @Schema(description = "Наименование элемента")
+    private String elementName;
     @Schema(description = "Индентификатор подэлемента")
     private Long partElementId;
+    @Schema(description = "Наименование подэлемента")
+    private String partName;
     @Schema(description = "Номер измерения(по схеме)")
     private Integer measurementNumber;
     @Schema(description = "Значение твердости элемента")

@@ -18,8 +18,12 @@ public class ResponseDefectMeasurementDto {
     private Long id;
     @Schema(description = "Индентификатор элемента")
     private Long elementId;
+    @Schema(description = "Наименование элемента")
+    private String elementName;
     @Schema(description = "Индентификатор подэлемента")
     private Long partElementId;
+    @Schema(description = "Наименование подэлемента")
+    private String partName;
     @Schema(description = "Наименование дефекта")
     private String defectName;
     @Schema(description = "Указание недопустимого дефекта")

@@ -12,6 +12,7 @@ import ru.nabokovsg.diagnosedNK.mapper.measurement.vms.VisualInspectionMapper;
 import ru.nabokovsg.diagnosedNK.model.measurement.vms.QVisualInspection;
 import ru.nabokovsg.diagnosedNK.model.measurement.vms.VisualInspection;
 import ru.nabokovsg.diagnosedNK.repository.measurement.vms.VisualInspectionRepository;
+import ru.nabokovsg.diagnosedNK.service.equipmentDiagnosed.EquipmentElementService;
 
 import java.util.List;
 
@@ -22,12 +23,14 @@ public class VisualInspectionServiceImpl implements VisualInspectionService {
     private final VisualInspectionRepository repository;
     private final VisualInspectionMapper mapper;
     private final EntityManager em;
+    private final EquipmentElementService equipmentElementService;
 
     @Override
     public ResponseVisualInspectionDto save(VisualInspectionDto inspectionDto) {
         VisualInspection inspection = getByPredicate(inspectionDto);
         if (inspection == null) {
-            inspection = repository.save(mapper.mapToVisualInspection(inspectionDto));
+            inspection = repository.save(mapper.mapToVisualInspection(inspectionDto
+                                                     , equipmentElementService.getById(inspectionDto.getElementId())));
         }
         return mapper.mapToResponseVisualInspectionDto(inspection);
     }
@@ -36,7 +39,8 @@ public class VisualInspectionServiceImpl implements VisualInspectionService {
     public ResponseVisualInspectionDto update(VisualInspectionDto inspectionDto) {
         if (repository.existsById(inspectionDto.getId())) {
             return mapper.mapToResponseVisualInspectionDto(
-                    repository.save(mapper.mapToVisualInspection(inspectionDto)));
+                    repository.save(mapper.mapToVisualInspection(inspectionDto
+                                                   , equipmentElementService.getById(inspectionDto.getElementId()))));
         }
         throw new NotFoundException(
                 String.format("VisualInspection with id=%s not found for update", inspectionDto.getId()));

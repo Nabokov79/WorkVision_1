@@ -23,8 +23,12 @@ public class HardnessMeasurement {
     private Long equipmentId;
     @Column(name = "element_id")
     private Long elementId;
+    @Column(name = "element_name")
+    private String elementName;
     @Column(name = "part_element_id")
     private Long partElementId;
+    @Column(name = "part_name")
+    private String partName;
     @Column(name = "measurement_number")
     private Integer measurementNumber;
     @Column(name = "diameter")

@@ -7,17 +7,22 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nabokovsg.diagnosedNK.exceptions.NotFoundException;
 import ru.nabokovsg.diagnosedNK.mapper.measurement.vms.DefectMeasurementMapper;
+import ru.nabokovsg.diagnosedNK.model.equipmentDiagnosed.EquipmentElement;
+import ru.nabokovsg.diagnosedNK.model.equipmentDiagnosed.PartElement;
 import ru.nabokovsg.diagnosedNK.model.measurement.utm.UltrasonicThicknessMeasurement;
 import ru.nabokovsg.diagnosedNK.model.measurement.vms.DefectMeasurement;
 import ru.nabokovsg.diagnosedNK.model.measurement.vms.QCalculationParameterMeasurement;
 import ru.nabokovsg.diagnosedNK.model.measurement.vms.QDefectMeasurement;
 import ru.nabokovsg.diagnosedNK.model.norms.Defect;
 import ru.nabokovsg.diagnosedNK.repository.measurement.vms.DefectMeasurementRepository;
+import ru.nabokovsg.diagnosedNK.service.equipmentDiagnosed.EquipmentElementService;
 import ru.nabokovsg.diagnosedNK.service.norms.DefectService;
 import ru.nabokovsg.diagnosedNK.dto.measurement.vms.defectMeasurement.DefectMeasurementDto;
 import ru.nabokovsg.diagnosedNK.dto.measurement.vms.defectMeasurement.ResponseDefectMeasurementDto;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,19 +33,27 @@ public class DefectMeasurementServiceImpl implements DefectMeasurementService {
     private final ParameterMeasurementService parameterMeasurementService;
     private final EntityManager em;
     private final DefectService defectsService;
+    private final EquipmentElementService equipmentElementService;
 
     @Override
-    public ResponseDefectMeasurementDto save(DefectMeasurementDto defectMeasurementDto) {
-        DefectMeasurement defectMeasurement = getByPredicate(defectMeasurementDto);
-        Defect defect = defectsService.getById(defectMeasurementDto.getDefectId());
+    public ResponseDefectMeasurementDto save(DefectMeasurementDto measurementDto) {
+        DefectMeasurement defectMeasurement = getByPredicate(measurementDto);
+        Defect defect = defectsService.getById(measurementDto.getDefectId());
         if (defectMeasurement == null) {
-            defectMeasurement = repository.save(mapper.mapToDefectMeasurement(defectMeasurementDto, defect));
+            EquipmentElement element = equipmentElementService.getById(measurementDto.getElementId());
+            Map<Long, PartElement> partsElement = element.getPartsElement()
+                    .stream().collect(Collectors.toMap(PartElement::getId, p -> p));
+            DefectMeasurement measurement = mapper.mapWithEquipmentElement(measurementDto, defect, element);
+            if(measurementDto.getPartElementId() != null) {
+                measurement = mapper.mapWithPartElement(measurement, partsElement.get(measurementDto.getPartElementId()));
+            }
+            defectMeasurement = repository.save(measurement);
         }
         defectMeasurement.getParameterMeasurements().addAll(parameterMeasurementService.save(
                                                                       defect.getTypeCalculation()
                                                                     , defect.getMeasuredParameters()
                                                                     , defectMeasurement.getParameterMeasurements()
-                                                                    , defectMeasurementDto.getParameterMeasurements()));
+                                                                    , measurementDto.getParameterMeasurements()));
         return mapper.mapToResponseDefectMeasurementDto(defectMeasurement);
     }
 

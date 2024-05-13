@@ -2,13 +2,17 @@ package ru.nabokovsg.diagnosedNK.service.measurement.hardnessMeasurement;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.nabokovsg.diagnosedNK.dto.equipmentDiagnosed.element.ResponseElementDto;
 import ru.nabokovsg.diagnosedNK.dto.measurement.hardnessMeasurement.HardnessMeasurementDto;
 import ru.nabokovsg.diagnosedNK.dto.measurement.hardnessMeasurement.ResponseHardnessMeasurementDto;
 import ru.nabokovsg.diagnosedNK.exceptions.NotFoundException;
 import ru.nabokovsg.diagnosedNK.mapper.measurement.HardnessMeasurementMapper;
+import ru.nabokovsg.diagnosedNK.model.equipmentDiagnosed.EquipmentElement;
+import ru.nabokovsg.diagnosedNK.model.equipmentDiagnosed.PartElement;
 import ru.nabokovsg.diagnosedNK.model.measurement.HardnessMeasurement;
 import ru.nabokovsg.diagnosedNK.model.norms.AcceptableHardness;
 import ru.nabokovsg.diagnosedNK.repository.measurement.HardnessMeasurementRepository;
+import ru.nabokovsg.diagnosedNK.service.equipmentDiagnosed.EquipmentElementService;
 import ru.nabokovsg.diagnosedNK.service.norms.AcceptableHardnessService;
 
 import java.util.List;
@@ -21,12 +25,18 @@ public class HardnessMeasurementServiceImpl implements HardnessMeasurementServic
 
     private final HardnessMeasurementRepository repository;
     private final HardnessMeasurementMapper mapper;
-
     private final AcceptableHardnessService acceptableHardnessService;
+    private final EquipmentElementService equipmentElementService;
 
     @Override
     public List<ResponseHardnessMeasurementDto> save(HardnessMeasurementDto measurementDto) {
-        HardnessMeasurement measurement = mapper.mapToHardnessMeasurement(measurementDto);
+        EquipmentElement element = equipmentElementService.getById(measurementDto.getElementId());
+        Map<Long, PartElement> partsElement = element.getPartsElement()
+                                              .stream().collect(Collectors.toMap(PartElement::getId, p -> p));
+        HardnessMeasurement measurement = mapper.mapWithEquipmentElement(measurementDto, element);
+        if(measurementDto.getPartElementId() != null) {
+            measurement = mapper.mapWithPartElement(measurement, partsElement.get(measurementDto.getPartElementId()));
+        }
         Map<Integer, HardnessMeasurement> measurements
                                    = repository.findAllBySurveyJournalIdAndEquipmentId(measurement.getSurveyJournalId()
                                                                                         , measurement.getEquipmentId())

@@ -9,13 +9,18 @@ import ru.nabokovsg.diagnosedNK.dto.measurement.vms.completedRepairElement.Compl
 import ru.nabokovsg.diagnosedNK.dto.measurement.vms.completedRepairElement.ResponseCompletedRepairElementDto;
 import ru.nabokovsg.diagnosedNK.exceptions.NotFoundException;
 import ru.nabokovsg.diagnosedNK.mapper.measurement.vms.CompletedRepairElementMapper;
+import ru.nabokovsg.diagnosedNK.model.equipmentDiagnosed.EquipmentElement;
+import ru.nabokovsg.diagnosedNK.model.equipmentDiagnosed.PartElement;
 import ru.nabokovsg.diagnosedNK.model.measurement.vms.CompletedRepairElement;
 import ru.nabokovsg.diagnosedNK.model.measurement.vms.QCompletedRepairElement;
 import ru.nabokovsg.diagnosedNK.model.norms.ElementRepair;
 import ru.nabokovsg.diagnosedNK.repository.measurement.vms.CompletedRepairElementRepository;
+import ru.nabokovsg.diagnosedNK.service.equipmentDiagnosed.EquipmentElementService;
 import ru.nabokovsg.diagnosedNK.service.norms.ElementRepairService;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,13 +31,21 @@ public class CompletedRepairElementServiceImpl implements CompletedRepairElement
     private final ElementRepairService repairService;
     private final ParameterMeasurementService parameterMeasurementService;
     private final EntityManager em;
+    private final EquipmentElementService equipmentElementService;
 
     @Override
     public ResponseCompletedRepairElementDto save(CompletedRepairElementDto repairDto) {
         CompletedRepairElement repair = getByPredicate(repairDto);
         ElementRepair elementRepair = repairService.getById(repairDto.getRepairId());
         if (repair == null) {
-            repair = repository.save(mapper.mapToCompletedRepairElement(repairDto, elementRepair));
+            EquipmentElement element = equipmentElementService.getById(repairDto.getElementId());
+            Map<Long, PartElement> partsElement = element.getPartsElement()
+                    .stream().collect(Collectors.toMap(PartElement::getId, p -> p));
+            repair = mapper.mapWithEquipmentElement(repairDto, elementRepair, element);
+            if(repairDto.getPartElementId() != null) {
+                repair = mapper.mapWithPartElement(repair, partsElement.get(repairDto.getPartElementId()));
+            }
+            repair = repository.save(repair);
         }
         repair.setParameterMeasurements(parameterMeasurementService.save(elementRepair.getTypeCalculation()
                                                                        , elementRepair.getMeasuredParameters()
