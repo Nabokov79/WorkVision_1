@@ -7,8 +7,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.nabokovsg.gateway.client.BaseClient;
-import ru.nabokovsg.gateway.dto.laboratoryNK.diagnosticDocumentsType.NewDiagnosticDocumentTypeDto;
-import ru.nabokovsg.gateway.dto.laboratoryNK.diagnosticDocumentsType.UpdateDiagnosticDocumentTypeDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.diagnosticDocument.diagnosticDocumentsType.NewDiagnosticDocumentTypeDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.diagnosticDocument.diagnosticDocumentsType.UpdateDiagnosticDocumentTypeDto;
 
 @Service
 public class DiagnosticDocumentTypeClient extends BaseClient {

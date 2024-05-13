@@ -1,9 +1,11 @@
 package ru.nabokovsg.laboratoryNK.mapper.document;
 
+import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import ru.nabokovsg.laboratoryNK.model.document.DocumentEquipmentPassport;
 import ru.nabokovsg.laboratoryNK.model.document.report.Section;
 
+@Mapper(componentModel = "spring")
 public interface DocumentEquipmentPassportMapper {
 
     @Mapping(source = "header", target = "header")

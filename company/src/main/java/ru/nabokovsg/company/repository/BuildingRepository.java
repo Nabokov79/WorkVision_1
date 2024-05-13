@@ -8,4 +8,6 @@ import java.util.Set;
 public interface BuildingRepository extends JpaRepository<Building, Long> {
 
     Set<Building> findAllByExploitationRegionId(Long exploitationRegionId);
+
+    Building findByAddressId(Long addressId);
 }

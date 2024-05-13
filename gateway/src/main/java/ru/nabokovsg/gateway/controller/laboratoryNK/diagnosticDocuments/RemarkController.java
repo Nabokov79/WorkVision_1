@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.nabokovsg.gateway.client.laboratoryNK.diagnosticDocuments.RemarkClient;
-import ru.nabokovsg.gateway.dto.laboratoryNK.remark.NewRemarkDto;
-import ru.nabokovsg.gateway.dto.laboratoryNK.remark.UpdateRemarkDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.diagnosticDocument.remark.NewRemarkDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.diagnosticDocument.remark.UpdateRemarkDto;
 
 @RestController
 @RequestMapping(

@@ -19,7 +19,6 @@ public class NewMeasuringToolDto {
     @NotBlank(message = "toll should not be blank")
     private String toll;
     @Schema(description = "Модель")
-    @NotBlank(message = "model should not be blank")
     private String model;
     @Schema(description = "Заводской номер")
     @NotBlank(message = "work number should not be blank")
@@ -33,7 +32,7 @@ public class NewMeasuringToolDto {
     @Schema(description = "Дата начала эксплуатации")
     @NotNull(message = "exploitation should not be blank")
     private LocalDate exploitation;
-    @Schema(description = "Индентификатор организации-изготовителя")
+    @Schema(description = "Организация-изготовитель")
     @NotBlank(message = "manufacturer should not be blank")
     private String manufacturer;
     @Schema(description = "Диапазон измерений")
@@ -42,16 +41,16 @@ public class NewMeasuringToolDto {
     @Schema(description = "Характеристики")
     @NotBlank(message = "characteristics should not be blank")
     private String characteristics;
-    @Schema(description = "Индентификатор владелеца средства(прибора)")
+    @Schema(description = "Владелец средства(прибора) измерения")
     @NotBlank(message = "owner should not be blank")
-    private Long owner;
+    private String owner;
     @Schema(description = "Дата поверки")
     @NotNull(message = "verification date should not be blank")
     private LocalDate verificationDate;
     @Schema(description = "Дата следующей поверки")
     @NotNull(message = "next verification date should not be blank")
     private LocalDate nextVerificationDate;
-    @Schema(description = "Индентификатор метрологической организации")
+    @Schema(description = "Метрологическая организация")
     @NotBlank(message = "organization should not be blank")
     private String organization;
     @Schema(description = "Номер свидетельства о поверке")

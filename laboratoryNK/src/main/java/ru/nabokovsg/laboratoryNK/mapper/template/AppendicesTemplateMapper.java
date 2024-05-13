@@ -20,7 +20,7 @@ public interface AppendicesTemplateMapper {
     AppendicesTemplate mapWithReportTemplate(@MappingTarget AppendicesTemplate appendices
                                                           , ReportTemplate reportTemplate);
 
-    @Mapping(source = "protocolTemplate", target = "protocolTemplate")
+    @Mapping(source = "protocolTemplate", target = "surveyProtocolTemplate")
     AppendicesTemplate mapWithProtocolTemplate(@MappingTarget AppendicesTemplate appendices
                                                             , SurveyProtocolTemplate protocolTemplate);
 }

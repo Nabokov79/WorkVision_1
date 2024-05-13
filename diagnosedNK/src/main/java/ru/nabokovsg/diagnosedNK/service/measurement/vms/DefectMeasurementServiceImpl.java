@@ -46,7 +46,7 @@ public class DefectMeasurementServiceImpl implements DefectMeasurementService {
 
     @Override
     public List<ResponseDefectMeasurementDto> getAll(Long id) {
-        return repository.findAllByVisualMeasuringSurveyEquipmentDiagnosedTaskJournalId(id)
+        return repository.findAllBySurveyJournalId(id)
                          .stream()
                          .map(mapper::mapToResponseDefectMeasurementDto)
                          .toList();

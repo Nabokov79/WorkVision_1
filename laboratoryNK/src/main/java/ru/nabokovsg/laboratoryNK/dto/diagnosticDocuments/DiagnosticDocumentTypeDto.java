@@ -16,7 +16,7 @@ public class DiagnosticDocumentTypeDto {
     @Schema(description = "Название документа")
     private String title;
     @Schema(description = "Заголовок документа")
-    private String heading;
+    private String subtitle;
     @Schema(description = "Тип документа")
     private String typeDocument;
 }

@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS EXPLOITATION_REGIONS
     heat_supply_area_id BIGINT                                  NOT NULL,
     division_type       VARCHAR                                 NOT NULL,
     CONSTRAINT pk_exploitationRegion PRIMARY KEY (id),
-    CONSTRAINT UQ_EXPLOITATION_REGIONS UNIQUE (full_name, short_name),
+    CONSTRAINT UQ_EXPLOITATION_REGIONS UNIQUE (full_name, short_name, number),
     CONSTRAINT FK_EXPLOITATION_REGIONS_ON_HEAT_SUPPLY_AREAS
         FOREIGN KEY (heat_supply_area_id) REFERENCES heat_supply_areas (id)
 );

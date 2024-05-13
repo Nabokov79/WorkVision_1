@@ -29,7 +29,7 @@ public interface TableTemplateMapper {
     TableTemplate mapWithProtocolReportTemplate(@MappingTarget TableTemplate tableTemplate
                                                              , ProtocolReportTemplate protocolReportTemplate);
 
-    @Mapping(source = "protocolTemplate", target = "protocolTemplate")
+    @Mapping(source = "protocolTemplate", target = "surveyProtocolTemplate")
     @Mapping(target = "sequentialNumber", ignore = true)
     @Mapping(target = "id", ignore = true)
     TableTemplate mapWithProtocolTemplate(@MappingTarget TableTemplate tableTemplate

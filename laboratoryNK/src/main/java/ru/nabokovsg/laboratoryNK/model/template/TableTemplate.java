@@ -36,7 +36,7 @@ public class TableTemplate {
     private ProtocolReportTemplate protocolReportTemplate;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "protocol_template_id")
-    private SurveyProtocolTemplate protocolTemplate;
+    private SurveyProtocolTemplate surveyProtocolTemplate;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "protocol_control_template_id")
     private ProtocolControlTemplate protocolControlTemplate;

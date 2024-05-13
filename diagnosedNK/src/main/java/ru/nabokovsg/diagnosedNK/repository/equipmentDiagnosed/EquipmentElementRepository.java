@@ -7,5 +7,5 @@ import java.util.Set;
 
 public interface EquipmentElementRepository extends JpaRepository<EquipmentElement, Long> {
 
-    Set<EquipmentElement> findAllByEquipmentId(Long id);
+    Set<EquipmentElement> findAllByEquipmentDiagnosedId(Long id);
 }

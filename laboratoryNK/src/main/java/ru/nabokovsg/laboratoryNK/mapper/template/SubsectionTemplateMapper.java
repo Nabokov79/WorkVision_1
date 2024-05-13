@@ -44,7 +44,7 @@ public interface SubsectionTemplateMapper {
     SubsectionTemplate mapWithSectionTemplate(@MappingTarget SubsectionTemplate subsectionsTemplate
                                                            , SectionTemplate sectionTemplate);
 
-    @Mapping(source = "protocolTemplate", target = "protocolTemplate")
+    @Mapping(source = "protocolTemplate", target = "surveyProtocolTemplate")
     @Mapping(target = "sequentialNumber", ignore = true)
     @Mapping(target = "id", ignore = true)
     SubsectionTemplate mapWithProtocolTemplate(@MappingTarget SubsectionTemplate subsectionsTemplate

@@ -21,4 +21,6 @@ public class EquipmentPassportDto {
     private String header;
     @Schema(description = "Значение")
     private String meaning;
+    @Schema(description = "Указать в протоколе")
+    private Boolean useToProtocol;
 }

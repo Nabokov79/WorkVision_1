@@ -25,8 +25,8 @@ public class DiagnosticDocumentTypeServiceImpl implements DiagnosticDocumentType
         TypeDocument typeDocument = convertToTypeDocument(documentTypeDto.getTypeDocument());
         return mapper.mapToDiagnosticDocumentTypeDto(
                 Objects.requireNonNullElseGet(
-                        repository.findByTitleAndHeadingAndTypeDocument(documentTypeDto.getTitle()
-                                , documentTypeDto.getHeading()
+                        repository.findByTitleAndSubtitleAndTypeDocument(documentTypeDto.getTitle()
+                                , documentTypeDto.getSubtitle()
                                 , typeDocument)
                         , () -> repository.save(mapper.mapToDiagnosticDocument(documentTypeDto, typeDocument)))
         );

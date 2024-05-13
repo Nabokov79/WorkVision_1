@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.nabokovsg.gateway.client.laboratoryNK.diagnosticDocuments.DiagnosticDocumentTypeClient;
-import ru.nabokovsg.gateway.dto.laboratoryNK.diagnosticDocumentsType.NewDiagnosticDocumentTypeDto;
-import ru.nabokovsg.gateway.dto.laboratoryNK.diagnosticDocumentsType.UpdateDiagnosticDocumentTypeDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.diagnosticDocument.diagnosticDocumentsType.NewDiagnosticDocumentTypeDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.diagnosticDocument.diagnosticDocumentsType.UpdateDiagnosticDocumentTypeDto;
 
 @RestController
 @RequestMapping(

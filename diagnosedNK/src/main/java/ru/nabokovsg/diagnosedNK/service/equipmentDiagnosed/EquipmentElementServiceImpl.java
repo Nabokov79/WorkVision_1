@@ -60,7 +60,7 @@ public class EquipmentElementServiceImpl implements EquipmentElementService {
 
     @Override
     public List<ResponseElementDto> getAll(Long id) {
-        return repository.findAllByEquipmentId(id)
+        return repository.findAllByEquipmentDiagnosedId(id)
                          .stream()
                          .map(mapper::mapToElementDto)
                          .toList();

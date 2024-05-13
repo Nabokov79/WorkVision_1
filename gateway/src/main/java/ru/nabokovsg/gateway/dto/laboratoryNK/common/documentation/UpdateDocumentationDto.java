@@ -19,10 +19,8 @@ public class UpdateDocumentationDto {
     @Positive(message = "id can only be positive")
     private Long id;
     @Schema(description = "Вид документа")
-    @NotBlank(message = "documentation view should not be blank")
     private String view;
     @Schema(description = "Номер документа")
-    @NotBlank(message = "documentation number should not be blank")
     private String number;
     @Schema(description = "Заголовок документа")
     @NotBlank(message = "documentation title should not be blank")

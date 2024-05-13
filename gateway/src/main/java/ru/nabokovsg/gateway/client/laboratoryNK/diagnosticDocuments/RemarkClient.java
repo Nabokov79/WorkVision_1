@@ -7,8 +7,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.nabokovsg.gateway.client.BaseClient;
-import ru.nabokovsg.gateway.dto.laboratoryNK.remark.NewRemarkDto;
-import ru.nabokovsg.gateway.dto.laboratoryNK.remark.UpdateRemarkDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.diagnosticDocument.remark.NewRemarkDto;
+import ru.nabokovsg.gateway.dto.laboratoryNK.diagnosticDocument.remark.UpdateRemarkDto;
 
 @Service
 public class RemarkClient extends BaseClient {

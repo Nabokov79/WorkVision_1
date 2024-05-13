@@ -7,5 +7,5 @@ import java.util.Set;
 
 public interface DefectMeasurementRepository extends JpaRepository<DefectMeasurement, Long> {
 
-    Set<DefectMeasurement> findAllByVisualMeasuringSurveyEquipmentDiagnosedTaskJournalId(Long taskJournalId);
+    Set<DefectMeasurement> findAllBySurveyJournalId(Long surveyJournalId);
 }

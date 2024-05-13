@@ -30,21 +30,21 @@ public class BuildingController {
     private final BuildingClient client;
 
     @Operation(summary = "Добавление новой информации о котельной(цтп)")
-    @PostMapping("/building")
+    @PostMapping
     public Mono<Object> save(@RequestBody @Valid
                                      @Parameter(description = "Котельная, ЦТП") NewBuildingDto buildingDto) {
         return client.save(buildingDto);
     }
 
     @Operation(summary = "Изменение данных котельной(цтп)")
-    @PatchMapping("/building")
+    @PatchMapping
     public Mono<Object> update(@RequestBody @Valid
                                    @Parameter(description = "Котельная, ЦТП") UpdateBuildingDto buildingDto) {
         return client.update(buildingDto);
     }
 
     @Operation(summary = "Получение данных всех котельных(цтп)")
-    @GetMapping("/building/{id}")
+    @GetMapping("/{id}")
     public Mono<Object> get(@PathVariable @NotNull @Positive @Parameter(description = "Индентификатор") Long id) {
         return client.get(id);
     }
@@ -57,7 +57,7 @@ public class BuildingController {
     }
 
     @Operation(summary = "Удаление данных котельной(цтп)")
-    @DeleteMapping("/building/{id}")
+    @DeleteMapping("/{id}")
     public Mono<String> delete(@PathVariable @NotNull @Positive @Parameter(description = "Индентификатор") Long id) {
         return client.delete(id);
     }

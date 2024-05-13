@@ -6,7 +6,7 @@ import ru.nabokovsg.laboratoryNK.model.diagnosticDocuments.TypeDocument;
 
 public interface DiagnosticDocumentTypeRepository extends JpaRepository<DiagnosticDocumentType, Long> {
 
-    DiagnosticDocumentType findByTitleAndHeadingAndTypeDocument(String title
-                                                              , String heading
+    DiagnosticDocumentType findByTitleAndSubtitleAndTypeDocument(String title
+                                                              , String subtitle
                                                               , TypeDocument typeDocument);
 }

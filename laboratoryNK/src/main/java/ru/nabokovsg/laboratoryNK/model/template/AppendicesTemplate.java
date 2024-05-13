@@ -32,5 +32,5 @@ public class AppendicesTemplate {
     private ReportTemplate reportTemplate;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "protocol_template_id",  nullable = false)
-    private SurveyProtocolTemplate protocolTemplate;
+    private SurveyProtocolTemplate surveyProtocolTemplate;
 }

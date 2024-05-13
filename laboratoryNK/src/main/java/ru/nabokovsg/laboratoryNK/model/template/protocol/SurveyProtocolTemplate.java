@@ -36,13 +36,13 @@ public class SurveyProtocolTemplate {
     private String title;
     @Column(name = "subtitle")
     private String subtitle;
-    @OneToMany(mappedBy = "protocolTemplate", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "surveyProtocolTemplate", fetch = FetchType.LAZY)
     private Set<SubsectionTemplate> subsectionTemplates;
-    @OneToMany(mappedBy = "protocolTemplate", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "surveyProtocolTemplate", fetch = FetchType.LAZY)
     private Set<TableTemplate> tableTemplates;
     @OneToOne
     @JoinColumn(name = "conclusion_template_id", referencedColumnName = "id")
     private ConclusionTemplate conclusionTemplate;
-    @OneToMany(mappedBy = "protocolTemplate", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "surveyProtocolTemplate", fetch = FetchType.LAZY)
     private Set<AppendicesTemplate> appendices;
 }
