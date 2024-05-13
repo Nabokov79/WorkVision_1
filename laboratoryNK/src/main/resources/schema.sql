@@ -274,8 +274,8 @@ CREATE TABLE IF NOT EXISTS TABLE_TEMPLATES
     CONSTRAINT pk_tableTemplate PRIMARY KEY (id),
     CONSTRAINT FK_TABLE_TEMPLATES_ON_REPORT_PROTOCOL_TEMPLATES
         FOREIGN KEY (protocol_report_template_id) REFERENCES report_protocol_templates (id),
-    CONSTRAINT FK_TABLE_TEMPLATES_ON_PROTOCOL_TEMPLATES
-        FOREIGN KEY (protocol_template_id) REFERENCES protocol_templates (id),
+    CONSTRAINT FK_TABLE_TEMPLATES_ON_SURVEY_PROTOCOL_TEMPLATES
+        FOREIGN KEY (protocol_template_id) REFERENCES survey_protocol_templates (id),
     CONSTRAINT FK_TABLE_TEMPLATES_ON_PROTOCOL_CONTROL_TEMPLATES
         FOREIGN KEY (protocol_control_template_id) REFERENCES protocol_control_templates (id)
 );
@@ -311,8 +311,8 @@ CREATE TABLE IF NOT EXISTS SUBSECTION_TEMPLATES
         FOREIGN KEY (protocol_report_template_id) REFERENCES report_protocol_templates (id),
     CONSTRAINT FK_SUBSECTION_TEMPLATES_ON_SECTION_TEMPLATES
         FOREIGN KEY (section_template_id) REFERENCES section_templates (id),
-    CONSTRAINT FK_SUBSECTION_TEMPLATES_ON_PROTOCOL_TEMPLATES
-        FOREIGN KEY (protocol_template_id) REFERENCES protocol_templates (id),
+    CONSTRAINT FK_SUBSECTION_TEMPLATES_ON_SURVEY_PROTOCOL_TEMPLATES
+        FOREIGN KEY (protocol_template_id) REFERENCES survey_protocol_templates (id),
     CONSTRAINT FK_SUBSECTION_TEMPLATES_ON_PROTOCOL_CONTROL_TEMPLATES
         FOREIGN KEY (protocol_control_template_id) REFERENCES protocol_control_templates (id)
 );
@@ -370,8 +370,8 @@ CREATE TABLE IF NOT EXISTS APPENDICES_TEMPLATES
     CONSTRAINT UQ_APPENDICES_TEMPLATES UNIQUE (sequential_number, appendices_name),
     CONSTRAINT FK_APPENDICES_TEMPLATES_ON_REPORT_TEMPLATES
         FOREIGN KEY (report_template_id) REFERENCES report_templates (id),
-    CONSTRAINT FK_APPENDICES_TEMPLATES_ON_PROTOCOL_TEMPLATES
-        FOREIGN KEY (protocol_template_id) REFERENCES protocol_templates (id)
+    CONSTRAINT FK_APPENDICES_TEMPLATES_ON_SURVEY_PROTOCOL_TEMPLATES
+        FOREIGN KEY (protocol_template_id) REFERENCES survey_protocol_templates (id)
 );
 
 CREATE TABLE IF NOT EXISTS PAGE_TITLE
