@@ -28,15 +28,15 @@ public class EquipmentTypeController {
     @Operation(summary = "Добавление нового типа оборудования")
     @PostMapping
     public ResponseEntity<ResponseEquipmentTypeDto> save(
-            @RequestBody @Parameter(description = "Тип оборудования") EquipmentTypeDto elementTypeDto) {
-        return ResponseEntity.ok().body(service.save(elementTypeDto));
+            @RequestBody @Parameter(description = "Тип оборудования") EquipmentTypeDto equipmentTypeDto) {
+        return ResponseEntity.ok().body(service.save(equipmentTypeDto));
     }
 
     @Operation(summary = "Изменение данных типа оборудования")
     @PatchMapping
     public ResponseEntity<ResponseEquipmentTypeDto> update(
-            @RequestBody @Parameter(description = "Тип оборудования") EquipmentTypeDto elementTypeDto) {
-        return ResponseEntity.ok().body(service.update(elementTypeDto));
+            @RequestBody @Parameter(description = "Тип оборудования") EquipmentTypeDto equipmentTypeDto) {
+        return ResponseEntity.ok().body(service.update(equipmentTypeDto));
     }
 
     @Operation(summary = "Получить тип оборудования")

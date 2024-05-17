@@ -20,20 +20,20 @@ public class EquipmentTypeServiceImpl implements EquipmentTypeService {
     private final EquipmentTypeMapper mapper;
 
     @Override
-    public ResponseEquipmentTypeDto save(EquipmentTypeDto elementTypeDto) {
+    public ResponseEquipmentTypeDto save(EquipmentTypeDto equipmentTypeDto) {
         return mapper.mapResponseEquipmentTypeDto(
-                Objects.requireNonNullElseGet(repository.findByEquipmentNameAndModel(elementTypeDto.getEquipmentName()
-                                                                                   , elementTypeDto.getModel()),
-                                            () -> repository.save(mapper.mapToEquipmentType(elementTypeDto))));
+                Objects.requireNonNullElseGet(repository.findByEquipmentNameAndModel(equipmentTypeDto.getEquipmentName()
+                                                                                   , equipmentTypeDto.getModel()),
+                                            () -> repository.save(mapper.mapToEquipmentType(equipmentTypeDto))));
     }
 
     @Override
-    public ResponseEquipmentTypeDto update(EquipmentTypeDto elementTypeDto) {
-        if (repository.existsById(elementTypeDto.getId())) {
-            return mapper.mapResponseEquipmentTypeDto(repository.save(mapper.mapToEquipmentType(elementTypeDto)));
+    public ResponseEquipmentTypeDto update(EquipmentTypeDto equipmentTypeDto) {
+        if (repository.existsById(equipmentTypeDto.getId())) {
+            return mapper.mapResponseEquipmentTypeDto(repository.save(mapper.mapToEquipmentType(equipmentTypeDto)));
         }
         throw new NotFoundException(
-                String.format("Equipment type with id=%s not found for update", elementTypeDto.getId()));
+                String.format("Equipment type with id=%s not found for update", equipmentTypeDto.getId()));
     }
 
     @Override

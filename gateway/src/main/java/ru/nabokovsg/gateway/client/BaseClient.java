@@ -21,15 +21,28 @@ public class BaseClient {
                 .bodyToMono(Object.class);
     }
 
+    public <T> Flux<Object> postAll(String path, T body) {
+        return client.post()
+                .uri(path)
+                .bodyValue(body)
+                .retrieve()
+                .bodyToFlux(Object.class);
+    }
+
     public <T> Mono<Object> patch(String path, T body) {
         return client.patch()
                 .uri(path)
                 .bodyValue(body)
                 .retrieve()
-                .onStatus(
-                        HttpStatus.NOT_FOUND::equals,
-                        response -> response.bodyToMono(String.class).map(NotFoundException::new))
                 .bodyToMono(Object.class);
+    }
+
+    public <T> Flux<Object> patchAll(String path, T body) {
+        return client.patch()
+                .uri(path)
+                .bodyValue(body)
+                .retrieve()
+                .bodyToFlux(Object.class);
     }
 
     public Mono<Object> get(String path) {

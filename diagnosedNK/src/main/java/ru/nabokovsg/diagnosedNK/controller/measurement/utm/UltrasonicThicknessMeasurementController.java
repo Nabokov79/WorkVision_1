@@ -28,21 +28,21 @@ public class UltrasonicThicknessMeasurementController {
     @Operation(summary = "Добавить ультразвуковой толщинометрии")
     @PostMapping
     public ResponseEntity<ResponseUltrasonicThicknessMeasurementDto> save(@RequestBody
-                                                             @Parameter(name = "Данные измерений")
-                                                                          UltrasonicThicknessMeasurementDto measurementDto) {
+                                                                          @Parameter(name = "Данные измерения толщины")
+                                                                    UltrasonicThicknessMeasurementDto measurementDto) {
         return ResponseEntity.ok().body(service.save(measurementDto));
     }
 
     @Operation(summary = "Изменить данные ультразвуковой толщинометрии")
     @PatchMapping
     public ResponseEntity<ResponseUltrasonicThicknessMeasurementDto> update(@RequestBody
-                                                             @Parameter(name = "Данные измерений")
-                                                             UltrasonicThicknessMeasurementDto measurementDto) {
+                                                                           @Parameter(name = "Данные измерения толщины")
+                                                                     UltrasonicThicknessMeasurementDto measurementDto) {
         return ResponseEntity.ok().body(service.update(measurementDto));
     }
 
     @Operation(summary = "Получить данные измеренных дефектов оборудования")
-    @GetMapping("/{id}")
+    @GetMapping("/all/{id}")
     public ResponseEntity<List<ResponseUltrasonicThicknessMeasurementDto>> getAll(
             @PathVariable @Parameter(name = "Индентификатор записи в журнале задач") Long id) {
         return ResponseEntity.ok().body(service.getAll(id));

@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Измеренное значение параметра дефекта")
+@Schema(description = "Данные для добавления/изменения измеренного значения параметра дефекта")
 public class ParameterMeasurementDto {
 
     @Schema(description = "Индентификатор")

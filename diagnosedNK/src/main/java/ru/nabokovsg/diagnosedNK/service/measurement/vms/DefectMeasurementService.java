@@ -10,6 +10,8 @@ public interface DefectMeasurementService {
 
     ResponseDefectMeasurementDto save(DefectMeasurementDto defectMeasurementDto);
 
+    ResponseDefectMeasurementDto update(DefectMeasurementDto defectMeasurementDto);
+
     List<ResponseDefectMeasurementDto> getAll(Long id);
 
     void delete(Long id);

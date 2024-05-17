@@ -41,20 +41,43 @@ public class DefectMeasurementServiceImpl implements DefectMeasurementService {
         Defect defect = defectsService.getById(measurementDto.getDefectId());
         if (defectMeasurement == null) {
             EquipmentElement element = equipmentElementService.getById(measurementDto.getElementId());
+            DefectMeasurement measurement = mapper.mapWithEquipmentElement(measurementDto, defect, element);
+            if(measurementDto.getPartElementId() != null) {
+                Map<Long, PartElement> partsElement = element.getPartsElement()
+                        .stream().collect(Collectors.toMap(PartElement::getId, p -> p));
+                measurement = mapper.mapWithPartElement(measurement, partsElement.get(measurementDto.getPartElementId()));
+            }
+            defectMeasurement = repository.save(measurement);
+            defectMeasurement.getParameterMeasurements().addAll(parameterMeasurementService.save(
+                    defect.getTypeCalculation()
+                    , defect.getMeasuredParameters()
+                    , defectMeasurement.getParameterMeasurements()
+                    , measurementDto.getParameterMeasurements()));
+        }
+        return mapper.mapToResponseDefectMeasurementDto(defectMeasurement);
+    }
+
+    @Override
+    public ResponseDefectMeasurementDto update(DefectMeasurementDto measurementDto) {
+        if (repository.existsById(measurementDto.getId())) {
+            Defect defect = defectsService.getById(measurementDto.getDefectId());
+            EquipmentElement element = equipmentElementService.getById(measurementDto.getElementId());
             Map<Long, PartElement> partsElement = element.getPartsElement()
                     .stream().collect(Collectors.toMap(PartElement::getId, p -> p));
             DefectMeasurement measurement = mapper.mapWithEquipmentElement(measurementDto, defect, element);
             if(measurementDto.getPartElementId() != null) {
                 measurement = mapper.mapWithPartElement(measurement, partsElement.get(measurementDto.getPartElementId()));
             }
-            defectMeasurement = repository.save(measurement);
+            DefectMeasurement defectMeasurement = repository.save(measurement);
+            defectMeasurement.getParameterMeasurements().addAll(parameterMeasurementService.update(
+                    defect.getTypeCalculation()
+                    , defect.getMeasuredParameters()
+                    , defectMeasurement.getParameterMeasurements()
+                    , measurementDto.getParameterMeasurements()));
+            return mapper.mapToResponseDefectMeasurementDto(defectMeasurement);
         }
-        defectMeasurement.getParameterMeasurements().addAll(parameterMeasurementService.save(
-                                                                      defect.getTypeCalculation()
-                                                                    , defect.getMeasuredParameters()
-                                                                    , defectMeasurement.getParameterMeasurements()
-                                                                    , measurementDto.getParameterMeasurements()));
-        return mapper.mapToResponseDefectMeasurementDto(defectMeasurement);
+        throw new NotFoundException(
+                String.format("DefectMeasurement with id=%s not found for update", measurementDto.getId()));
     }
 
     @Override
@@ -111,5 +134,10 @@ public class DefectMeasurementServiceImpl implements DefectMeasurementService {
                 .select(defect)
                 .where(booleanBuilder)
                 .fetchOne();
+    }
+
+    private DefectMeasurement getById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() ->  new NotFoundException(String.format("DefectMeasurement with id=%s not found", id)));
     }
 }

@@ -33,8 +33,16 @@ public class DefectMeasurementController {
         return ResponseEntity.ok().body(service.save(defectMeasurementDto));
     }
 
+    @Operation(summary = "Изменить данные измеренного дефекта")
+    @PatchMapping
+    public ResponseEntity<ResponseDefectMeasurementDto> update(@RequestBody
+                                                             @Parameter(name = "Данные измеренного дефекта")
+                                                             DefectMeasurementDto defectMeasurementDto) {
+        return ResponseEntity.ok().body(service.update(defectMeasurementDto));
+    }
+
     @Operation(summary = "Получить данные измеренных дефектов оборудования")
-    @GetMapping("/{id}")
+    @GetMapping("/all/{id}")
     public ResponseEntity<List<ResponseDefectMeasurementDto>> getAll(
             @PathVariable @Parameter(name = "Индентификатор записи в журнале задач") Long id) {
         return ResponseEntity.ok().body(service.getAll(id));

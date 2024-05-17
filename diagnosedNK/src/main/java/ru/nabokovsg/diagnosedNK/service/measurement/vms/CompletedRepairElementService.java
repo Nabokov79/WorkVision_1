@@ -9,6 +9,8 @@ public interface CompletedRepairElementService {
 
     ResponseCompletedRepairElementDto save(CompletedRepairElementDto repairDto);
 
+    ResponseCompletedRepairElementDto update(CompletedRepairElementDto repairDto);
+
    List<ResponseCompletedRepairElementDto> getAll(Long id);
 
     void delete(Long id);

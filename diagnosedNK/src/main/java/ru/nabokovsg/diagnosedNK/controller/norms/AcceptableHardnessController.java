@@ -40,7 +40,7 @@ public class AcceptableHardnessController {
     }
 
     @Operation(summary = "Получить данные допустимых значений твердости металла элементов оборудования")
-    @GetMapping("/{id}")
+    @GetMapping("/all/{id}")
     public ResponseEntity<List<ResponseAcceptableHardnessDto>> getAll(
             @PathVariable @Parameter(name = "Индентификатор типа оборудования") Long id) {
         return ResponseEntity.ok().body(service.getAll(id));

@@ -40,7 +40,7 @@ public class AcceptableThicknessController {
     }
 
     @Operation(summary = "Получить данные допустимых толщин толщины стенки элементов оборудования")
-    @GetMapping("/{id}")
+    @GetMapping("/all/{id}")
     public ResponseEntity<List<ResponseAcceptableThicknessDto>> getAll(
             @PathVariable @Parameter(name = "Индентификатор типа оборудования") Long id) {
         return ResponseEntity.ok().body(service.getAll(id));

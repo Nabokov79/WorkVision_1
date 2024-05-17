@@ -31,6 +31,17 @@ public class ParameterMeasurementServiceImpl implements ParameterMeasurementServ
                                                                          , parameterMeasurementsDto)));
     }
 
+    @Override
+    public Set<CalculationParameterMeasurement> update(TypeCalculation typeCalculation
+            , Set<MeasuredParameter> measuredParameters
+            , Set<CalculationParameterMeasurement> parameterMeasurements
+            , List<ParameterMeasurementDto> parameterMeasurementsDto) {
+        return new HashSet<>(repository.saveAll(calculationTypeCalculation(typeCalculation
+                , measuredParameters
+                , parameterMeasurements
+                , parameterMeasurementsDto)));
+    }
+
     public Set<CalculationParameterMeasurement> calculationTypeCalculation(TypeCalculation typeCalculation
                                                             , Set<MeasuredParameter> measuredParameters
                                                             , Set<CalculationParameterMeasurement> parameterMeasurements

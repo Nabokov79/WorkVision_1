@@ -10,7 +10,8 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Результаты выполнения измерений твердости металла элементов оборудования")
+@Schema(description = "Данные для добавления/изменения результата выполнения" +
+                      " измерений твердости металла элементов оборудования")
 public class HardnessMeasurementDto {
 
     @Schema(description = "Индентификатор")

@@ -14,4 +14,9 @@ public interface ParameterMeasurementService {
                                             , Set<MeasuredParameter> measuredParameters
                                             , Set<CalculationParameterMeasurement> parameterMeasurements
                                             , List<ParameterMeasurementDto> parameterMeasurementsDto);
+
+    Set<CalculationParameterMeasurement> update(TypeCalculation typeCalculation
+            , Set<MeasuredParameter> measuredParameters
+            , Set<CalculationParameterMeasurement> parameterMeasurements
+            , List<ParameterMeasurementDto> parameterMeasurementsDto);
 }

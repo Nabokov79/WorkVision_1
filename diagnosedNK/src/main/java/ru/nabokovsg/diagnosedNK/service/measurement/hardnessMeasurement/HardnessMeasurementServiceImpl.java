@@ -2,7 +2,6 @@ package ru.nabokovsg.diagnosedNK.service.measurement.hardnessMeasurement;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.nabokovsg.diagnosedNK.dto.equipmentDiagnosed.element.ResponseElementDto;
 import ru.nabokovsg.diagnosedNK.dto.measurement.hardnessMeasurement.HardnessMeasurementDto;
 import ru.nabokovsg.diagnosedNK.dto.measurement.hardnessMeasurement.ResponseHardnessMeasurementDto;
 import ru.nabokovsg.diagnosedNK.exceptions.NotFoundException;
@@ -73,7 +72,7 @@ public class HardnessMeasurementServiceImpl implements HardnessMeasurementServic
                                                                                  , getAcceptableValue(measurementDb))));
         }
         throw new NotFoundException(
-                String.format("HardnessMeasurement with MeasurementNumber=%s not found for update"
+                String.format("HardnessMeasurement with measurementNumber=%s not found for update"
                                                                              , measurementDto.getMeasurementNumber()));
     }
 
@@ -83,6 +82,16 @@ public class HardnessMeasurementServiceImpl implements HardnessMeasurementServic
                          .stream()
                          .map(mapper::mapToResponseHardnessMeasurementDto)
                          .toList();
+    }
+
+    @Override
+    public void delete(Long id) {
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return;
+        }
+        throw new NotFoundException(
+                String.format("HardnessMeasurement with id=%s not found for delete", id));
     }
 
     private boolean getAcceptableValue(HardnessMeasurement measurement) {

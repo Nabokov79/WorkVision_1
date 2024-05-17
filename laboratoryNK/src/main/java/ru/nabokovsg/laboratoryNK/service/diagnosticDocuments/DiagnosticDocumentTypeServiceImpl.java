@@ -23,6 +23,7 @@ public class DiagnosticDocumentTypeServiceImpl implements DiagnosticDocumentType
     @Override
     public DiagnosticDocumentTypeDto save(DiagnosticDocumentTypeDto documentTypeDto) {
         TypeDocument typeDocument = convertToTypeDocument(documentTypeDto.getTypeDocument());
+        documentTypeDto.setTitle(documentTypeDto.getTitle().toUpperCase());
         return mapper.mapToDiagnosticDocumentTypeDto(
                 Objects.requireNonNullElseGet(
                         repository.findByTitleAndSubtitleAndTypeDocument(documentTypeDto.getTitle()
@@ -35,6 +36,7 @@ public class DiagnosticDocumentTypeServiceImpl implements DiagnosticDocumentType
     @Override
     public DiagnosticDocumentTypeDto update(DiagnosticDocumentTypeDto documentTypeDto) {
         if (repository.existsById(documentTypeDto.getId())) {
+            documentTypeDto.setTitle(documentTypeDto.getTitle().toUpperCase());
             return mapper.mapToDiagnosticDocumentTypeDto(
                     repository.save(mapper.mapToDiagnosticDocument(documentTypeDto
                                                             , convertToTypeDocument(documentTypeDto.getTypeDocument())))

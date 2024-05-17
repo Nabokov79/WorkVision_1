@@ -15,8 +15,6 @@ public class EquipmentInspectionDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
-    @Schema(description = "Индентификатор записи журнала задач")
-    private Long taskJournalId;
     @Schema(description = "Дата проведения обследования")
     private String date;
     @Schema(description = "Описание выполненного обследования")

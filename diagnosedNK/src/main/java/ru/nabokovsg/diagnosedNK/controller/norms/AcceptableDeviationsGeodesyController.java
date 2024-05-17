@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.diagnosedNK.dto.norms.geodesy.AcceptableDeviationsGeodesyDto;
 import ru.nabokovsg.diagnosedNK.dto.norms.geodesy.ResponseAcceptableDeviationsGeodesyDto;
@@ -20,7 +19,6 @@ import java.util.List;
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
-@Validated
 @Tag(name="Данные допустимых значений при проведении геодезии(нивелирования)",
         description="API для работы с данными норм при проведении геодезии(нивелирования)")
 public class AcceptableDeviationsGeodesyController {
@@ -44,7 +42,7 @@ public class AcceptableDeviationsGeodesyController {
     }
 
     @Operation(summary = "Получить рекомендации по типу объекта")
-    @GetMapping("/{id}")
+    @GetMapping("/all/{id}")
     public ResponseEntity<List<ResponseAcceptableDeviationsGeodesyDto>> getAll(
             @PathVariable @Parameter(name = "Индентификатор типа оборудования") Long id) {
         return ResponseEntity.ok().body(service.getAll(id));

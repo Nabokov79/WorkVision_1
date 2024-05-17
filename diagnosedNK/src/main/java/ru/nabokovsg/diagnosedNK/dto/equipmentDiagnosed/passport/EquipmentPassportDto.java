@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-@Schema(description = "Данные паспорта оборудования для добавления/изменения")
+@Schema(description = "Данныедля добавления/изменения информации паспорта оборудования")
 public class EquipmentPassportDto {
 
     @Schema(description = "Индентификатор")

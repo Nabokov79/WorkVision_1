@@ -16,8 +16,8 @@ public class NewDiagnosticDocumentTypeDto {
     @NotBlank(message = "title should not be blank")
     private String title;
     @Schema(description = "Заголовок документа")
-    @NotBlank(message = "heading should not be blank")
-    private String heading;
+    @NotBlank(message = "subtitle should not be blank")
+    private String subtitle;
     @Schema(description = "Тип документа")
     @NotBlank(message = "type document should not be blank")
     private String typeDocument;

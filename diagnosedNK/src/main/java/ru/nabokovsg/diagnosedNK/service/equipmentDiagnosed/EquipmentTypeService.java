@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface EquipmentTypeService {
 
-    ResponseEquipmentTypeDto save(EquipmentTypeDto elementTypeDto);
+    ResponseEquipmentTypeDto save(EquipmentTypeDto equipmentTypeDto);
 
-    ResponseEquipmentTypeDto update(EquipmentTypeDto elementTypeDto);
+    ResponseEquipmentTypeDto update(EquipmentTypeDto equipmentTypeDto);
 
    ResponseEquipmentTypeDto get(Long id);
 

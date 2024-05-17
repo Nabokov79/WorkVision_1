@@ -10,7 +10,8 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Результаты ультразвукового измерения толщины элемента, подэлемента оборудования")
+@Schema(description = "Дабавлени/изменение результата ультразвукового измерения толщины стенки элемента" +
+        ", подэлемента оборудования")
 public class UltrasonicThicknessMeasurementDto {
 
     @Schema(description = "Индентификатор")

@@ -8,7 +8,7 @@ import ru.nabokovsg.diagnosedNK.model.equipmentDiagnosed.EquipmentType;
 @Mapper(componentModel = "spring")
 public interface EquipmentTypeMapper {
 
-    EquipmentType mapToEquipmentType(EquipmentTypeDto elementTypeDto);
+    EquipmentType mapToEquipmentType(EquipmentTypeDto equipmentTypeDto);
 
     ResponseEquipmentTypeDto mapResponseEquipmentTypeDto(EquipmentType equipmentType);
 }

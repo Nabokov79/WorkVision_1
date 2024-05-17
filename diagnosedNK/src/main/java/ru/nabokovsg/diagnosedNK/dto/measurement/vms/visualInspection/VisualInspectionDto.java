@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-@Schema(description = "Данные результатов визуального осмотра элементов оборудования")
+@Schema(description = "Данные добавления/изменения результатов визуального осмотра элементов оборудования")
 public class VisualInspectionDto {
 
     @Schema(description = "Индентификатор")

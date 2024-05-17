@@ -9,7 +9,7 @@ import ru.nabokovsg.diagnosedNK.dto.equipmentDiagnosed.standardSize.StandardSize
 @Setter
 @Getter
 @AllArgsConstructor
-@Schema(description = "Данные элемента оборудования")
+@Schema(description = "Данные для добавления/изменения элемента оборудования")
 public class ElementDto {
 
     @Schema(description = "Индентификатор")

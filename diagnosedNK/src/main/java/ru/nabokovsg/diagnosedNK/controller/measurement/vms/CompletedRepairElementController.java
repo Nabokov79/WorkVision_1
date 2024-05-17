@@ -32,6 +32,13 @@ public class CompletedRepairElementController {
         return ResponseEntity.ok().body(service.save(repairDto));
     }
 
+    @Operation(summary = "Изменить выполненный ремонт элемента")
+    @PatchMapping
+    public ResponseEntity<ResponseCompletedRepairElementDto> update(
+            @RequestBody @Parameter(description = "Выполненный ремонт элемента") CompletedRepairElementDto repairDto) {
+        return ResponseEntity.ok().body(service.update(repairDto));
+    }
+
     @Operation(summary = "Получить выполненные ремонты элементов оборудования по записи журнала обследований")
     @GetMapping("/{id}")
     public ResponseEntity<List<ResponseCompletedRepairElementDto>> getAll(

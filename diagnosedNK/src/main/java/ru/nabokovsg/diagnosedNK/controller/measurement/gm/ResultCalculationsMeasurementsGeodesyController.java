@@ -27,7 +27,7 @@ public class ResultCalculationsMeasurementsGeodesyController {
 
     @Operation(summary = "Получить рассчитанные данные геодезических измерений реперов оборудования")
     @GetMapping("/reference-point")
-    public ResponseEntity<List<ReferencePointDto>> getResultCReferencePoint(
+    public ResponseEntity<List<ReferencePointDto>> getResultReferencePoint(
             @RequestParam @Parameter(name = "Индентификатор оборудования") Long equipmentId
     , @RequestParam @Parameter(name = "Индентификатор записи в журнале обследований") Long surveyJournalId) {
         return ResponseEntity.ok().body(service.getResultReferencePoint(equipmentId, surveyJournalId));

@@ -29,7 +29,7 @@ public class GeodesicMeasurementController {
     @Operation(summary = "Добавить данные геодезический съемки оборудования")
     @PostMapping
     public ResponseEntity<List<ResponseGeodesicMeasurementDto>> save(@RequestBody
-                                                           @Parameter(name = "Данные геодезической съемки оборудования")
+                                                         @Parameter(name = "Данные измерений геодезической съемки")
                                                                      GeodeticMeasurementEquipmentDto measurementsDto) {
         return ResponseEntity.ok().body(service.save(measurementsDto));
     }
@@ -37,13 +37,13 @@ public class GeodesicMeasurementController {
     @Operation(summary = "Измененить данные геодезический съемки одного места измерения")
     @PatchMapping
     public ResponseEntity<List<ResponseGeodesicMeasurementDto>> update(@RequestBody
-                                                         @Parameter(name = "Данные мест измерений геодезической съемки")
+                                                         @Parameter(name = "Данные измерений геодезической съемки")
                                                          List<GeodesicMeasurementDto> measurementsDto) {
         return ResponseEntity.ok().body(service.update(measurementsDto));
     }
 
     @Operation(summary = "Получить данные геодезических измерений по индентификатору записи журнала задач")
-    @GetMapping("/{id}")
+    @GetMapping("/all/{id}")
     public ResponseEntity<List<ResponseGeodesicMeasurementDto>> getAll(
             @PathVariable @Parameter(name = "Индентификатор оборудования") Long id) {
         return ResponseEntity.ok().body(service.getAll(id));

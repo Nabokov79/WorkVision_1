@@ -10,6 +10,7 @@ import ru.nabokovsg.laboratoryNK.model.template.SubsectionTemplate;
 @Mapper(componentModel = "spring")
 public interface MeasuringToolTemplateMapper {
 
+    @Mapping(source = "measuringTool.id", target = "measuringToolId")
     @Mapping(source = "measuringTool.toll", target = "toll")
     @Mapping(source = "measuringTool.model", target = "model")
     @Mapping(source = "tool", target = "measuringTool")
@@ -18,6 +19,7 @@ public interface MeasuringToolTemplateMapper {
     @Mapping(target = "id", ignore = true)
     MeasuringToolTemplate mapToMeasuringToolTemplate(MeasuringTool measuringTool, String tool);
 
+    @Mapping(source = "measuringTool.id", target = "measuringToolId")
     @Mapping(source = "measuringTool.toll", target = "toll")
     @Mapping(source = "measuringTool.model", target = "model")
     @Mapping(source = "tool", target = "measuringTool")
@@ -30,6 +32,7 @@ public interface MeasuringToolTemplateMapper {
 
     ResponseMeasuringToolTemplateDto mapToResponseMeasuringToolTemplateDto(MeasuringToolTemplate template);
 
+    @Mapping(source = "template.measuringToolId", target = "measuringToolId")
     @Mapping(source = "template.toll", target = "toll")
     @Mapping(source = "template.model", target = "model")
     @Mapping(source = "template.measuringTool", target = "measuringTool")

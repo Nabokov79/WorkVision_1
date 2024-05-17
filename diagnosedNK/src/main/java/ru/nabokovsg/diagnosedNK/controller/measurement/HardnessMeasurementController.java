@@ -43,9 +43,16 @@ public class HardnessMeasurementController {
 
     @Operation(summary = "Получить данные данные измерений твердости металла елементов, подэлементов оборудования" +
                                                                             " по индентификатору записи журнала задач")
-    @GetMapping("/{id}")
+    @GetMapping("/all/{id}")
     public ResponseEntity<List<ResponseHardnessMeasurementDto>> getAll(
             @PathVariable @Parameter(name = "Индентификатор записи в журнале задач") Long id) {
         return ResponseEntity.ok().body(service.getAll(id));
+    }
+
+    @Operation(summary = "Удалить результат измерения твердости")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable @Parameter(name = "Индентификатор") Long id) {
+        service.delete(id);
+        return ResponseEntity.ok("Результат измерения твердости успешно удален.");
     }
 }

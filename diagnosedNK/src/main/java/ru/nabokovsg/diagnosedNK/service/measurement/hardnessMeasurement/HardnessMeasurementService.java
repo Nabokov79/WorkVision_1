@@ -12,4 +12,6 @@ public interface HardnessMeasurementService {
     List<ResponseHardnessMeasurementDto> update(HardnessMeasurementDto measurementDto);
 
     List<ResponseHardnessMeasurementDto> getAll(Long id);
+
+    void delete(Long id);
 }

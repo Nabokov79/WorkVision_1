@@ -55,6 +55,28 @@ public class CompletedRepairElementServiceImpl implements CompletedRepairElement
     }
 
     @Override
+    public ResponseCompletedRepairElementDto update(CompletedRepairElementDto repairDto) {
+        if (repository.existsById(repairDto.getId())) {
+            ElementRepair elementRepair = repairService.getById(repairDto.getRepairId());
+            EquipmentElement element = equipmentElementService.getById(repairDto.getElementId());
+            Map<Long, PartElement> partsElement = element.getPartsElement()
+                    .stream().collect(Collectors.toMap(PartElement::getId, p -> p));
+            CompletedRepairElement repair = mapper.mapWithEquipmentElement(repairDto, elementRepair, element);
+            if(repairDto.getPartElementId() != null) {
+                repair = mapper.mapWithPartElement(repair, partsElement.get(repairDto.getPartElementId()));
+            }
+            repair = repository.save(repair);
+            repair.setParameterMeasurements(parameterMeasurementService.update(elementRepair.getTypeCalculation()
+                    , elementRepair.getMeasuredParameters()
+                    , repair.getParameterMeasurements()
+                    , repairDto.getParameterMeasurements()));
+            return mapper.mapToResponseCompletedRepairElementDto(repair);
+        }
+        throw new NotFoundException(
+                String.format("Completed repair element with id=%s not found for update", repairDto.getId()));
+    }
+
+    @Override
     public List<ResponseCompletedRepairElementDto> getAll(Long id) {
         return repository.findAllBySurveyJournalId(id)
                          .stream()

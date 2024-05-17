@@ -42,7 +42,7 @@ public class EquipmentInspectionController {
     }
 
     @Operation(summary = "Получить данные всех обследований оборудования")
-    @GetMapping("/{id}")
+    @GetMapping("/all/{id}")
     public ResponseEntity<List<ResponseEquipmentInspectionDto>> getAll(
             @PathVariable @Parameter(name = "Индентификатор диагностируемого оборудования") Long id) {
         return ResponseEntity.ok().body(service.getAll(id));

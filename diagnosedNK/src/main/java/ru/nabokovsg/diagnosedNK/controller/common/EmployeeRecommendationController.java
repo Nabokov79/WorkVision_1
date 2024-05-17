@@ -40,7 +40,7 @@ public class EmployeeRecommendationController {
     }
 
     @Operation(summary = "Получить рекомендации диагностируемого оборудования")
-    @GetMapping("/{id}")
+    @GetMapping("/all/{id}")
     public ResponseEntity<List<ResponseEmployeeRecommendationDto>> getAll(
             @PathVariable @Parameter(name = "Индентификатор диагностируемого оборудования") Long id) {
         return ResponseEntity.ok().body(service.getAll(id));

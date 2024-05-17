@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.diagnosedNK.dto.norms.defects.DefectDto;
 import ru.nabokovsg.diagnosedNK.dto.norms.defects.ResponseDefectDto;
@@ -21,7 +20,6 @@ import java.util.List;
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
-@Validated
 @Tag(name="Дефекты элемента оборудования",
         description="API для работы с дефектами элементов оборудования")
 public class DefectController {
@@ -44,7 +42,7 @@ public class DefectController {
 
     @Operation(summary = "Получить дефект")
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseDefectDto> get(@PathVariable Long id) {
+    public ResponseEntity<ResponseDefectDto> get(@PathVariable @Parameter(description = "Индентификатор") Long id) {
         return ResponseEntity.ok().body(service.get(id));
     }
     @Operation(summary = "Получить дефекты")

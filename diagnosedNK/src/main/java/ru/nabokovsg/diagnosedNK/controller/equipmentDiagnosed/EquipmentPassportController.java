@@ -19,7 +19,7 @@ import java.util.List;
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
-@Tag(name="Паспрот оборудования",
+@Tag(name="Паспорт оборудования",
         description="API для работы с данными паспорта оборудования")
 public class EquipmentPassportController {
 
