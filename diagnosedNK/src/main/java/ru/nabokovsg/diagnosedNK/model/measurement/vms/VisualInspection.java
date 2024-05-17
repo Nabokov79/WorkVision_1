@@ -26,8 +26,6 @@ public class VisualInspection {
     private Long elementId;
     @Column(name = "element_name")
     private String elementName;
-    @Column(name = "part_name")
-    private String partName;
     @Column(name = "inspection")
     private String inspection;
 }

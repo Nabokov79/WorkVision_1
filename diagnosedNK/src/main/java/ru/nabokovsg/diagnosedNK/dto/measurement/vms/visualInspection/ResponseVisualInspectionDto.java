@@ -15,6 +15,8 @@ public class ResponseVisualInspectionDto {
     private Long id;
     @Schema(description = "Индентификатор элемента")
     private Long elementId;
+    @Schema(description = "Наименование элемента")
+    private String elementName;
     @Schema(description = "Результат визуального осмотра элемента")
     private String inspection;
 }

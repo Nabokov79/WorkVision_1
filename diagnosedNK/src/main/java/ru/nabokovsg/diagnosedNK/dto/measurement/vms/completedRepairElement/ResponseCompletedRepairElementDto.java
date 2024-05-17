@@ -1,7 +1,6 @@
 package ru.nabokovsg.diagnosedNK.dto.measurement.vms.completedRepairElement;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,11 +15,13 @@ public class ResponseCompletedRepairElementDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
+    @Schema(description = "Индентификатор элемента")
+    private Long elementId;
     @Schema(description = "Наименование элемента")
     private String elementName;
-    @Schema(description = "Наименование подэлемента")
+    @Schema(description = "Индентификатор подэлемента")
     private Long partElementId;
-    @Column(name = "part_name")
+    @Schema(description = "Наименование подэлемента")
     private String partName;
     @Schema(description = "Наименование ремонта")
     private String repairName;
